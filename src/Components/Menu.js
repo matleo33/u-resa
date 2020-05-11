@@ -11,7 +11,7 @@ const Home = () => (
             <nav class="menu">
               <Link to="/u-resa/reservation"> Réservation </Link>
               <Link to="/u-resa/Profile"> Mon profil </Link>
-              <Link to="/u-resa/about">A propos</Link>
+              <Link to="/u-resa/About">A propos</Link>
               <Link to="/">Logout</Link>  
             </nav>
       

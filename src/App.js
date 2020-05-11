@@ -3,6 +3,9 @@ import Home from "./Components/Home"
 import { Route, Switch } from "react-router-dom"
 import Profile from "./Components/Profile"
 import Menu from "./Components/Menu"
+import Connexion from "./Components/Connexion"
+import About from './Components/About';
+import Reservation from './Components/Reservation';
 
 const NoMatchPage = () => {
   return (
@@ -18,6 +21,9 @@ const Root = () => (
     <Route exact path="/" component={Home}></Route>
     <Route exact path="/u-resa/" component={Home}></Route>
     <Route exact path="/u-resa/Profile" component={Profile}></Route>
+    <Route exact path="/u-resa/Connexion" component={Connexion}></Route>
+    <Route exact path="/u-resa/About" component={About}></Route>
+    <Route exact path="/u-resa/Reservation" component={Reservation}></Route>
     <Route component={NoMatchPage}></Route>
   </Switch>
 );

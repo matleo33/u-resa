@@ -30,24 +30,24 @@ a, a:hover{
 }
 
 .logo{
-  color: #ffffff;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 2px;
-  float: left;
-  margin-left: 5%;
-  font-size: 30px;
-}
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    float: left;
+    margin-left: 5%;
+    font-size: 30px;
+  }
+  
+  nav a{
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 18px;
+  }
 
-nav a{
-  letter-spacing: 2px;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 18px;
-}
-
-.menu{
-    float: right;
+  .menu{
+    text-align: right;
 }
 
 .menu a{
