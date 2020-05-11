@@ -2,6 +2,7 @@ import React from 'react';
 import Home from "./Components/Home"
 import { Route, Switch } from "react-router-dom"
 import Profile from "./Components/Profile"
+import Menu from "./Components/Menu"
 
 const NoMatchPage = () => {
   return (
@@ -25,6 +26,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Menu />
         <Root />
       </header>
     </div>

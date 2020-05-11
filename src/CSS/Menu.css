@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+/*font-family: 'Lora', serif;*/
+
+body,html{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: 'Lora', serif;
+}
+
+a, a:hover{
+    text-decoration: none;
+}
+
+
+.container-fluid{
+    padding: 0;
+    margin: 0;
+}
+
+/* header */
+
+.MenuHeader{
+    background-color: #184759;
+    height: 100px;
+    line-height: 100px;
+}
+
+.logo{
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  float: left;
+  margin-left: 5%;
+  font-size: 30px;
+}
+
+nav a{
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+.menu{
+    float: right;
+}
+
+.menu a{
+    color: #ffffff;
+    margin-right: 20px;
+}
+
+.menu a:hover{
+    color: #000000;
+}
