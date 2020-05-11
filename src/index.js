@@ -6,10 +6,21 @@ import Profil from "./profil"
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
 
+const NoMatchPage = () => {
+  return (
+    <div class="notFound">
+    <h3 >404 - Not found</h3>
+    </div>
+
+  );
+};
+
 const Root = () => (
   <Switch>
+    <Route exact path="/" component={App}></Route>
     <Route exact path="/u-resa/" component={App}></Route>
     <Route exact path="/u-resa/Profil" component={Profil}></Route>
+    <Route component={NoMatchPage}></Route>
   </Switch>
 );
 
