@@ -7,7 +7,7 @@ const Home = () => (
   <div>
       <header class="container-fluid MenuHeader">
           <div>
-            <a href="#" class="logo">U-RESA</a>
+            <Link class="logo" to="/u-resa/"> U-RESA </Link>
             <nav class="menu">
               <Link to="/u-resa/reservation"> Réservation </Link>
               <Link to="/u-resa/Profile"> Mon profil </Link>
