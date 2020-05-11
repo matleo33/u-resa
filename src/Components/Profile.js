@@ -24,7 +24,7 @@ export default class Profile extends React.Component {
                 <span className='date'>Test lib semantic ui react</span>
               </Card.Meta>
               <Card.Description>
-                Leothaud la salope
+                Leothaud
             </Card.Description>
             </Card.Content>
             <Card.Content extra>
@@ -42,7 +42,7 @@ export default class Profile extends React.Component {
             <Card.Content extra>
               <a>
                 <Icon name='user' />
-                22 Friends non je déconne il a pas d'ami
+                22 Friends
             </a>
             </Card.Content>
           </Card>
