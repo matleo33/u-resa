@@ -1,10 +1,5 @@
 import React from 'react';
-//import './App.css';
-import Cardsemantic from "./testsemanticui";
-import Profil from './profil';
-import Home from "./Home"
-
-
+import Home from "./Components/Home"
 
 function App() {
   return (

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './CSS/index.css';
 import App from './App';
-import Profil from "./profil"
+import Profil from "./Components/Profile"
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 const Root = () => (
   <Switch>
@@ -15,9 +15,9 @@ const Root = () => (
 
 ReactDOM.render(
   <Router>
-  <React.StrictMode>
-    <Root />
-  </React.StrictMode>
+    <React.StrictMode>
+      <Root />
+    </React.StrictMode>
   </Router>,
   document.getElementById('root')
 );
