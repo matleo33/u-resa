@@ -18,6 +18,7 @@ const NoMatchPage = () => {
 const Root = () => (
   <Switch>
     <Route exact path="/" component={App}></Route>
+    <Route exact path="/u-resa/" component={App}></Route>
     <Route exact path="/u-resa/Profile" component={Profile}></Route>
     <Route component={NoMatchPage}></Route>
   </Switch>
