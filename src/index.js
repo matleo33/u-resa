@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './CSS/index.css';
 import App from './App';
-import Profil from "./Components/Profile"
+import Profile from "./Components/Profile"
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 const NoMatchPage = () => {
   return (
     <div class="notFound">
-    <h3 >404 - Not found</h3>
+      <h3 >404 - Not found</h3>
     </div>
 
   );
@@ -18,8 +18,7 @@ const NoMatchPage = () => {
 const Root = () => (
   <Switch>
     <Route exact path="/" component={App}></Route>
-    <Route exact path="/u-resa/" component={App}></Route>
-    <Route exact path="/u-resa/Profil" component={Profil}></Route>
+    <Route exact path="/Profile" component={Profile}></Route>
     <Route component={NoMatchPage}></Route>
   </Switch>
 );
