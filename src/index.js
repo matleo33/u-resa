@@ -8,8 +8,8 @@ import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
 
 const Root = () => (
   <Switch>
-    <Route exact path="/" component={App}></Route>
-    <Route exact path="/Profil" component={Profil}></Route>
+    <Route exact path="/u-resa/" component={App}></Route>
+    <Route exact path="/u-resa/Profil" component={Profil}></Route>
   </Switch>
 );
 
