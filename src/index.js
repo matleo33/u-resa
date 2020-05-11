@@ -3,7 +3,27 @@ import ReactDOM from 'react-dom';
 import './CSS/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router } from "react-router-dom"
+import Profile from "./Components/Profile"
+import Connexion from "./Components/Connexion"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+
+const NoMatchPage = () => {
+  return (
+    <div class="notFound">
+      <h3 >404 - Not found</h3>
+    </div>
+
+  );
+};
+
+const Root = () => (
+  <Switch>
+    <Route exact path="/" component={App}></Route>
+    <Route exact path="/Profile" component={Profile}></Route>
+    <Route exact path="/Connexion" component={Connexion}></Route>
+    <Route component={NoMatchPage}></Route>
+  </Switch>
+);
 
 ReactDOM.render(
   <Router>
