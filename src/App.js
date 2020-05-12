@@ -2,6 +2,7 @@ import React from 'react';
 import Home from "./Components/Home"
 import { Route, Switch } from "react-router-dom"
 import Profile from "./Components/Profile"
+import Connexion from "./Components/Connexion"
 import Menu from "./Components/Menu"
 import Connexion from "./Components/Connexion"
 import About from './Components/About';
