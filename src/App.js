@@ -7,6 +7,7 @@ import Menu from "./Components/Menu"
 import About from './Components/About';
 import Reservation from './Components/Reservation';
 import Footer from "./Components/Footer"
+import Plan from "./Components/Plan"
 
 const NoMatchPage = () => {
   return (
@@ -26,6 +27,7 @@ const Root = () => (
     <Route exact path="/u-resa/Connexion" component={Connexion}></Route>
     <Route exact path="/u-resa/About" component={About}></Route>
     <Route exact path="/u-resa/Reservation" component={Reservation}></Route>
+    <Route exact path="/u-resa/Plan" component={Plan}></Route>
     <Route component={NoMatchPage}></Route>
   </Switch>
 );

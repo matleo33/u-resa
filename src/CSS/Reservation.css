@@ -1,12 +1,8 @@
 .ReservationFirst{
     max-height: 20%;
     height: 20%;
-    background-color: bisque;
-    padding-bottom: 2%;
-}
+    background-color: whitesmoke;
 
-.reserv{
-    height: 900px;
 }
 
 .reserv h2{   
@@ -23,15 +19,23 @@ padding-top: 2%;
     margin-bottom: 2%;
 }
 
+.separator2{
+    height: 2px;
+    width: 90%;
+    border: none;
+    box-shadow: none;
+    background-color: #2a83a7;
+    margin-top: 4%;
+    margin-bottom: 0%;
+}
+
 #titi{
     text-align: center;
     margin-top: 1%;
 }
 
 .TakeReservation{
-    max-height: 40%;
-    height: 800px;
-    background-color: grey;
+    background-color: whitesmoke;
     margin-bottom: 2%;
 }
 
@@ -41,5 +45,5 @@ padding-top: 2%;
 
 #listD{
     text-align: center;
-
+    padding-bottom: 2%;
 }

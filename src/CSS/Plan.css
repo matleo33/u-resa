@@ -1,0 +1,14 @@
+.Plan{
+    text-align: center;
+    background-color: whitesmoke;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    font-size: x-large;
+    text-transform: uppercase;
+    font-weight: bold;
+
+}
+
+.PlanImg{
+    padding-top: 1%;
+}

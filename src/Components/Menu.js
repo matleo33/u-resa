@@ -19,7 +19,7 @@ const Home = () => (
               <Link to="/u-resa/reservation"> Réservation </Link>
               <Link to="/u-resa/Profile"> Mon profil </Link>
               <Link to="/u-resa/About">A propos</Link>
-              <Link to="/u-resa/plan">Plan</Link>
+              <Link to="/u-resa/Plan">Plan</Link>
               <a href="http://localhost:8080/Connexion">Connexion</a>
               
             </nav>

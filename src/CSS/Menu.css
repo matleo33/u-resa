@@ -11,9 +11,6 @@ body{
     font-family: 'Lora', serif;
 }
 
-
-
-
 .container-fluid{
     padding: 0;
     margin: 0;
@@ -35,6 +32,10 @@ body{
     margin-left: 5%;
     font-size: 30px;
   }
+
+  .logo:hover{
+    color: black;
+}
   
   nav a{
     letter-spacing: 2px;

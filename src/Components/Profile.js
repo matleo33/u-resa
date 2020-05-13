@@ -55,9 +55,10 @@ export default class Profile extends React.Component {
           </p>
             </Accordion.Content>
 
-            <Accordion.Title>
+            <Accordion.Title active={1}>
 
           Info 3
+
         </Accordion.Title>
 
           </Accordion>
