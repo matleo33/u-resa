@@ -4,28 +4,12 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var MemoryStore = require('session-memory-store')(session);
-var Connexion = require('./Connexion');
+var Routes = require('./Routes');
 
 
 var app = express();
 
-
-
-app.use('/', Connexion);
-
-
-app.use(session({
-    name: 'NSESSIONID',
-    secret: 'Hello I am a long long long secret',
-    store: new MemoryStore()  // or other session store
-}));
-
-app.use(cookieParser());
-
-/*app.get('/Connexion', function (req, res) {
-    //res.setHeader('Content-Type', 'text/plain');
-    //res.send('Connectez-vous');
-});*/
+app.use('/', Routes);
 
 app.use(function (req, res, next) {
     res.setHeader('Content-Type', 'text/plain');
