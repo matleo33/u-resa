@@ -1,10 +1,25 @@
-.profilCard{
-    width: 25%;
-    margin-top: 1%;
-    margin-left: 1%;
+
+
+.ProfilStyle{
+    background-color: whitesmoke;
+    padding-bottom: 2%;
 }
 
-.accueilBTN{
-    margin-top: 1%;
-    margin-left: 1%;
+.ProfilImg{
+    padding-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    width: max-content;
+
 }
+
+.ProfilInfo{
+    padding-top: 1%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+
+
+

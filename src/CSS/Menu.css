@@ -11,9 +11,7 @@ body{
     font-family: 'Lora', serif;
 }
 
-a, a:hover{
-    text-decoration: none;
-}
+
 
 
 .container-fluid{
@@ -24,7 +22,7 @@ a, a:hover{
 /* header */
 
 .MenuHeader{
-    background-color: #184759;
+    background-color: #009de0;
     height: 100px;
     line-height: 100px;
 }
@@ -34,7 +32,6 @@ a, a:hover{
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 2px;
-    float: left;
     margin-left: 5%;
     font-size: 30px;
   }
@@ -56,5 +53,5 @@ a, a:hover{
 }
 
 .menu a:hover{
-    color: #000000;
+    color: black;
 }

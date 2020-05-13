@@ -1,0 +1,15 @@
+body{
+    background-color: #DED6CA;
+}
+
+.footer{
+    margin-top: 1%;
+    padding-top: 1%;
+
+}
+
+.footer p{
+    font-size: large;
+    text-align: center;
+    color: #443A31;
+}

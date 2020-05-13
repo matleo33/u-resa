@@ -6,6 +6,7 @@ import Connexion from "./Components/Connexion"
 import Menu from "./Components/Menu"
 import About from './Components/About';
 import Reservation from './Components/Reservation';
+import Footer from "./Components/Footer"
 
 const NoMatchPage = () => {
   return (
@@ -18,8 +19,9 @@ const NoMatchPage = () => {
 
 const Root = () => (
   <Switch>
-    <Route exact path="/" component={Home}></Route>
-    <Route exact path="/u-resa/" component={Home}></Route>
+    <Route exact path="/Home" component={Home}></Route>
+    <Route exact path="/" component={Reservation}></Route>
+    <Route exact path="/u-resa/" component={Reservation}></Route>
     <Route exact path="/u-resa/Profile" component={Profile}></Route>
     <Route exact path="/u-resa/Connexion" component={Connexion}></Route>
     <Route exact path="/u-resa/About" component={About}></Route>
@@ -34,6 +36,7 @@ function App() {
       <header className="App-header">
         <Menu />
         <Root />
+        <Footer />
       </header>
     </div>
   );
