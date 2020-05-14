@@ -21,8 +21,8 @@ router.use(session({
 router.get('/Connexion', Connexion.getCasClient().core());
 
 
-router.get('/Contactus', function (req, res, next) {
-    var mail = new Mail;
+router.post('/Contactus', function (req, res, next) {
+    var mail = new Mail(req.query.from, req.query.subject, req.query.message);
     if (!mail.send()) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(500).send('Email fail');

@@ -2,7 +2,7 @@ const mailer = require("nodemailer");
 
 
 class Mail {
-    constructor(smtpTransport, mail) {
+    constructor(from, subject, message) {
         this.smtpTransport = mailer.createTransport("SMTP", {
             host: "smtp.mailtrap.io",
             port: 25,
@@ -12,11 +12,11 @@ class Mail {
             }
         });
         this.mail = {
-            from: "536a6554a5-ff6ff8@inbox.mailtrap.io",
+            from: from,
             to: "536a6554a5-ff6ff8@inbox.mailtrap.io",
-            subject: "Send Email Using Node.js",
-            text: "Node.js New world for me",
-            html: "<b>Node.js New world for me</b>"
+            subject: subject,
+            text: message,
+            html: "<b>" + message + "</b>"
         };
     }
     send() {
