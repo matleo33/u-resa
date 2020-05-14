@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../CSS/profil.css';
 import { Card, Icon, Image, Accordion, Grid } from 'semantic-ui-react'
-
+import { Form, Input, TextArea, Button, Select } from 'semantic-ui-react'
 
 export default class Profile extends React.Component {
   state = { activeIndex: 0 }
@@ -33,12 +33,34 @@ export default class Profile extends React.Component {
               onClick={this.handleClick}
             >
               <Icon name='dropdown' />
-          Info 1
+          Contactez-nous
         </Accordion.Title>
             <Accordion.Content active={activeIndex === 0}>
-              <p>
-                Mathieu
-          </p>
+            <Form>
+    <Form.Field
+      id='form-input-control-error-email'
+      control={Input}
+      label='Email'
+      placeholder='joe@gmail.com'
+    />
+        <Form.Field
+      id='form-input-control-error-email'
+      control={Input}
+      label='Objet'
+      placeholder='Objet du message'
+    />
+    <Form.Field
+      id='form-textarea-control-opinion'
+      control={TextArea}
+      label='Message'
+      placeholder='Message'
+    />
+    <Form.Field
+      id='form-button-control-public'
+      control={Button}
+      content='Envoyer'
+    />
+  </Form>
             </Accordion.Content>
 
             <Accordion.Title
