@@ -16,3 +16,8 @@ code {
   margin-top: 5%;
   text-align: center;
 }
+
+@font-face {
+  font-family: 'Brix';
+  src: local('Brix'), url(../Font/BrixSlab-Light.otf) format('opentype');
+}

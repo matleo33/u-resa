@@ -31,6 +31,7 @@ body{
     letter-spacing: 2px;
     margin-left: 5%;
     font-size: 30px;
+    font-family: Brix;
   }
 
   .logo:hover{
@@ -42,6 +43,7 @@ body{
     font-weight: bold;
     text-transform: uppercase;
     font-size: 18px;
+    font-family: Brix;
   }
 
   .menu{
