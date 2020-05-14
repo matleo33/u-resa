@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "aad7e0e3-2f47-4c80-a0eb-33024984303d",
+		"name": "U-Resa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post mail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Contactus?from=536a6554a5-ff6ff8@inbox.mailtrap.io&subject=Just a test&message=Core message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Contactus"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "536a6554a5-ff6ff8@inbox.mailtrap.io"
+						},
+						{
+							"key": "subject",
+							"value": "Just a test"
+						},
+						{
+							"key": "message",
+							"value": "Core message"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
