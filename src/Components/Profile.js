@@ -18,6 +18,7 @@ export default class Profile extends React.Component {
     }
   }
 
+
   onChangeMsg(event) {
     this.setState({
       Message: event.target.value
@@ -55,6 +56,7 @@ export default class Profile extends React.Component {
       if (response.status === 200) {
         console.log("ok");
         this.setState({ hiddenMessageOK: false })
+        window.scrollTo(0,0);
 
       }
     })
