@@ -7,7 +7,11 @@ export default class Profile extends React.Component {
   state = { activeIndex: 0 }
   constructor(props) {
     super(props);
-
+    this.state = {
+      Message: '',
+      Object: '',
+      AdresseMail: ''
+    }
   }
 
   mailClick = () => {
@@ -18,10 +22,9 @@ export default class Profile extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'yourValue',
-        Subject: 'yourOtherValue',
-        message: 'yourOtherValue',
-
+        from: this.state.Message,
+        Subject: this.state.Object,
+        message: this.state.AdresseMail
       })
     }).then((response) => response.json())
       .then((json) => {

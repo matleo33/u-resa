@@ -13,7 +13,7 @@ class Mail {
         });
         this.mail = {
             from: from,
-            to: "536a6554a5-ff6ff8@inbox.mailtrap.io",
+            to: "nathan.mari.miage@gmail.com", //536a6554a5-ff6ff8@inbox.mailtrap.io
             subject: subject,
             text: message,
             html: "<b>" + message + "</b>"

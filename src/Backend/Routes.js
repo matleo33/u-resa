@@ -26,6 +26,7 @@ router.get('/Connexion', Connexion.getCasClient().core());
 
 
 router.post('/Contactus', function (req, res, next) {
+    console.log(req.body);/*
     var mail = new Mail(req.query.from, req.query.subject, req.query.message);
     if (!mail.send()) {
         res.setHeader('Content-Type', 'text/plain');
@@ -34,7 +35,7 @@ router.post('/Contactus', function (req, res, next) {
     else {
         res.setHeader('Content-Type', 'text/plain');
         res.status(200).send('Email sent');
-    }
+    }*/
 });
 
 
