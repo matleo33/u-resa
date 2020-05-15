@@ -36,7 +36,7 @@ export default class Profile extends React.Component {
   }
 
   mailClick = () => {
-    fetch('http://localhost:8080/Contactus?from=aaaaa@aaa.com&subject=bbbbbb&message=cccc', {
+    fetch('http://localhost:8080/Contactus', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
