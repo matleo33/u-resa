@@ -10,6 +10,28 @@ export default class Profile extends React.Component {
 
   }
 
+  mailClick = () => {
+    fetch('http://localhost:8080/Contactus?from=aaaaa@aaa.com&subject=bbbbbb&message=cccc', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'yourValue',
+        Subject: 'yourOtherValue',
+        message: 'yourOtherValue',
+
+      })
+    }).then((response) => response.json())
+      .then((json) => {
+        return json.movies;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   handleClick = (e, titleProps) => {
     const { index } = titleProps
     const { activeIndex } = this.state
@@ -36,31 +58,32 @@ export default class Profile extends React.Component {
           Contactez-nous
         </Accordion.Title>
             <Accordion.Content active={activeIndex === 0}>
-            <Form>
-    <Form.Field
-      id='form-input-control-error-email'
-      control={Input}
-      label='Email'
-      placeholder='joe@gmail.com'
-    />
-        <Form.Field
-      id='form-input-control-error-email'
-      control={Input}
-      label='Objet'
-      placeholder='Objet du message'
-    />
-    <Form.Field
-      id='form-textarea-control-opinion'
-      control={TextArea}
-      label='Message'
-      placeholder='Message'
-    />
-    <Form.Field
-      id='form-button-control-public'
-      control={Button}
-      content='Envoyer'
-    />
-  </Form>
+              <Form>
+                <Form.Field
+                  id='form-input-control-error-email'
+                  control={Input}
+                  label='Email'
+                  placeholder='joe@gmail.com'
+                />
+                <Form.Field
+                  id='form-input-control-error-email'
+                  control={Input}
+                  label='Objet'
+                  placeholder='Objet du message'
+                />
+                <Form.Field
+                  id='form-textarea-control-opinion'
+                  control={TextArea}
+                  label='Message'
+                  placeholder='Message'
+                />
+                <Form.Field
+                  id='form-button-control-public'
+                  control={Button}
+                  onClick={this.mailClick}
+                  content='Envoyer'
+                />
+              </Form>
             </Accordion.Content>
 
             <Accordion.Title
@@ -79,7 +102,7 @@ export default class Profile extends React.Component {
 
             <Accordion.Title active={1}>
 
-          Info 3
+              Info 3
 
         </Accordion.Title>
 
