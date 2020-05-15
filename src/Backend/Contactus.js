@@ -4,19 +4,18 @@ const mailer = require("nodemailer");
 class Mail {
     constructor(from, subject, message) {
         this.smtpTransport = mailer.createTransport("SMTP", {
-            host: "smtp.mailtrap.io",
+            host: "smtp.gmail.com",
             port: 25,
             auth: {
-                user: "3a7d95f0003a35",
-                pass: "04c451d57e64cb"
+                user: "uresa33@gmail.com",
+                pass: "u1r2$s&a"
             }
         });
         this.mail = {
-            from: from,
-            to: "nathan.mari.miage@gmail.com", //536a6554a5-ff6ff8@inbox.mailtrap.io
+            to: "uresa33@gmail.com", //536a6554a5-ff6ff8@inbox.mailtrap.io
             subject: subject,
-            text: message,
-            html: "<b>" + message + "</b>"
+            text: "Message de :" + from + message,
+            html: "<p>" + "Message de : " + from + "</p>" + "<p>" + message + "</p>"
         };
     }
     send() {

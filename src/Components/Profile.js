@@ -14,6 +14,27 @@ export default class Profile extends React.Component {
     }
   }
 
+  onChangeMsg(event) {
+    this.setState({
+      Message: event.target.value
+    })
+
+  }
+
+  onChangeObj(event) {
+    this.setState({
+      Object: event.target.value
+    })
+
+  }
+
+  onChangeMail(event) {
+    this.setState({
+      AdresseMail: event.target.value
+    })
+
+  }
+
   mailClick = () => {
     fetch('http://localhost:8080/Contactus?from=aaaaa@aaa.com&subject=bbbbbb&message=cccc', {
       method: 'POST',
@@ -22,9 +43,9 @@ export default class Profile extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: this.state.Message,
-        Subject: this.state.Object,
-        message: this.state.AdresseMail
+        from: this.state.AdresseMail,  
+        subject: this.state.Object,
+        message: this.state.Message
       })
     }).then((response) => response.json())
       .then((json) => {
@@ -67,18 +88,24 @@ export default class Profile extends React.Component {
                   control={Input}
                   label='Email'
                   placeholder='joe@gmail.com'
+                  onChange = {this.onChangeMail.bind(this)}
+                  value={this.state.AdresseMail}
                 />
                 <Form.Field
                   id='form-input-control-error-email'
                   control={Input}
                   label='Objet'
                   placeholder='Objet du message'
+                  onChange = {this.onChangeObj.bind(this)}
+                  value={this.state.Object}
                 />
                 <Form.Field
                   id='form-textarea-control-opinion'
                   control={TextArea}
                   label='Message'
                   placeholder='Message'
+                  onChange = {this.onChangeMsg.bind(this)}
+                  value={this.state.Message}
                 />
                 <Form.Field
                   id='form-button-control-public'
@@ -104,8 +131,8 @@ export default class Profile extends React.Component {
             </Accordion.Content>
 
             <Accordion.Title active={1}>
-
-              Info 3
+            
+            info 3
 
         </Accordion.Title>
 
