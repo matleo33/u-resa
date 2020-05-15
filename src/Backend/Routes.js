@@ -15,6 +15,8 @@ router.use(function (req, res, next) {
     next();
 });
 
+router.use(express.json());
+
 router.use(cookieParser());
 router.use(session({
     name: 'NSESSIONID',
@@ -26,8 +28,7 @@ router.get('/Connexion', Connexion.getCasClient().core());
 
 
 router.post('/Contactus', function (req, res, next) {
-    console.log(req.body);/*
-    var mail = new Mail(req.query.from, req.query.subject, req.query.message);
+    var mail = new Mail(req.body.from, req.body.subject, req.body.message);
     if (!mail.send()) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(500).send('Email fail');
@@ -35,7 +36,7 @@ router.post('/Contactus', function (req, res, next) {
     else {
         res.setHeader('Content-Type', 'text/plain');
         res.status(200).send('Email sent');
-    }*/
+    }
 });
 
 
