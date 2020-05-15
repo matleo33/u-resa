@@ -63,13 +63,21 @@ const Reservation = () => (
         <div class="TakeReservation">
             <h2> Prendre une réservation </h2>
             <hr class="separator"></hr>
-            <div id="listD">
-            <p> Date de ma réservation : <input type="date" id="start" name="trip-start" /></p>
-            <p> Heure de ma réservation : <Select  className="listD" placeholder='Aucune préférence' options={Horaire} /></p>
-            <p> Mon Université :  <Select  className="listD" placeholder='Sélectionnez mon université' options={Université} /></p>
-            <p> Batiment désiré :  <Select  className="listD" placeholder='Sélectionnez le batiment' options={Batiment} /></p>
-            <p> Salle :  <Select  className="listD" placeholder='Sélectionnez la salle' options={Salle} /></p>
-            </div>
+
+            <form class="reservForm">
+            <p class="listTitre"> Date de ma réservation : </p>
+            <input type="date" class="listD" id="start" name="trip-start" />
+            <p class="listTitre"> Heure de ma réservation : </p>
+            <Select  className="listD" placeholder='Aucune préférence' options={Horaire} />
+            <p class="listTitre"> Mon Université :  </p>
+            <Select  className="listD" placeholder='Sélectionnez mon université' options={Université} />
+            <p class="listTitre"> Batiment désiré : </p> 
+            <Select  className="listD" placeholder='Sélectionnez le batiment' options={Batiment} />
+            <p class="listTitre"> Salle : </p> 
+            <Select  className="listD" placeholder='Sélectionnez la salle' options={Salle} />
+
+            </form>  
+
         </div>
     </section>
   </div>
