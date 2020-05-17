@@ -6,33 +6,193 @@
 	},
 	"item": [
 		{
-			"name": "Post mail",
+			"name": "Mail tests",
+			"item": [
+				{
+					"name": "Post mail passant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e06065f2-a0c5-44ad-9e94-3ec5343adefe",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"testmail@uresa.com\",\r\n    \"subject\": \"Postman\",\r\n    \"message\": \"Cas passant\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/Contactus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Contactus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post mail sans from",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef228f56-def2-44eb-88b7-8b53dbb69a22",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"subject\": \"Postman\",\r\n    \"message\": \"Cas passant\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/Contactus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Contactus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post mail sans subject",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "98fa8bff-b2ed-4cce-8f54-bffaf2ce643a",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"testmail@uresa.com\",\r\n    \"message\": \"Cas passant\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/Contactus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Contactus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post mail sans message",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7b0cf5cc-ae89-40e2-b77d-059d67ec17d9",
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"testmail@uresa.com\",\r\n    \"subject\": \"Postman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/Contactus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Contactus"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Connexion",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/Contactus?from=536a6554a5-ff6ff8@inbox.mailtrap.io&subject=Just a test&message=Core message",
+					"raw": "http://localhost:8080/Connexion",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"Contactus"
-					],
-					"query": [
-						{
-							"key": "from",
-							"value": "536a6554a5-ff6ff8@inbox.mailtrap.io"
-						},
-						{
-							"key": "subject",
-							"value": "Just a test"
-						},
-						{
-							"key": "message",
-							"value": "Core message"
-						}
+						"Connexion"
 					]
 				}
 			},
