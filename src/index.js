@@ -3,17 +3,9 @@ import ReactDOM from 'react-dom';
 import './CSS/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom"
 import "./Font/BrixSlab-Light.otf"
 
-const NoMatchPage = () => {
-  return (
-    <div class="notFound">
-      <h3 >404 - Not found</h3>
-    </div>
-
-  );
-};
 
 ReactDOM.render(
   <Router>

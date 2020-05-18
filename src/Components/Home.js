@@ -1,5 +1,5 @@
 import React from 'react';
-import {Accordion,Card,Button,useAccordionToggle} from 'react-bootstrap'
+import {Accordion,Card,useAccordionToggle} from 'react-bootstrap'
 
 function CustomToggle({ children, eventKey }) {
   const decoratedOnClick = useAccordionToggle(eventKey, () =>

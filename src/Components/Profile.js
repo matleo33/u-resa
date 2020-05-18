@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../CSS/profil.css';
-import { Card, Icon, Image, Accordion, Grid } from 'semantic-ui-react'
-import { Form, Input, TextArea, Button, Select } from 'semantic-ui-react'
+import { Icon, Image, Accordion } from 'semantic-ui-react'
+import { Form, Input, TextArea, Button } from 'semantic-ui-react'
 import { Message } from 'semantic-ui-react'
 
 
@@ -14,7 +14,8 @@ export default class Profile extends React.Component {
       Object: '',
       AdresseMail: '',
       hiddenMessageOK: true,
-      hiddenMessageKO: true
+      hiddenMessageKO: true,
+      infoProfil: [],
     }
   }
 
@@ -40,6 +41,24 @@ export default class Profile extends React.Component {
 
   }
 
+
+
+  componentDidMount() {
+
+    fetch('http://localhost:8080/users')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({
+          infoProfil: json[0],
+        });
+        console.log("good")
+      }).catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+
   mailClick = () => {
     fetch('http://localhost:8080/Contactus', {
       method: 'POST',
@@ -56,7 +75,7 @@ export default class Profile extends React.Component {
       if (response.status === 200) {
         console.log("ok");
         this.setState({ hiddenMessageOK: false })
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
 
       }
     })
@@ -145,17 +164,20 @@ export default class Profile extends React.Component {
               onClick={this.handleClick}
             >
               <Icon name='dropdown' />
-          Info 2
+          Nom et prénom
         </Accordion.Title>
             <Accordion.Content active={activeIndex === 1}>
               <p>
-                Leothaud
-          </p>
+                {this.state.infoProfil.nom}
+              </p>
+              <p>
+                {this.state.infoProfil.prenom}
+              </p>
             </Accordion.Content>
 
             <Accordion.Title active={1}>
 
-              info 3
+              Info 3
 
         </Accordion.Title>
 
