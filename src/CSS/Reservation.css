@@ -1,13 +1,17 @@
+h2{
+    font-family: 'Lora', serif;
+}
+
 .ReservationFirst{
     max-height: 20%;
     height: 20%;
     background-color: whitesmoke;
-
 }
 
 .reserv h2{   
 text-align: center;
 padding-top: 2%;
+
 }
 
 .separator{
