@@ -33,12 +33,5 @@ router.use('/Resas', Resas);
 router.use('/Salles', Salles);
 router.use('/Profil', Profil);
 
-/*
-router.use('/Salles', Utilisateur);
-router.get('/Users', Utilisateur);
-router.get('/sallesPrises', Utilisateur);
-router.get('/sallesHistorique', Utilisateur);
-router.get('/test', Utilisateur);*/
-
 
 module.exports = router;
