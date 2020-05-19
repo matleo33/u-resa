@@ -4,9 +4,12 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var MemoryStore = require('session-memory-store')(session);
-var Connexion = require('./Connexion');
-var Contactus = require('./Contactus');
+var Profil = require('./Profil');
 var Utilisateur = require('./Utilisateur');
+var Resas = require('./Resas');
+var Salles = require('./Salles');
+
+
 
 
 var router = express.Router();
@@ -23,14 +26,19 @@ router.use(session({
     store: new MemoryStore()  // or other session store
 }));
 
-router.get('/Connexion', Connexion.getCasClient().core());
 
-router.post('/Contactus', Contactus);
-router.get('/Salles', Utilisateur);
+
+router.use('/User', Utilisateur);
+router.use('/Resas', Resas);
+router.use('/Salles', Salles);
+router.use('/Profil', Profil);
+
+/*
+router.use('/Salles', Utilisateur);
 router.get('/Users', Utilisateur);
 router.get('/sallesPrises', Utilisateur);
 router.get('/sallesHistorique', Utilisateur);
-router.get('/test', Utilisateur);
+router.get('/test', Utilisateur);*/
 
 
 module.exports = router;
