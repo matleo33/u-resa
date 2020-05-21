@@ -45,7 +45,7 @@ export default class Profile extends React.Component {
 
   componentDidMount() {
 
-    fetch('http://localhost:8080/users')
+    fetch('http://localhost:8080/User/2')
       .then(res => res.json())
       .then(json => {
         this.setState({
