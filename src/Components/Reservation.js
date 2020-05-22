@@ -1,6 +1,6 @@
 import React from 'react';
 import "../CSS/Reservation.css"
-import { Button } from 'semantic-ui-react'
+import { Button, Checkbox } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { Select } from 'semantic-ui-react'
 
@@ -74,7 +74,19 @@ export default class Reservation extends React.Component {
             <Select className="listD" placeholder='Sélectionnez le batiment' options={Batiment} />
             <p class="listTitre"> Salle : </p>
             <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} />
+            <div>
+              <input id="CheckboxCGU1" name="CheckboxCGU1" type="checkbox" value="Admin" class="checkCGU" />
+              <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/About">les CGU</a></label>
+            </div>
+            <div>
+              <input id="CheckboxCGU1" name="CheckboxCGU1" type="checkbox" value="Admin" class="checkCGU" />
+              <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/About">les CGU 2eme partie</a></label>
+            </div>
+            <div class="ReservationBtn">
+              <Button primary >Réserver</Button>
+            </div>
           </form>
+
         </div>
       </section>
     </div>
