@@ -42,6 +42,36 @@ router.get('/:User', function (req, res) {
   });
 });
 
+router.get('/:User/CGU', function (req, res) {
+  // Connecting to the database.
+  connection.getConnection(function (err, connection) {
+    if (err) throw err;
+    // Executing the MySQL query (select all data from the 'users' table).
+    connection.query('SELECT CGU FROM reservant where id_reservant =' + req.params.user, function (error, results, fields) {
+      // If some error occurs, we throw an error.
+      if (error) throw error;
+
+      // Getting the 'response' from the database and sending it to our route. This is were the data is.
+      res.send(results)
+    });
+  });
+});
+
+router.POST('/CGU', function (req, res) {
+  // Connecting to the database.
+  connection.getConnection(function (err, connection) {
+    if (err) throw err;
+    // Executing the MySQL query (select all data from the 'users' table).
+    connection.query('UPDATE reservant SET CGU=1 where id_reservant =' + req.params.user, function (error, results, fields) {
+      // If some error occurs, we throw an error.
+      if (error) throw error;
+
+      // Getting the 'response' from the database and sending it to our route. This is were the data is.
+      res.send(results)
+    });
+  });
+});
+
 
 
 module.exports = router;
