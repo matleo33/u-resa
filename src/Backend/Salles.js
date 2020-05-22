@@ -43,8 +43,61 @@ router.post('/Disponibilitehoraire', function (req, res) {
         //on vérifie si le checkin avant le checkout
         //on vérifie si le checkout est après le checkin
         const query = 'select nomSalle from salle s where nomSalle not in (select nomSalle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%d/%m/%Y %H:%i") < str_to_date((str_to_date(duree, "%i")+horaire), "%Y%m%d%H%i") AND str_to_date("' + req.body.horairefin + '", "%d/%m/%Y %H:%i") > horaire )';
-        //const query = 'select nomSalle from salle where nomSalle NOT IN( select nomSalle from salle s inner join reservation r on s.id_salle = r.fk_id_salle where FROM_UNIXTIME(UNIX_TIMESTAMP(horaire) + duree60) > str_to_date("' + req.body.horaire + '", "%d/%c/%Y %H:%i") AND FROM_UNIXTIME(UNIX_TIMESTAMP(horaire) + duree60) < FROM_UNIXTIME(UNIX_TIMESTAMP(str_to_date("' + req.body.horaire + '", "%d/%c/%Y %H:%i")) + duree60) OR FROM_UNIXTIME(UNIX_TIMESTAMP(horaire)) > str_to_date("' + req.body.horaire + '", "%d/%c/%Y %H:%i") AND FROM_UNIXTIME(UNIX_TIMESTAMP(horaire)) < FROM_UNIXTIME(UNIX_TIMESTAMP(str_to_date("' + req.body.horaire + '", "%d/%c/%Y %H:%i")) + duree60))';
-        //const query = 'select nomSalle from salle where nomSalle NOT IN( select nomSalle from salle s inner join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%d/%c/%Y %H:%i") >= FROM_UNIXTIME(UNIX_TIMESTAMP(horaire) - "' + req.body.duree * 60 + '") OR str_to_date("' + req.body.horaire + '", "%d/%c/%Y %H:%i") <= str_to_date(horaire + str_to_date(duree, "%H"), "%Y%m%d%H%i") AND str_to_date("' + req.body.horaire + '", "%d/%c/%Y %H:%i") >= str_to_date(horaire, "%Y%m%d%H%i"))';
+        if (err) throw err;
+        // Executing the MySQL query (select all data from the 'users' table).
+        connection.query(query, function (error, results, fields) {
+            // If some error occurs, we throw an error.
+            if (error) throw error;
+
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send(results)
+        });
+    });
+});
+
+router.post('/Disponibilitesalle', function (req, res) { //A DEV REQUETE
+    // Connecting to the database.
+    if (!req.body.date) {
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(400).json({ "status": "Date non renseignée" });
+    }
+    if (!req.body.idsalle) {
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(400).json({ "status": "Salle non renseignée" });
+    }
+    connection.getConnection(function (err, connection) {
+        //on vérifie si le checkin avant le checkout
+        //on vérifie si le checkout est après le checkin
+        const query = '';
+        if (err) throw err;
+        // Executing the MySQL query (select all data from the 'users' table).
+        connection.query(query, function (error, results, fields) {
+            // If some error occurs, we throw an error.
+            if (error) throw error;
+
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send(results)
+        });
+    });
+});
+
+
+router.post('/Disponibilite', function (req, res) { //A DEV REQUETE
+    // Connecting to the database.
+    if (!req.body.horaire) {
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(400).json({ "status": "Date non renseignée" });
+    }
+    if (!req.body.horairefin) {
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(400).json({ "status": "Date de fin non renseignée" });
+    }
+    if (!req.body.idsalle) {
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(400).json({ "status": "Salle non renseignée" });
+    }
+    connection.getConnection(function (err, connection) {
+        const query = 'select * from salle s where id_salle = ' + req.body.idsalle + ' and nomSalle not in ( select nomSalle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%d/%m/%Y %H:%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%d/%m/%Y %H:%i:%s") > horaire and s.id_salle =' + req.body.idsalle + ')';
         if (err) throw err;
         // Executing the MySQL query (select all data from the 'users' table).
         connection.query(query, function (error, results, fields) {

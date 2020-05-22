@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var MemoryStore = require('session-memory-store')(session);
 var Profil = require('./Profil');
 var Utilisateur = require('./Utilisateur');
-var Resas = require('./Resas');
 var Salles = require('./Salles');
 
 
@@ -29,7 +28,6 @@ router.use(session({
 
 
 router.use('/User', Utilisateur);
-router.use('/Resas', Resas);
 router.use('/Salles', Salles);
 router.use('/Profil', Profil);
 

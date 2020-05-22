@@ -3,14 +3,23 @@ var express = require('express');
 var router = express.Router();
 
 
-const connection = mysql.createPool({
+/*const connection = mysql.createPool({
     host: 'sql7.freemysqlhosting.net',
     user: 'sql7341566',
     password: 'mLMLfGnRCw',
     database: 'sql7341566'
+});*/
+
+const connection = mysql.createPool({
+    host: 'localhost',
+    port: 3308,
+    user: 'root',
+    password: '',
+    database: 'résa'
 });
 
-router.get('/Historique/:user', function (req, res) {
+
+router.get('/Historique', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
         if (err) throw err;
@@ -18,7 +27,7 @@ router.get('/Historique/:user', function (req, res) {
         connection.query('SELECT * ' +
             'from reservant ' +
             'inner join reservation on(reservation.fk_id_reservant = reservant.id_reservant) ' +
-            'where reservant.id_reservant=' + req.params.user +
+            'where reservant.id_reservant=' + req.User +
             ' and NOW()+0-horaire+FLOOR(reservation.duree/60)*10000 + (reservation.duree/60 - FLOOR(reservation.duree/60)) *6000>0', function (error, results, fields) {
 
                 // If some error occurs, we throw an error.
@@ -30,7 +39,7 @@ router.get('/Historique/:user', function (req, res) {
     });
 });
 
-router.get('/Encours/:user', function (req, res) {
+router.get('/Encours', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
         if (err) throw err;
@@ -38,7 +47,7 @@ router.get('/Encours/:user', function (req, res) {
         connection.query('SELECT * ' +
             'from reservant ' +
             'inner join reservation on(reservation.fk_id_reservant = reservant.id_reservant) ' +
-            'where reservant.id_reservant=' + req.params.user +
+            'where reservant.id_reservant=' + req.User +
             ' and NOW()+0-horaire+FLOOR(reservation.duree/60)*10000 + (reservation.duree/60 - FLOOR(reservation.duree/60)) *6000<0', function (error, results, fields) {
 
                 // If some error occurs, we throw an error.
