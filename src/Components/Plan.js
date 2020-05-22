@@ -11,5 +11,3 @@ export default class Plan extends React.Component {
         </div>
     }
 }
-
-export default Plan;
