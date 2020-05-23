@@ -48,8 +48,37 @@ const Horaire = [
   { key: 'u', value: 'u', text: '17H30' },
 ]
 
+
+
 export default class Reservation extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      isChecked: false,
+      isChecked2: false
+    };
+  }
+
+
+
+
+  toggleChange1 = () => {
+    this.setState({
+      isChecked: !this.state.isChecked,
+    }, () => {console.log("wesh wesh 1",this.state.isChecked);
+   console.log("wesh wesh 2",this.state.isChecked2)}
+    );}
+
+    toggleChange2 = () => {
+      this.setState({
+        isChecked2: !this.state.isChecked2,
+      },() => {console.log("wesh wesh 1",this.state.isChecked);
+      console.log("wesh wesh 2",this.state.isChecked2)}
+      );}
+
   render() {
+
     return <div>
       <section class="container-fluid reserv">
         <div class="ReservationFirst">
@@ -75,15 +104,15 @@ export default class Reservation extends React.Component {
             <p class="listTitre"> Salle : </p>
             <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} />
             <div>
-              <input id="CheckboxCGU1" name="CheckboxCGU1" type="checkbox" value="Admin" class="checkCGU" />
+              <input id="CheckboxCGU1" name="CheckboxCGU1" onChange={this.toggleChange1} type="checkbox" value="Admin" class="checkCGU" />
               <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/About">les CGU</a></label>
             </div>
             <div>
-              <input id="CheckboxCGU1" name="CheckboxCGU1" type="checkbox" value="Admin" class="checkCGU" />
+              <input id="CheckboxCGU2" name="CheckboxCGU2" onChange={this.toggleChange2} type="checkbox" value="Admin" class="checkCGU" />
               <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/About">les CGU 2eme partie</a></label>
             </div>
             <div class="ReservationBtn">
-              <Button primary >Réserver</Button>
+              <Button primary onClick={this.toggleChange}>Réserver</Button>
             </div>
           </form>
 
