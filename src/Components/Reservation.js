@@ -105,11 +105,11 @@ export default class Reservation extends React.Component {
             <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} />
             <div>
               <input id="CheckboxCGU1" name="CheckboxCGU1" onChange={this.toggleChange1} type="checkbox" value="Admin" class="checkCGU" />
-              <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/About">les CGU</a></label>
+              <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/CGU">les CGU</a></label>
             </div>
             <div>
               <input id="CheckboxCGU2" name="CheckboxCGU2" onChange={this.toggleChange2} type="checkbox" value="Admin" class="checkCGU" />
-              <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/About">les CGU 2eme partie</a></label>
+              <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/CGU">les CGU 2eme partie</a></label>
             </div>
             <div class="ReservationBtn">
               <Button primary onClick={this.toggleChange}>Réserver</Button>
