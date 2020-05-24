@@ -7,6 +7,7 @@ import CGU from './CGU';
 import Reservation from './Reservation';
 import Plan from "./Plan"
 import ErrorPage from "./404NotFound"
+import Recherche from "./Recherche"
 
 export default class Routes extends React.Component {
   render() {
@@ -19,6 +20,7 @@ export default class Routes extends React.Component {
       <Route exact path="/u-resa/CGU" component={CGU}></Route>
       <Route exact path="/u-resa/Reservation" component={Reservation}></Route>
       <Route exact path="/u-resa/Plan" component={Plan}></Route>
+      <Route exact path="/u-resa/Recherche" component={Recherche}></Route>
       <Route component={ErrorPage}></Route>
     </Switch>
   }

@@ -66,16 +66,22 @@ export default class Reservation extends React.Component {
   toggleChange1 = () => {
     this.setState({
       isChecked: !this.state.isChecked,
-    }, () => {console.log("wesh wesh 1",this.state.isChecked);
-   console.log("wesh wesh 2",this.state.isChecked2)}
-    );}
+    }, () => {
+      console.log("wesh wesh 1", this.state.isChecked);
+      console.log("wesh wesh 2", this.state.isChecked2)
+    }
+    );
+  }
 
-    toggleChange2 = () => {
-      this.setState({
-        isChecked2: !this.state.isChecked2,
-      },() => {console.log("wesh wesh 1",this.state.isChecked);
-      console.log("wesh wesh 2",this.state.isChecked2)}
-      );}
+  toggleChange2 = () => {
+    this.setState({
+      isChecked2: !this.state.isChecked2,
+    }, () => {
+      console.log("wesh wesh 1", this.state.isChecked);
+      console.log("wesh wesh 2", this.state.isChecked2)
+    }
+    );
+  }
 
   render() {
 
