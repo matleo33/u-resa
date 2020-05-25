@@ -4,10 +4,12 @@ import { Route, Switch } from "react-router-dom"
 import Profile from "./Profile"
 import Connexion from "./Connexion"
 import CGU from './CGU';
-import Reservation from './Reservation';
+import Reservation from './RechercheEtReservation';
 import Plan from "./Plan"
 import ErrorPage from "./404NotFound"
-import Recherche from "./Recherche"
+import Recherche from "./RechercheSalle"
+import Historesas from "./HistoEtResas"
+
 
 export default class Routes extends React.Component {
   render() {
@@ -18,9 +20,10 @@ export default class Routes extends React.Component {
       <Route exact path="/u-resa/Profile" component={Profile}></Route>
       <Route exact path="/u-resa/Connexion" component={Connexion}></Route>
       <Route exact path="/u-resa/CGU" component={CGU}></Route>
-      <Route exact path="/u-resa/Reservation" component={Reservation}></Route>
+      <Route exact path="/u-resa/RechercheEtReservation" component={Reservation}></Route>
       <Route exact path="/u-resa/Plan" component={Plan}></Route>
-      <Route exact path="/u-resa/Recherche" component={Recherche}></Route>
+      <Route exact path="/u-resa/RechercheSalle" component={Recherche}></Route>
+      <Route exact path="/u-resa/HistoEtResas" component={Historesas}></Route>
       <Route component={ErrorPage}></Route>
     </Switch>
   }

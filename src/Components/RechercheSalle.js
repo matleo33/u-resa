@@ -1,7 +1,6 @@
 import React from 'react';
 import "../CSS/Reservation.css"
-import { Button, Checkbox } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
 import { Select } from 'semantic-ui-react'
 
 const Université = [
@@ -55,48 +54,21 @@ export default class Reservation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isChecked: false,
-      isChecked2: false
     };
   }
 
 
-
-
-  toggleChange1 = () => {
-    this.setState({
-      isChecked: !this.state.isChecked,
-    }, () => {
-      console.log("wesh wesh 1", this.state.isChecked);
-      console.log("wesh wesh 2", this.state.isChecked2)
-    }
-    );
-  }
-
-  toggleChange2 = () => {
-    this.setState({
-      isChecked2: !this.state.isChecked2,
-    }, () => {
-      console.log("wesh wesh 1", this.state.isChecked);
-      console.log("wesh wesh 2", this.state.isChecked2)
-    }
-    );
+  toggleChange = (e) => {
+    e.preventDefault();
+    window.location = './RechercheEtReservation';
   }
 
   render() {
 
     return <div>
       <section class="container-fluid reserv">
-        <div class="ReservationFirst">
-          <h2> Mes réservations </h2>
-          <hr class="separator"></hr>
-          <div id="titi">
-            <Link to="/u-resa/"><Button secondary>Historique</Button></Link>
-          </div>
-          <hr class="separator2"></hr>
-        </div>
         <div class="TakeReservation">
-          <h2> Prendre une réservation </h2>
+          <h2> Rechercher et réserver une salle </h2>
           <hr class="separator"></hr>
           <form class="reservForm">
             <p class="listTitre"> Date de ma réservation : </p>
@@ -109,19 +81,10 @@ export default class Reservation extends React.Component {
             <Select className="listD" placeholder='Sélectionnez le batiment' options={Batiment} />
             <p class="listTitre"> Salle : </p>
             <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} />
-            <div>
-              <input id="CheckboxCGU1" name="CheckboxCGU1" onChange={this.toggleChange1} type="checkbox" value="Admin" class="checkCGU" />
-              <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/CGU">les CGU</a></label>
-            </div>
-            <div>
-              <input id="CheckboxCGU2" name="CheckboxCGU2" onChange={this.toggleChange2} type="checkbox" value="Admin" class="checkCGU" />
-              <label for="Checkbox1">J'accepte les <a href="http://localhost:3000/u-resa/CGU">conditions générales d'utilisations</a></label>
-            </div>
             <div class="ReservationBtn">
               <Button primary onClick={this.toggleChange}>Réserver</Button>
             </div>
           </form>
-
         </div>
       </section>
     </div>

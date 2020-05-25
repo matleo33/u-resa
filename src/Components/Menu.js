@@ -4,6 +4,7 @@ import "../CSS/Menu.css"
 import { Grid } from 'semantic-ui-react'
 
 
+
 export default class MenuPerso extends React.Component {
 
   render() {
@@ -17,7 +18,7 @@ export default class MenuPerso extends React.Component {
               </Grid.Column>
               <Grid.Column>
                 <nav class="menu">
-                  <Link to="/u-resa/reservation"> Réservation </Link>
+                  <Link to="/u-resa/RechercheSalle"> Réservation </Link>
                   <Link to="/u-resa/Profile"> Mon profil </Link>
                   <Link to="/u-resa/Plan">Plan</Link>
                   <a href="http://localhost:8080/Connexion">Connexion</a>

@@ -3,6 +3,7 @@ import "../CSS/Recherche.css"
 import { Button, Segment } from 'semantic-ui-react'
 
 
+
 export default class Reservation extends React.Component {
 
     constructor(props) {
@@ -12,6 +13,10 @@ export default class Reservation extends React.Component {
         }
     };
 
+    routeChange = (e) => {
+        e.preventDefault();
+        window.location = './CGU';
+    }
 
     NumberList(props) {
         const numbers = props.numbers;
@@ -36,7 +41,7 @@ export default class Reservation extends React.Component {
                         <this.NumberList numbers={numbers} />
                     </div>
                     <div class="ReservationBtn">
-                        <Button primary onClick={this.toggleChange}>Réserver</Button>
+                        <Button primary onClick={this.routeChange}>Réserver</Button>
                     </div>
                 </div>
             </section>

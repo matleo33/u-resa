@@ -1,7 +1,37 @@
 import React from 'react';
 import "../CSS/CGU.css"
+import { Button } from 'semantic-ui-react'
+
 
 export default class About extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isChecked: false,
+      isChecked2: false
+    };
+  }
+
+  toggleChange = (e) => {
+    this.setState({
+      isChecked: !this.state.isChecked,
+    }, () => {
+      console.log("wesh wesh 1", this.state.isChecked);
+      console.log("wesh wesh 2", this.state.isChecked2)
+    }
+    );
+  }
+
+  toggleChange2 = () => {
+    this.setState({
+      isChecked2: !this.state.isChecked2,
+    }, () => {
+      console.log("wesh wesh 1", this.state.isChecked);
+      console.log("wesh wesh 2", this.state.isChecked2)
+    }
+    );
+  }
+
   render() {
     return <div class="container">
       <div class="cgu">
@@ -33,6 +63,18 @@ export default class About extends React.Component {
             <p>
               J’accepte les conditions générales d’utilisations et certifie sur l’honneur disposer d’une inscription à jour à l'Université de Bordeaux ainsi que d’une assurance de responsabilité civile validée et à jour sur cette période (fournie lors de l’inscription) :
           </p>
+          </div>
+
+          <div>
+            <input id="CheckboxCGU1" name="CheckboxCGU1" onChange={this.toggleChange1} type="checkbox" value="Admin" class="checkCGU" />
+            <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/CGU">les CGU</a></label>
+          </div>
+          <div>
+            <input id="CheckboxCGU2" name="CheckboxCGU2" onChange={this.toggleChange2} type="checkbox" value="Admin" class="checkCGU" />
+            <label for="Checkbox1">J'accepte les <a href="http://localhost:3000/u-resa/CGU">conditions générales d'utilisations</a></label>
+          </div>
+          <div class="ReservationBtn">
+            <Button primary onClick={this.toggleChange}>Valider ma première réservation</Button>
           </div>
         </div>
       </div>
