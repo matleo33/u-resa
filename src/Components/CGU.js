@@ -67,11 +67,11 @@ export default class About extends React.Component {
 
           <div>
             <input id="CheckboxCGU1" name="CheckboxCGU1" onChange={this.toggleChange1} type="checkbox" value="Admin" class="checkCGU" />
-            <label for="Checkbox1">J'ai lu et compris <a href="http://localhost:3000/u-resa/CGU">les CGU</a></label>
+            <label for="Checkbox1">J'ai lu et compris les CGU</label>
           </div>
           <div>
             <input id="CheckboxCGU2" name="CheckboxCGU2" onChange={this.toggleChange2} type="checkbox" value="Admin" class="checkCGU" />
-            <label for="Checkbox1">J'accepte les <a href="http://localhost:3000/u-resa/CGU">conditions générales d'utilisations</a></label>
+            <label for="Checkbox1">J'accepte les conditions générales d'utilisations</label>
           </div>
           <div class="ReservationBtn">
             <Button primary onClick={this.toggleChange}>Valider ma première réservation</Button>

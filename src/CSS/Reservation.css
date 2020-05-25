@@ -72,7 +72,8 @@ padding-top: 2%;
     margin-bottom: 0%;
     font-weight: bold;
     margin-left: 4%;
-    padding-top: 3%;    
+    padding-top: 0;
+
 }
 
 .reservForm{
@@ -83,4 +84,19 @@ padding-top: 2%;
     border-radius: 10px;
     box-shadow: 0px 0px 2px grey;
     min-width: 12em;
+}
+
+.erreur{
+    padding-top: 3%;    
+    margin-left: 2%;
+    margin-bottom: 0;
+    color: red;
+    visibility:hidden;
+}
+
+.erreurVisible{
+    padding-top: 3%;    
+    margin-left: 2%;
+    margin-bottom: 0;
+    color: red;
 }
