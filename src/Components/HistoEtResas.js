@@ -8,6 +8,12 @@ export default class Reservation extends React.Component {
         this.state = {
             visibilityHistoric: "none"
         };
+        fetch("http://localhost:8080/Historique")
+            .then(response => response.json())
+            .then(response => this.setState({ historic: response }))
+        fetch("http://localhost:8080/Encours")
+            .then(response => response.json())
+            .then(response => this.setState({ reservations: response }))
     }
 
     toggleVisibilityHistoric() {
@@ -16,15 +22,6 @@ export default class Reservation extends React.Component {
         } else {
             this.setState({ visibilityHistoric: "visible" });
         }
-    }
-
-    componentDidMount() {
-        fetch("http://localhost:8080/Historique")
-            .then(response => response.json())
-            .then(response => this.setState({ historic: response }))
-        fetch("http://localhost:8080/Encours")
-            .then(response => response.json())
-            .then(response => this.setState({ reservations: response }))
     }
 
     render() {
