@@ -76,20 +76,33 @@ export default class Reservation extends React.Component {
     event.preventDefault();
     this.testErreur(event);
     if(this.state.FindErreur === false){
-      var data = new FormData();
-      data.append('Date', this.state.Date);
+      //var data = new FormData();
+      let data = [
+        {Date: this.state.Date, 
+        Horaire: this.state.Horaire,
+        Fac: this.state.Fac,
+        Batiment: this.state.Batiment,
+        Salle: this.state.Salle}
+      ]
+      /*data.append('Date', this.state.Date);
       data.append('Horaire', this.state.Horaire);
       data.append('Fac', this.state.Fac);
       data.append('Batiment', this.state.Batiment);
       data.append('Salle', this.state.Salle);
-      /*for(var pair of data.entries()) {
+      for(var pair of data.entries()) {
         console.log(pair[0]+ ', '+ pair[1]); 
      }*/
-      fetch('./RechercheEtReservation', {
+
+     this.props.history.push({
+      pathname: '/u-resa/RechercheEtReservation',
+      data: data // your data array of objects
+    })
+
+      /*fetch('/RechercheEtReservation', {
         method: 'POST',
         body: data,
       });
-      window.location = './RechercheEtReservation';
+      window.location = './RechercheEtReservation';*/
     }
 
   }
