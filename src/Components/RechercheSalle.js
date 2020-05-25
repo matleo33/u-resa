@@ -75,9 +75,16 @@ export default class Reservation extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.testErreur(event);
-    if(this.state.FindErreur === true){
-      const data = new FormData(event.target);
-      alert(data)
+    if(this.state.FindErreur === false){
+      var data = new FormData();
+      data.append('Date', this.state.Date);
+      data.append('Horaire', this.state.Horaire);
+      data.append('Fac', this.state.Fac);
+      data.append('Batiment', this.state.Batiment);
+      data.append('Salle', this.state.Salle);
+      /*for(var pair of data.entries()) {
+        console.log(pair[0]+ ', '+ pair[1]); 
+     }*/
       fetch('./RechercheEtReservation', {
         method: 'POST',
         body: data,
@@ -136,7 +143,7 @@ export default class Reservation extends React.Component {
             <Select className="listD" placeholder='Sélectionnez mon université' options={Université} onChange={this.FacChange}/>
             <p id="erreur_Batiment" class={this.state.Error}>*Champ non renseigné</p>
             <p class="listTitre"> Batiment désiré : </p>
-            <Select className="listD" placeholder='Sélectionnez le batiment' options={Batiment} onChange={this.BatimentChange}/>
+            <Select id="email" name="email" htmlFor="email" className="listD" placeholder='Sélectionnez le batiment' options={Batiment} onChange={this.BatimentChange}/>
             <p id="erreur_Salle" class={this.state.Error}>*Champ non renseigné</p>
             <p class="listTitre"> Salle : </p>
             <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
