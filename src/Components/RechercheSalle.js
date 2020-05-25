@@ -1,7 +1,7 @@
 import React from 'react';
 import "../CSS/Reservation.css"
-import { Button } from 'semantic-ui-react'
 import { Select } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
 const Université = [
   { key: 'af', value: 'af', text: 'Bordeux 1 le 100' },
@@ -53,8 +53,49 @@ export default class Reservation extends React.Component {
 
   constructor(props) {
     super(props);
+    this.DateChange = this.DateChange.bind(this);
+    this.HoraireChange = this.HoraireChange.bind(this);
+    this.FacChange = this.FacChange.bind(this);
+    this.BatimentChange = this.BatimentChange.bind(this);
+    this.SalleChange = this.SalleChange.bind(this);
+    this.test = this.test.bind(this)
     this.state = {
+      Error: "erreur",
+      Date: "",
+      Horaire: "",
+      Fac: "",
+      Batiment: "",
+      Salle: "",
     };
+  }
+
+  test(event) {
+    event.preventDefault()
+    if(this.state.Date === "" || this.state.Horaire === "" || this.state.Fac === "" || this.state.Batiment === "" || this.state.Salle === ""){
+      this.setState({
+        Error: "erreurVisible"
+      })
+    }
+  }
+
+  DateChange(event) {
+    this.setState({Date: event.target.value});
+  }
+
+  HoraireChange(event) {
+    this.setState({Horaire: event.target.textContent});
+  }
+
+  FacChange(event) {
+    this.setState({Fac: event.target.textContent});
+  }
+
+  BatimentChange(event) {
+    this.setState({Batiment: event.target.textContent});
+  }
+
+  SalleChange(event) {
+    this.setState({Salle: event.target.textContent});
   }
 
 
@@ -62,6 +103,8 @@ export default class Reservation extends React.Component {
     e.preventDefault();
     window.location = './RechercheEtReservation';
   }
+
+  
 
   render() {
 
@@ -71,19 +114,25 @@ export default class Reservation extends React.Component {
           <h2> Rechercher et réserver une salle </h2>
           <hr class="separator"></hr>
           <form class="reservForm">
+          <p id="erreur_Date"class={this.state.Error}>*Champ non renseigné</p>
             <p class="listTitre"> Date de ma réservation : </p>
-            <input type="date" class="listD" id="start" name="trip-start" />
+            <input type="date" class="listD" id="start" name="trip-start" onChange={this.DateChange} />
+            <p id="erreur_Heure" class={this.state.Error}>*Champ non renseigné</p>
             <p class="listTitre"> Heure de ma réservation : </p>
-            <Select className="listD" placeholder='Aucune préférence' options={Horaire} />
+            <Select className="listD" placeholder='Aucune préférence' options={Horaire} onChange={this.HoraireChange}/>
+            <p id="erreur_University" class={this.state.Error}>*Champ non renseigné</p>
             <p class="listTitre"> Mon Université :  </p>
-            <Select className="listD" placeholder='Sélectionnez mon université' options={Université} />
+            <Select className="listD" placeholder='Sélectionnez mon université' options={Université} onChange={this.FacChange}/>
+            <p id="erreur_Batiment" class={this.state.Error}>*Champ non renseigné</p>
             <p class="listTitre"> Batiment désiré : </p>
-            <Select className="listD" placeholder='Sélectionnez le batiment' options={Batiment} />
+            <Select className="listD" placeholder='Sélectionnez le batiment' options={Batiment} onChange={this.BatimentChange}/>
+            <p id="erreur_Salle" class={this.state.Error}>*Champ non renseigné</p>
             <p class="listTitre"> Salle : </p>
-            <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} />
+            <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
             <div class="ReservationBtn">
               <Button primary onClick={this.toggleChange}>Réserver</Button>
             </div>
+          <button onClick={this.test}>test</button>
           </form>
         </div>
       </section>

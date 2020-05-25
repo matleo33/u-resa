@@ -18,9 +18,10 @@ export default class MenuPerso extends React.Component {
               </Grid.Column>
               <Grid.Column>
                 <nav class="menu">
-                  <Link to="/u-resa/RechercheSalle"> Réservation </Link>
-                  <Link to="/u-resa/Profile"> Mon profil </Link>
+                  <Link to="/u-resa/RechercheSalle"> Réserver </Link>
+                  <Link to="/u-resa/HistoEtResas"> Mes réservations </Link>
                   <Link to="/u-resa/Plan">Plan</Link>
+                  <Link to="/u-resa/Profile"> Mon profil </Link>
                   <a href="http://localhost:8080/Connexion">Connexion</a>
                 </nav>
               </Grid.Column>

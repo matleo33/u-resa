@@ -30,7 +30,7 @@ export default class Reservation extends React.Component {
 
 
     render() {
-        var numbers = ["{A,B,C}", "B"];
+        var numbers = ["{A,B,C}", "{A,B,C}", "{A,B,C}"];
         return <div>
             <section class="container-fluid reserv">
                 <div class="TakeReservation">
