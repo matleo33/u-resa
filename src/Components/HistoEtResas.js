@@ -6,7 +6,9 @@ export default class Reservation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            visibilityHistoric: "none"
+            visibilityHistoric: "none",
+            reservations: null,
+            historic: null
         };
     }
 
