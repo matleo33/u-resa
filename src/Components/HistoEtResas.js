@@ -12,8 +12,6 @@ export default class Reservation extends React.Component {
         };
     }
 
-
-
     render() {
 
         return <div>
