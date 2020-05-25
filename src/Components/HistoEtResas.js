@@ -7,13 +7,13 @@ export default class Reservation extends React.Component {
         super(props);
         this.state = {
             visibilityHistoric: "none",
-            reservations: null,
-            historic: null
+            reservations: [],
+            historic: []
         };
     }
 
     toggleVisibilityHistoric() {
-        if (this.state.visibilityHistoric == "visible") {
+        if (this.state.visibilityHistoric === "visible") {
             this.setState({ visibilityHistoric: "hidden" });
         } else {
             this.setState({ visibilityHistoric: "visible" });
