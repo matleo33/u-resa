@@ -60,12 +60,6 @@ export default class Reservation extends React.Component {
                     <div class="ReservationBtn">
                         <Button primary onClick={this.routeChange}>Réserver</Button>
                     </div>
-                    <button onClick={this.test}>teeest</button>
-                    <p>{this.state.Date}</p>
-                    <p>{this.state.Batiment}</p>
-                    <p>{this.state.Fac}</p>
-                    <p>{this.state.Horaire}</p>
-                    <p>{this.state.Salle}</p>
                 </div>
             </section>
         </div>

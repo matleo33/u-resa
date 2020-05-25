@@ -18,7 +18,7 @@ const Batiment = [
 const Salle = [
   { key: 'af', value: 'af', text: '101' },
   { key: 'ax', value: 'ax', text: '102' },
-  { key: 'ax', value: 'ax', text: '105' },
+  { key: 'ap', value: 'ap', text: '105' },
   { key: 'al', value: 'al', text: 'des profs ptdr trolol' },
 ]
 
@@ -140,27 +140,27 @@ export default class Reservation extends React.Component {
   render() {
 
     return <div>
-      <section class="container-fluid reserv">
-        <div class="TakeReservation">
+      <section className="container-fluid reserv">
+        <div className="TakeReservation">
           <h2> Rechercher et réserver une salle </h2>
-          <hr class="separator"></hr>
-          <form class="reservForm" onSubmit={this.handleSubmit}>
-          <p id="erreur_Date"class={this.state.Error}>*Champ non renseigné</p>
-            <p class="listTitre"> Date de ma réservation : </p>
-            <input type="date" class="listD" id="start" name="trip-start" onChange={this.DateChange} />
-            <p id="erreur_Heure" class={this.state.Error}>*Champ non renseigné</p>
-            <p class="listTitre"> Heure de ma réservation : </p>
+          <hr className="separator"></hr>
+          <form className="reservForm" onSubmit={this.handleSubmit}>
+          <p id="erreur_Date"className={this.state.Error}>*Champ non renseigné</p>
+            <p className="listTitre"> Date de ma réservation : </p>
+            <input type="date" className="listD" id="start" name="trip-start" onChange={this.DateChange} />
+            <p id="erreur_Heure" className={this.state.Error}>*Champ non renseigné</p>
+            <p className="listTitre"> Heure de ma réservation : </p>
             <Select className="listD" placeholder='Aucune préférence' options={Horaire} onChange={this.HoraireChange}/>
-            <p id="erreur_University" class={this.state.Error}>*Champ non renseigné</p>
-            <p class="listTitre"> Mon Université :  </p>
+            <p id="erreur_University" className={this.state.Error}>*Champ non renseigné</p>
+            <p className="listTitre"> Mon Université :  </p>
             <Select className="listD" placeholder='Sélectionnez mon université' options={Université} onChange={this.FacChange}/>
-            <p id="erreur_Batiment" class={this.state.Error}>*Champ non renseigné</p>
-            <p class="listTitre"> Batiment désiré : </p>
+            <p id="erreur_Batiment" className={this.state.Error}>*Champ non renseigné</p>
+            <p className="listTitre"> Batiment désiré : </p>
             <Select id="email" name="email" htmlFor="email" className="listD" placeholder='Sélectionnez le batiment' options={Batiment} onChange={this.BatimentChange}/>
-            <p id="erreur_Salle" class={this.state.Error}>*Champ non renseigné</p>
-            <p class="listTitre"> Salle : </p>
+            <p id="erreur_Salle" className={this.state.Error}>*Champ non renseigné</p>
+            <p className="listTitre"> Salle : </p>
             <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
-            <div class="ReservationBtn">
+            <div className="ReservationBtn">
               <Button primary>Réserver</Button>
             </div>
           </form>

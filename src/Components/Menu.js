@@ -9,15 +9,15 @@ export default class MenuPerso extends React.Component {
 
   render() {
     return <div>
-      <header class="container-fluid MenuHeader">
+      <header className="container-fluid MenuHeader">
         <div>
           <Grid columns={2}>
             <Grid.Row>
               <Grid.Column>
-                <Link class="logo" to="/u-resa/"> U-RESA </Link>
+                <Link className="logo" to="/u-resa/"> U-RESA </Link>
               </Grid.Column>
               <Grid.Column>
-                <nav class="menu">
+                <nav className="menu">
                   <Link to="/u-resa/RechercheSalle"> Réserver </Link>
                   <Link to="/u-resa/HistoEtResas"> Mes réservations </Link>
                   <Link to="/u-resa/Plan">Plan</Link>
