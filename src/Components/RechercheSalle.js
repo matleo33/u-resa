@@ -58,7 +58,9 @@ export default class Reservation extends React.Component {
     this.FacChange = this.FacChange.bind(this);
     this.BatimentChange = this.BatimentChange.bind(this);
     this.SalleChange = this.SalleChange.bind(this);
-    this.test = this.test.bind(this)
+    this.testErreur = this.testErreur.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+    
     this.state = {
       Error: "erreur",
       Date: "",
@@ -66,14 +68,31 @@ export default class Reservation extends React.Component {
       Fac: "",
       Batiment: "",
       Salle: "",
+      FindErreur: false,
     };
   }
 
-  test(event) {
+  handleSubmit(event) {
+    event.preventDefault();
+    this.testErreur(event);
+    if(this.state.FindErreur === true){
+      const data = new FormData(event.target);
+      alert(data)
+      fetch('./RechercheEtReservation', {
+        method: 'POST',
+        body: data,
+      });
+      window.location = './RechercheEtReservation';
+    }
+
+  }
+
+  testErreur(event) {
     event.preventDefault()
     if(this.state.Date === "" || this.state.Horaire === "" || this.state.Fac === "" || this.state.Batiment === "" || this.state.Salle === ""){
       this.setState({
-        Error: "erreurVisible"
+        Error: "erreurVisible",
+        FindErreur: true
       })
     }
   }
@@ -96,15 +115,7 @@ export default class Reservation extends React.Component {
 
   SalleChange(event) {
     this.setState({Salle: event.target.textContent});
-  }
-
-
-  toggleChange = (e) => {
-    e.preventDefault();
-    window.location = './RechercheEtReservation';
-  }
-
-  
+  } 
 
   render() {
 
@@ -113,7 +124,7 @@ export default class Reservation extends React.Component {
         <div class="TakeReservation">
           <h2> Rechercher et réserver une salle </h2>
           <hr class="separator"></hr>
-          <form class="reservForm">
+          <form class="reservForm" onSubmit={this.handleSubmit}>
           <p id="erreur_Date"class={this.state.Error}>*Champ non renseigné</p>
             <p class="listTitre"> Date de ma réservation : </p>
             <input type="date" class="listD" id="start" name="trip-start" onChange={this.DateChange} />
@@ -130,9 +141,8 @@ export default class Reservation extends React.Component {
             <p class="listTitre"> Salle : </p>
             <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
             <div class="ReservationBtn">
-              <Button primary onClick={this.toggleChange}>Réserver</Button>
+              <Button primary>Réserver</Button>
             </div>
-          <button onClick={this.test}>test</button>
           </form>
         </div>
       </section>
