@@ -22,6 +22,17 @@ const Salle = [
   { key: 'al', value: 'al', text: 'des profs ptdr trolol' },
 ]
 
+const Duree = [
+  { key: 'af', value: '1', text: '30 min' },
+  { key: 'ax', value: '2', text: '1H' },
+  { key: 'ap', value: '3', text: '1H 30 min' },
+  { key: 'al', value: '4', text: '2H' },
+  { key: 'ar', value: '5', text: '2H 30 min' },
+  { key: 'am', value: '6', text: '3H' },
+  { key: 'an', value: '7', text: '3H 30 min' },
+  { key: 'ao', value: '8', text: '4H' },
+]
+
 
 const Horaire = [
   { key: 'a', value: 'a', text: 'Aucune préférence' },
@@ -60,6 +71,7 @@ export default class Reservation extends React.Component {
     this.SalleChange = this.SalleChange.bind(this);
     this.testErreur = this.testErreur.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this);
+
     
     this.state = {
       Error: "erreur",
@@ -68,6 +80,7 @@ export default class Reservation extends React.Component {
       Fac: "",
       Batiment: "",
       Salle: "",
+      Duree: "",
       FindErreur: false,
     };
   }
@@ -82,7 +95,8 @@ export default class Reservation extends React.Component {
         Horaire: this.state.Horaire,
         Fac: this.state.Fac,
         Batiment: this.state.Batiment,
-        Salle: this.state.Salle}
+        Salle: this.state.Salle,
+      Duree: this.state.Duree,}
       ]
       /*data.append('Date', this.state.Date);
       data.append('Horaire', this.state.Horaire);
@@ -109,7 +123,12 @@ export default class Reservation extends React.Component {
 
   testErreur(event) {
     event.preventDefault()
-    if(this.state.Date === "" || this.state.Horaire === "" || this.state.Fac === "" || this.state.Batiment === "" || this.state.Salle === ""){
+    if(this.state.Duree === "" || 
+    this.state.Date === "" || 
+    this.state.Horaire === "" || 
+    this.state.Fac === "" || 
+    this.state.Batiment === "" || 
+    this.state.Salle === ""){
       this.setState({
         Error: "erreurVisible",
         FindErreur: true
@@ -120,6 +139,7 @@ export default class Reservation extends React.Component {
   DateChange(event) {
     this.setState({Date: event.target.value});
   }
+
 
   HoraireChange(event) {
     this.setState({Horaire: event.target.textContent});
@@ -151,6 +171,9 @@ export default class Reservation extends React.Component {
             <p id="erreur_Heure" className={this.state.Error}>*Champ non renseigné</p>
             <p className="listTitre"> Heure de ma réservation : </p>
             <Select className="listD" placeholder='Aucune préférence' options={Horaire} onChange={this.HoraireChange}/>
+            <p id="erreur_Heure" className={this.state.Error}>*Champ non renseigné</p>
+            <p className="listTitre"> Durée de ma réservation : </p>
+            <Select className="listD" placeholder='Aucune préférence' options={Duree} onChange={(e, { value }) => this.setState({Duree: value})}/>
             <p id="erreur_University" className={this.state.Error}>*Champ non renseigné</p>
             <p className="listTitre"> Mon Université :  </p>
             <Select className="listD" placeholder='Sélectionnez mon université' options={Université} onChange={this.FacChange}/>
@@ -159,7 +182,7 @@ export default class Reservation extends React.Component {
             <Select id="email" name="email" htmlFor="email" className="listD" placeholder='Sélectionnez le batiment' options={Batiment} onChange={this.BatimentChange}/>
             <p id="erreur_Salle" className={this.state.Error}>*Champ non renseigné</p>
             <p className="listTitre"> Salle : </p>
-            <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
+            <Select  className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
             <div className="ReservationBtn">
               <Button primary>Réserver</Button>
             </div>
