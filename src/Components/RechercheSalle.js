@@ -16,6 +16,7 @@ const Batiment = [
 ]
 
 const Salle = [
+  { key: 'a', value: 'a', text: 'Aucune préférence' },
   { key: 'af', value: 'af', text: '101' },
   { key: 'ax', value: 'ax', text: '102' },
   { key: 'ap', value: 'ap', text: '105' },
@@ -70,9 +71,9 @@ export default class Reservation extends React.Component {
     this.BatimentChange = this.BatimentChange.bind(this);
     this.SalleChange = this.SalleChange.bind(this);
     this.testErreur = this.testErreur.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.EnvoieDonnee = this.EnvoieDonnee.bind(this);
 
-    
+
     this.state = {
       Error: "erreur",
       Date: "",
@@ -85,77 +86,65 @@ export default class Reservation extends React.Component {
     };
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.testErreur(event);
-    if(this.state.FindErreur === false){
-      //var data = new FormData();
+  EnvoieDonnee() {
       let data = [
-        {Date: this.state.Date, 
-        Horaire: this.state.Horaire,
-        Fac: this.state.Fac,
-        Batiment: this.state.Batiment,
-        Salle: this.state.Salle,
-      Duree: this.state.Duree,}
+        {
+          Date: this.state.Date,
+          Horaire: this.state.Horaire,
+          Fac: this.state.Fac,
+          Batiment: this.state.Batiment,
+          Salle: this.state.Salle,
+          Duree: this.state.Duree,
+        }
       ]
-      /*data.append('Date', this.state.Date);
-      data.append('Horaire', this.state.Horaire);
-      data.append('Fac', this.state.Fac);
-      data.append('Batiment', this.state.Batiment);
-      data.append('Salle', this.state.Salle);
-      for(var pair of data.entries()) {
-        console.log(pair[0]+ ', '+ pair[1]); 
-     }*/
 
-     this.props.history.push({
-      pathname: '/u-resa/RechercheEtReservation',
-      data: data // your data array of objects
-    })
-
-      /*fetch('/RechercheEtReservation', {
-        method: 'POST',
-        body: data,
-      });
-      window.location = './RechercheEtReservation';*/
-    }
-
+      this.props.history.push({
+        pathname: '/u-resa/RechercheEtReservation',
+        data: data
+      })
   }
 
   testErreur(event) {
     event.preventDefault()
-    if(this.state.Duree === "" || 
-    this.state.Date === "" || 
-    this.state.Horaire === "" || 
-    this.state.Fac === "" || 
-    this.state.Batiment === "" || 
-    this.state.Salle === ""){
+    if (this.state.Duree === "" ||
+      this.state.Date === "" ||
+      this.state.Horaire === "" ||
+      this.state.Fac === "" ||
+      this.state.Batiment === "" ||
+      this.state.Salle === "") {
       this.setState({
         Error: "erreurVisible",
-        FindErreur: true
       })
     }
+    
+    else if(this.state.Horaire === "Aucune préférence" && this.state.Salle === "Aucune préférence"){
+      this.setState({
+        Error: "erreurVisible",
+      })
+    }
+    else{this.EnvoieDonnee()}
   }
 
   DateChange(event) {
-    this.setState({Date: event.target.value});
+    this.setState({ Date: event.target.value });
   }
 
 
   HoraireChange(event) {
-    this.setState({Horaire: event.target.textContent});
+    this.setState({ Horaire: event.target.textContent });
   }
 
   FacChange(event) {
-    this.setState({Fac: event.target.textContent});
+    this.setState({ Fac: event.target.textContent });
   }
 
   BatimentChange(event) {
-    this.setState({Batiment: event.target.textContent});
+    this.setState({ Batiment: event.target.textContent });
   }
 
   SalleChange(event) {
-    this.setState({Salle: event.target.textContent});
-  } 
+    this.setState({ Salle: event.target.textContent });
+  }
 
   render() {
 
@@ -164,25 +153,25 @@ export default class Reservation extends React.Component {
         <div className="TakeReservation">
           <h2> Rechercher et réserver une salle </h2>
           <hr className="separator"></hr>
-          <form className="reservForm" onSubmit={this.handleSubmit}>
-          <p id="erreur_Date"className={this.state.Error}>*Champ non renseigné</p>
+          <form className="reservForm" onSubmit={this.testErreur}>
+            <p id="erreur_Date" className={this.state.Error}>*Champ non renseigné</p>
             <p className="listTitre"> Date de ma réservation : </p>
             <input type="date" className="listD" id="start" name="trip-start" onChange={this.DateChange} />
             <p id="erreur_Heure" className={this.state.Error}>*Champ non renseigné</p>
             <p className="listTitre"> Heure de ma réservation : </p>
-            <Select className="listD" placeholder='Aucune préférence' options={Horaire} onChange={this.HoraireChange}/>
+            <Select className="listD" placeholder='Aucune préférence' options={Horaire} onChange={this.HoraireChange} />
             <p id="erreur_Heure" className={this.state.Error}>*Champ non renseigné</p>
             <p className="listTitre"> Durée de ma réservation : </p>
-            <Select className="listD" placeholder='Aucune préférence' options={Duree} onChange={(e, { value }) => this.setState({Duree: value})}/>
+            <Select className="listD" placeholder='Aucune préférence' options={Duree} onChange={(e, { value }) => this.setState({ Duree: value })} />
             <p id="erreur_University" className={this.state.Error}>*Champ non renseigné</p>
             <p className="listTitre"> Mon Université :  </p>
-            <Select className="listD" placeholder='Sélectionnez mon université' options={Université} onChange={this.FacChange}/>
+            <Select className="listD" placeholder='Sélectionnez mon université' options={Université} onChange={this.FacChange} />
             <p id="erreur_Batiment" className={this.state.Error}>*Champ non renseigné</p>
             <p className="listTitre"> Batiment désiré : </p>
-            <Select id="email" name="email" htmlFor="email" className="listD" placeholder='Sélectionnez le batiment' options={Batiment} onChange={this.BatimentChange}/>
+            <Select id="email" name="email" htmlFor="email" className="listD" placeholder='Sélectionnez le batiment' options={Batiment} onChange={this.BatimentChange} />
             <p id="erreur_Salle" className={this.state.Error}>*Champ non renseigné</p>
             <p className="listTitre"> Salle : </p>
-            <Select  className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
+            <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
             <div className="ReservationBtn">
               <Button primary>Réserver</Button>
             </div>
