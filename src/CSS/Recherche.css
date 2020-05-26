@@ -55,6 +55,26 @@ padding-top: 2%;
 
 }
 
+.ui.segment{
+    width:50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.Left{
+    width:50%;
+    display: inline-block;
+    margin-left: 0;
+}
+
+.Right{
+    width:50%;
+    margin-right: 0;
+    display: inline-block;
+    right: 0;
+    text-align: right;
+}
+
 .Resa-list{
     margin-bottom: auto;
     padding-bottom: auto;
