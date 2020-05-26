@@ -1,6 +1,6 @@
 import React from 'react';
 import "../CSS/Recherche.css"
-import { Button } from 'semantic-ui-react'
+import { Button, Segment, Checkbox } from 'semantic-ui-react'
 
 
 
@@ -8,6 +8,7 @@ export default class Reservation extends React.Component {
 
     constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this);
         this.state = {
             numbers: ["A", "B"],
             Date: "",
@@ -16,10 +17,18 @@ export default class Reservation extends React.Component {
             Fac: "",
             Batiment: "",
             Salle: "",
-            response: []
+            response: [],
+            activeIndex: -1
         }
     };
 
+
+    handleClick = (e, titleProps) => {
+        const { index } = titleProps
+        const { activeIndex } = this.state
+        const newIndex = activeIndex === index ? -1 : index
+        this.setState({ activeIndex: newIndex })
+    }
 
     componentDidMount() {
         const { data } = this.props.location
@@ -31,6 +40,12 @@ export default class Reservation extends React.Component {
             Batiment: data[0]["Batiment"],
             Salle: data[0]["Salle"]
         });
+        var str = data[0]["Horaire"].split("H")
+        var heuresansretenue = (Number(str[0]) + Number(Math.trunc((data[0]["Duree"] * 30) / 60))) + 'H' + (Number(str[1]) + Number((data[0]["Duree"] * 30) % 60))
+        var str2 = heuresansretenue.split("H")
+        var heure = data[0]["Date"] + ' ' + (Number(str2[0]) + Number((Math.trunc(Number(str2[1]) / 60)))) + 'H' + (Number(str2[1]) % 60)
+        console.log(data[0]["Date"] + ' ' + data[0]["Horaire"])
+        console.log(heure)
         if (data[0]["Horaire"] === "Aucune préférence") {
             fetch("http://localhost:8080/Salles/Disponibilitesalle", {
                 method: 'POST',
@@ -39,7 +54,7 @@ export default class Reservation extends React.Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    horaire: data[0]["Date"] + ' ' + data[0]["Horaire"],
+                    date: data[0]["Date"],
                     idsalle: data[0]["Salle"]
                 })
             }).then(response => response.json())
@@ -54,16 +69,12 @@ export default class Reservation extends React.Component {
                 },
                 body: JSON.stringify({
                     horaire: data[0]["Date"] + ' ' + data[0]["Horaire"],
-                    horairefin: data[0]["Duree"],
+                    horairefin: heure,
                 })
             }).then(response => response.json())
                 .then(response => this.setState({ response: response }))
         }
         else {
-            var str = data[0]["Horaire"].split("H")
-            var heuresansretenue = (Number(str[0]) + Number(Math.trunc((data[0]["Duree"] * 30) / 60))) + 'H' + (Number(str[1]) + Number((data[0]["Duree"] * 30) % 60))
-            var str2 = heuresansretenue.split("H")
-            var heure = data[0]["Date"] + ' ' + (Number(str2[0]) + Number((Math.trunc(Number(str2[1]) / 60)))) + 'H' + (Number(str2[1]) % 60)
             fetch("http://localhost:8080/Salles/Disponibilite", {
                 method: 'POST',
                 headers: {
@@ -86,15 +97,17 @@ export default class Reservation extends React.Component {
                 <div class="TakeReservation">
                     <h2> Propositions de réservation </h2>
                     <hr class="separator"></hr>
-                    <div class="reservForm">
-                        <ul>
-                            {this.state.response.map((line) =>
-                                <li>
-                                    {line.nomSalle}
-                                </li>
-                            )}
-                        </ul>
-                    </div>
+                    {this.state.response.map((line, index) =>
+                        <Segment>
+                            <div className="Left">
+                                Salle {line.nomSalle}
+                            </div>
+                            <div className="Right">
+                                Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {this.state.Duree * 30} minutes
+                            </div>
+                            <Checkbox checked={this.state.activeIndex === index} index={index} id={index} onClick={this.handleClick} label="Sélectionner" />
+                        </Segment>
+                    )}
                     <div class="ReservationBtn">
                         <Button primary onClick={this.routeChange}>Réserver</Button>
                     </div>

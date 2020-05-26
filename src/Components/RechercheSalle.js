@@ -87,21 +87,21 @@ export default class Reservation extends React.Component {
   }
 
   EnvoieDonnee() {
-      let data = [
-        {
-          Date: this.state.Date,
-          Horaire: this.state.Horaire,
-          Fac: this.state.Fac,
-          Batiment: this.state.Batiment,
-          Salle: this.state.Salle,
-          Duree: this.state.Duree,
-        }
-      ]
+    let data = [
+      {
+        Date: this.state.Date,
+        Horaire: this.state.Horaire,
+        Fac: this.state.Fac,
+        Batiment: this.state.Batiment,
+        Salle: this.state.Salle,
+        Duree: this.state.Duree,
+      }
+    ]
 
-      this.props.history.push({
-        pathname: '/u-resa/RechercheEtReservation',
-        data: data
-      })
+    this.props.history.push({
+      pathname: '/u-resa/RechercheEtReservation',
+      data: data
+    })
   }
 
   testErreur(event) {
@@ -116,13 +116,13 @@ export default class Reservation extends React.Component {
         Error: "erreurVisible",
       })
     }
-    
-    else if(this.state.Horaire === "Aucune préférence" && this.state.Salle === "Aucune préférence"){
+
+    else if (this.state.Horaire === "Aucune préférence" && this.state.Salle === "Aucune préférence") {
       this.setState({
         Error: "erreurVisible",
       })
     }
-    else{this.EnvoieDonnee()}
+    else { this.EnvoieDonnee() }
   }
 
   DateChange(event) {
