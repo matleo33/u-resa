@@ -81,7 +81,7 @@ export default class Reservation extends React.Component {
     }
 
     render() {
-        return <div>
+        return <div className="fillall">
             <section class="container-fluid reserv">
                 <div class="TakeReservation">
                     <h2> Propositions de réservation </h2>

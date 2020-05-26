@@ -4,15 +4,15 @@ import { Select } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react'
 
 const Université = [
-  { key: 'af', value: 'af', text: 'Bordeux 1 le 100' },
-  { key: 'ax', value: 'ax', text: 'montaigne ptdr' },
-  { key: 'al', value: 'al', text: 'wesh la zone' },
+  { key: 'af', value: 'af', text: 'Université de Talence' },
+  { key: 'ax', value: 'ax', text: 'Université de Pessac' },
+  { key: 'al', value: 'al', text: 'Université de Vicoire' },
 ]
 
 const Batiment = [
-  { key: 'af', value: 'af', text: 'A22' },
-  { key: 'ax', value: 'ax', text: 'A21' },
-  { key: 'al', value: 'al', text: 'A29 évidement tu connais' },
+  { key: 'af', value: 'af', text: 'A21' },
+  { key: 'ax', value: 'ax', text: 'A22' },
+  { key: 'al', value: 'al', text: 'A29' },
 ]
 
 const Salle = [
@@ -20,7 +20,6 @@ const Salle = [
   { key: 'af', value: 'af', text: '101' },
   { key: 'ax', value: 'ax', text: '102' },
   { key: 'ap', value: 'ap', text: '105' },
-  { key: 'al', value: 'al', text: 'des profs ptdr trolol' },
 ]
 
 const Duree = [
