@@ -50,10 +50,10 @@ export default class Reservation extends React.Component {
                             {this.state.reservations.map((line) =>
                                 <Table.Row>
                                     <Table.Cell>
-                                        {line.date}
+                                        {line.horaire}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        {line.salle}
+                                        {line.nomSalle}
                                     </Table.Cell>
                                 </Table.Row>
                             )}
@@ -76,10 +76,10 @@ export default class Reservation extends React.Component {
                             {this.state.historic.map((line) =>
                                 <Table.Row>
                                     <Table.Cell>
-                                        {line.date}
+                                        {line.horaire}
                                     </Table.Cell>
                                     <Table.Cell>
-                                        {line.salle}
+                                        {line.nomSalle}
                                     </Table.Cell>
                                 </Table.Row>
                             )}

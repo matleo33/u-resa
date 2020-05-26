@@ -24,18 +24,14 @@ router.get('/Historique', function (req, res) {
     connection.getConnection(function (err, connection) {
         if (err) throw err;
         // Executing the MySQL query (select all data from the 'users' table).
-        connection.query('SELECT * ' +
-            'from reservant ' +
-            'inner join reservation on(reservation.fk_id_reservant = reservant.id_reservant) ' +
-            'where reservant.id_reservant=' + req.User +
-            ' and NOW()+0-horaire+FLOOR(reservation.duree/60)*10000 + (reservation.duree/60 - FLOOR(reservation.duree/60)) *6000>0', function (error, results, fields) {
+        connection.query('select s.id_salle, s.nomSalle, r.horaire, r.duree, r.finReservation, r.horaire_salle from salle s join reservation r on s.id_salle = r.fk_id_salle WHERE r.fk_id_reservant = ' + req.User + ' and r.horaire < sysdate() ', function (error, results, fields) {
 
-                // If some error occurs, we throw an error.
-                if (error) throw error;
+            // If some error occurs, we throw an error.
+            if (error) throw error;
 
-                // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                res.send(results)
-            });
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send(results)
+        });
     });
 });
 
@@ -44,18 +40,15 @@ router.get('/Encours', function (req, res) {
     connection.getConnection(function (err, connection) {
         if (err) throw err;
         // Executing the MySQL query (select all data from the 'users' table).
-        connection.query('SELECT * ' +
-            'from reservant ' +
-            'inner join reservation on(reservation.fk_id_reservant = reservant.id_reservant) ' +
-            'where reservant.id_reservant=' + req.User +
-            ' and NOW()+0-horaire+FLOOR(reservation.duree/60)*10000 + (reservation.duree/60 - FLOOR(reservation.duree/60)) *6000<0', function (error, results, fields) {
+        connection.query('select s.id_salle, s.nomSalle, r.horaire, r.duree, r.finReservation, r.horaire_salle from salle s join reservation r on s.id_salle = r.fk_id_salle WHERE r.fk_id_reservant = ' + req.User + ' and r.horaire > sysdate() ', function (error, results, fields) {
 
-                // If some error occurs, we throw an error.
-                if (error) throw error;
 
-                // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                res.send(results)
-            });
+            // If some error occurs, we throw an error.
+            if (error) throw error;
+
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send(results)
+        });
     });
 });
 
