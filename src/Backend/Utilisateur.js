@@ -44,7 +44,7 @@ router.get('/:User', function (req, res) {
   connection.getConnection(function (err, connection) {
     if (err) throw err;
     // Executing the MySQL query (select all data from the 'users' table).
-    connection.query('SELECT nom,prenom FROM reservant where id_reservant =' + req.params.user, function (error, results, fields) {
+    connection.query('SELECT nom,prenom FROM reservant where id_reservant =' + req.params.User, function (error, results, fields) {
       // If some error occurs, we throw an error.
       if (error) throw error;
 
@@ -59,7 +59,7 @@ router.get('/:User/CGU', function (req, res) {
   connection.getConnection(function (err, connection) {
     if (err) throw err;
     // Executing the MySQL query (select all data from the 'users' table).
-    connection.query('SELECT CGU FROM reservant where id_reservant =' + req.params.user, function (error, results, fields) {
+    connection.query('SELECT CGU FROM reservant where id_reservant =' + req.params.User, function (error, results, fields) {
       // If some error occurs, we throw an error.
       if (error) throw error;
 

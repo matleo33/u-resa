@@ -9,6 +9,7 @@ export default class Reservation extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.handleResa = this.handleResa.bind(this);
         this.state = {
             numbers: ["A", "B"],
             Date: "",
@@ -18,7 +19,8 @@ export default class Reservation extends React.Component {
             Batiment: "",
             Salle: "",
             response: [],
-            activeIndex: -1
+            activeIndex: -1,
+            CGU: -1
         }
     };
 
@@ -28,6 +30,47 @@ export default class Reservation extends React.Component {
         const { activeIndex } = this.state
         const newIndex = activeIndex === index ? -1 : index
         this.setState({ activeIndex: newIndex })
+    }
+
+    handleResa = () => {
+        console.log(this.state.horaire)
+        console.log(this.state.response[this.state.activeIndex.toString()]["id_salle"])
+        console.log(Number(this.state.duree) * 30)
+        fetch("http://localhost:8080/User/1/CGU", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }).then(response => response.json())
+            .then(response => this.setState({ CGU: response[0]["CGU"] }, function () {
+                if (this.state.CGU === 1) {
+                    fetch("http://localhost:8080/Salles/Reserver", {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            horaire: this.state.horaire,
+                            idsalle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
+                            duree: Number(this.state.duree) * 30,
+                            idreservant: "1",
+                        })
+                    })
+                    this.props.history.push({
+                        pathname: '/u-resa/HistoEtResas',
+                    })
+                }
+                else if (this.state.CGU === 0) {
+                    this.props.history.push({
+                        pathname: '/u-resa/CGU',
+                    })
+                }
+                else {
+                    console.log("Erreur")
+                }
+            }));
     }
 
     componentDidMount() {
@@ -92,7 +135,7 @@ export default class Reservation extends React.Component {
     }
 
     render() {
-        return <div>
+        return <div className="fillall">
             <section class="container-fluid reserv">
                 <div class="TakeReservation">
                     <h2> Propositions de réservation </h2>
@@ -109,7 +152,7 @@ export default class Reservation extends React.Component {
                         </Segment>
                     )}
                     <div class="ReservationBtn">
-                        <Button primary onClick={this.routeChange}>Réserver</Button>
+                        <Button primary onClick={this.handleResa}>Réserver</Button>
                     </div>
                 </div>
             </section>
