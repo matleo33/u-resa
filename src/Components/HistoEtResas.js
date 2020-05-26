@@ -6,7 +6,7 @@ export default class Reservation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            visibilityHistoric: "none",
+            visibilityHistoric: "hidden",
             reservations: [],
             historic: []
         };
@@ -38,12 +38,12 @@ export default class Reservation extends React.Component {
                     <Table striped>
                         <Table.Header>
                             <Table.Row>
-                                <Table.Cell>
+                                <Table.HeaderCell>
                                     Date
-                                </Table.Cell>
-                                <Table.Cell>
+                                </Table.HeaderCell>
+                                <Table.HeaderCell>
                                     Salle
-                                </Table.Cell>
+                                </Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
@@ -64,12 +64,12 @@ export default class Reservation extends React.Component {
                     <Table striped style={{ visibility: this.state.visibilityHistoric }}>
                         <Table.Header>
                             <Table.Row>
-                                <Table.Cell>
+                                <Table.HeaderCell>
                                     Date
-                                </Table.Cell>
-                                <Table.Cell>
+                                </Table.HeaderCell>
+                                <Table.HeaderCell>
                                     Salle
-                                </Table.Cell>
+                                </Table.HeaderCell>
                             </Table.Row>
                         </Table.Header>
                         <Table.Body>
