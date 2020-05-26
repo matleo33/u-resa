@@ -100,3 +100,8 @@ padding-top: 2%;
     margin-bottom: 0;
     color: red;
 }
+
+.fillall{
+    height: 38rem;
+    background-color: whitesmoke;
+}

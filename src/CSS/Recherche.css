@@ -110,3 +110,8 @@ padding-top: 2%;
     box-shadow: 0px 0px 2px grey;
     min-width: 12em;
 }
+
+.fillall{
+    height: 38rem;
+    background-color: whitesmoke;
+}

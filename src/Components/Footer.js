@@ -4,7 +4,7 @@ import { Icon, Grid } from 'semantic-ui-react'
 
 export default class Footer extends React.Component {
     render() {
-        return <div class="footer">
+        return <div className="footer">
             
 
 
@@ -19,7 +19,7 @@ export default class Footer extends React.Component {
             <Grid columns={2}>
 
       <Grid.Column>
-          <div class="icon">
+          <div className="icon">
       <Icon circular name='map marker alternate' size='large'></Icon>
       <span> 351 Cours de la Libération, 33400 Talence</span>
       <div></div>
@@ -32,7 +32,7 @@ export default class Footer extends React.Component {
       </Grid.Column>
 
       <Grid.Column>
-          <div class="text">
+          <div className="text">
         <div>A propos de l'univesité</div>
         <div>Lorem blabla blabla blabla </div>
         <Icon circular name='facebook' size='large'></Icon>
