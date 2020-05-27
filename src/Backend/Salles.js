@@ -116,6 +116,28 @@ router.post('/Disponibilite', function (req, res) { //A DEV REQUETE
     }
 });
 
+router.post('/Supprimer', function (req, res) { //A DEV REQUETE
+    // Connecting to the database.
+    if (!req.body.horaire_salle) {
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(400).json({ "status": "horaire_salle non renseignée" });
+    }
+    else {
+        connection.getConnection(function (err, connection) {
+            const query = 'DELETE FROM reservation WHERE horaire_salle = "' + req.body.horaire_salle + '"';
+            if (err) throw err;
+            // Executing the MySQL query (select all data from the 'users' table).
+            connection.query(query, function (error, results, fields) {
+                // If some error occurs, we throw an error.
+                if (error) throw error;
+
+                // Getting the 'response' from the database and sending it to our route. This is were the data is.
+                res.send(results)
+            });
+        });
+    }
+});
+
 router.use(express.json());
 
 router.post('/Reserver', function (req, res) {

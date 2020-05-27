@@ -47,7 +47,7 @@ const TableResa = (props) => {
                             {line.nomSalle}
                         </Table.Cell>
                         <Table.Cell>
-                            <Button negative index={index} id={index} onClick={(e, titleProps) => props.toggleDelete(e, titleProps)}>Annuler</Button>
+                            <Button negative index={index} id={index} onClick={(e, titleProps, line) => props.toggleDelete(e, titleProps, line)}>Annuler</Button>
                         </Table.Cell>
                     </Table.Row>
                 )}
@@ -73,9 +73,9 @@ export default class Reservation extends React.Component {
         };
     }
 
-    toggleDelete(e, titleProps) {
-        const { index } = titleProps
-        console.log(index)
+    toggleDelete(e, titleProps, line) {
+        const { index } = titleProps//Corrier ça : j'ai pas réussi à récupérer les données des props, par manque de temps
+        console.log(line.Date, line.Horaire)
         fetch("http://localhost:8080/User/1/Resas/Supprimer", {
             method: 'POST',
             headers: {
@@ -83,7 +83,7 @@ export default class Reservation extends React.Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                horaire_salle: this.state.Date + ' ' + this.state.Horaire + '_' + this.state.response[index]["id_salle"],
+                horaire_salle: line.Date + ' ' + line.Horaire + '_' + line.reservations[index]["id_salle"],
             })
         })
     }
