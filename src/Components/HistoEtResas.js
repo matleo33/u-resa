@@ -5,7 +5,7 @@ import { Button, Divider, Table } from 'semantic-ui-react'
 function handleDate(array) {
     array.forEach(element => {
         const date = element.horaire.substring(0, 10);
-        const heure = element.horaire.substring(11, 19);
+        const heure = element.horaire.substring(11, 16);
         const format = date + ' ' + heure;
         element.horaire = format;
     });
