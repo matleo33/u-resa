@@ -2,11 +2,21 @@ import React from 'react';
 import "../CSS/Reservation.css"
 import { Button, Divider, Table } from 'semantic-ui-react'
 
+function handleDate(array) {
+    array.forEach(element => {
+        const date = element.horaire.substring(0, 10);
+        const heure = element.horaire.substring(11, 19);
+        const format = date + ' ' + heure;
+        element.horaire = format;
+    });
+}
+
 const TableResa = (props) => {
     const visibilityMethod = props.visibility || "visible";
     if (props.content.length === 0) {
         return <div style={{ "text-align": "center", visibility: visibilityMethod }}>Vous n'avez encore fait aucune réservation</div>
     } else {
+        handleDate(props.content);
         return <Table celled striped collapsing style={{ "margin-left": "auto", "margin-right": "auto", visibility: visibilityMethod }}>
             <Table.Header>
                 <Table.Row>
@@ -64,7 +74,7 @@ export default class Reservation extends React.Component {
             .then(response => this.setState({ historic: response }))
         fetch("http://localhost:8080/User/1/Resas/Encours")
             .then(response => response.json())
-            .then(response => this.setState({ reservations: response }))
+            .then(response => this.setState({ reservations: response }));
     }
 
     render() {
