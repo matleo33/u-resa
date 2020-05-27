@@ -86,7 +86,7 @@ router.post('/CGU', function (req, res) {
 
 router.use(express.json());
 
-router.post('/Peutreserver', function (req, res) { //A DEV REQUETE
+router.post('/Peutreserver', function (req, res) {
   // Connecting to the database.
   if (!req.body.horaire) {
     res.setHeader('Content-Type', 'text/plain');
