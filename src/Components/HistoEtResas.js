@@ -29,10 +29,13 @@ const TableResa = (props) => {
                     <Table.HeaderCell>
                         Salle
                     </Table.HeaderCell>
+                    <Table.HeaderCell>
+                        Annuler
+                    </Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
             <Table.Body>
-                {props.content.map((line) =>
+                {props.content.map((line, index) =>
                     <Table.Row>
                         <Table.Cell>
                             {line.horaire}
@@ -42,6 +45,9 @@ const TableResa = (props) => {
                         </Table.Cell>
                         <Table.Cell>
                             {line.nomSalle}
+                        </Table.Cell>
+                        <Table.Cell>
+                            <Button negative index={index} id={index} onClick={(e, titleProps) => props.toggleDelete(e, titleProps)}>Annuler</Button>
                         </Table.Cell>
                     </Table.Row>
                 )}
@@ -65,6 +71,21 @@ export default class Reservation extends React.Component {
             Batiment: '',
             Salle: ''
         };
+    }
+
+    toggleDelete(e, titleProps) {
+        const { index } = titleProps
+        console.log(index)
+        fetch("http://localhost:8080/User/1/Resas/Supprimer", {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                horaire_salle: this.state.Date + ' ' + this.state.Horaire + '_' + this.state.response[index]["id_salle"],
+            })
+        })
     }
 
     toggleVisibilityHistoric() {
@@ -109,7 +130,7 @@ export default class Reservation extends React.Component {
                 <div class="ReservationFirst">
                     <h2> Mes réservations </h2>
                     <Divider />
-                    <TableResa content={this.state.reservations} />
+                    <TableResa content={this.state.reservations} toggleDelete={(e, titleProps) => this.toggleDelete(e, titleProps)} />
                     <Divider />
                     <div style={{ "textAlign": "center", marginBottom: "20px" }}>
                         <Button onClick={() => this.toggleVisibilityHistoric()}>Voir/Cacher mon historique</Button>

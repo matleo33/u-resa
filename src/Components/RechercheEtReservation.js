@@ -71,7 +71,6 @@ export default class Reservation extends React.Component {
                             Duree: this.state.Duree,
                         }
                     ]
-                    console.log(data)
                     this.props.history.push({
                         pathname: '/u-resa/CGU',
                         data: data
