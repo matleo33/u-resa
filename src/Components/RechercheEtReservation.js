@@ -33,9 +33,9 @@ export default class Reservation extends React.Component {
     }
 
     handleResa = () => {
-        console.log(this.state.horaire)
+        console.log(this.state.Date + ' ' + this.state.Horaire)
         console.log(this.state.response[this.state.activeIndex.toString()]["id_salle"])
-        console.log(Number(this.state.duree) * 30)
+        console.log(Number(this.state.Duree) * 30)
         fetch("http://localhost:8080/User/1/CGU", {
             method: 'GET',
             headers: {
@@ -52,9 +52,9 @@ export default class Reservation extends React.Component {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            horaire: this.state.horaire,
+                            horaire: this.state.Date + ' ' + this.state.Horaire,
                             idsalle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
-                            duree: Number(this.state.duree) * 30,
+                            duree: Number(this.state.Duree) * 30,
                             idreservant: "1",
                         })
                     })
@@ -87,8 +87,6 @@ export default class Reservation extends React.Component {
         var heuresansretenue = (Number(str[0]) + Number(Math.trunc((data[0]["Duree"] * 30) / 60))) + 'H' + (Number(str[1]) + Number((data[0]["Duree"] * 30) % 60))
         var str2 = heuresansretenue.split("H")
         var heure = data[0]["Date"] + ' ' + (Number(str2[0]) + Number((Math.trunc(Number(str2[1]) / 60)))) + 'H' + (Number(str2[1]) % 60)
-        console.log(data[0]["Date"] + ' ' + data[0]["Horaire"])
-        console.log(heure)
         if (data[0]["Horaire"] === "Aucune préférence") {
             fetch("http://localhost:8080/Salles/Disponibilitesalle", {
                 method: 'POST',
