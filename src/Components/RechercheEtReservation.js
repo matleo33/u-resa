@@ -136,19 +136,19 @@ export default class Reservation extends React.Component {
                     <h2> Propositions de réservation </h2>
                     <hr class="separator"></hr>
                     {this.state.response.map((line, index) =>
-                    <div className="centrageSegment">
-                        <Segment>
-                            <div className="Left">
-                                Salle {line.nomSalle}
+                        <div className="centrageSegment">
+                            <Segment>
+                                <div className="Left">
+                                    Salle {line.nomSalle}
+                                </div>
+                                <div className="Right">
+                                    Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {this.state.Duree * 30} minutes
                             </div>
-                            <div className="Right">
-                                Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {this.state.Duree * 30} minutes
-                            </div>
-                            <Checkbox checked={this.state.activeIndex === index} index={index} id={index} onClick={this.handleClick} label="Sélectionner" />
-                        </Segment>
+                                <Checkbox checked={this.state.activeIndex === index} index={index} id={index} onClick={this.handleClick} label="Sélectionner" />
+                            </Segment>
                         </div>
                     )}
-                    <div class="ReservationBtn">
+                    <div class="ReservationBtnReserver">
                         <Button primary onClick={this.handleResa}>Réserver</Button>
                     </div>
                 </div>

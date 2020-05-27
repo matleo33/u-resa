@@ -43,9 +43,12 @@ padding-top: 2%;
     margin-right: 2%;
 }
 
-.ReservationBtn{
-    margin-top: 4%;
-    margin-left: 4%;
+.ReservationBtnReserver{
+    margin-top: 3%;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .TakeReservation{
@@ -56,7 +59,8 @@ padding-top: 2%;
 }
 
 .centrageSegment{
-    width:50%;
+    width:35%;
+    margin-top: 1%;
     margin-right: auto;
     margin-left: auto;
 }
