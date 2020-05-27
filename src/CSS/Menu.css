@@ -16,45 +16,61 @@ body{
     margin: 0;
 }
 
-/* header */
-
 .MenuHeader{
     background-color: #009de0;
-    height: 100px;
-    line-height: 100px;
+}
+
+.MenuHeader a{
+    color: white;
+}
+
+.logo a{
+    color: white;
 }
 
 .logo{
+    padding-top: 2%;
+    text-align: center;
     color: #ffffff;
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 2px;
-    margin-left: 7%;
-    font-size: 30px;
+    font-size: 3rem;
     font-family: Brix;
   }
 
-  .logo:hover{
-    color: black;
-}
-  
-  nav a{
-    letter-spacing: 2px;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 18px;
-    font-family: Brix;
-  }
-
-  .menu{
-    text-align: right;
-}
-
-.menu a{
+.logo{
     color: #ffffff;
-    margin-right: 20px;
-}
+    padding-bottom: 2%;
+  }
 
-.menu a:hover{
+.logo:hover{
     color: black;
 }
+
+.Link{
+    font-size: 1.7rem;
+    margin-left: 6%;
+    margin-right: 6%;
+    font-family: Brix;
+}
+
+.ui.horizontal.segments{
+    margin: 0;
+    background-color: #009de0;
+}
+
+.MenuLink{
+    padding-bottom: 1%;
+}
+
+.separatorMenu{
+    height: 1px;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background-color: white;
+    margin-bottom: 2%;
+}
+
+
