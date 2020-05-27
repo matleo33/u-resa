@@ -7,15 +7,18 @@ const TableResa = (props) => {
     if (props.content.length === 0) {
         return <div style={{ "text-align": "center", visibility: visibilityMethod }}>Vous n'avez encore fait aucune réservation</div>
     } else {
-        return <Table striped collapsing style={{ "margin-left": "auto", "margin-right": "auto", visibility: visibilityMethod }}>
+        return <Table celled striped collapsing style={{ "margin-left": "auto", "margin-right": "auto", visibility: visibilityMethod }}>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>
                         Date et heure
-                                </Table.HeaderCell>
+                    </Table.HeaderCell>
+                    <Table.HeaderCell>
+                        Durée
+                    </Table.HeaderCell>
                     <Table.HeaderCell>
                         Salle
-                                </Table.HeaderCell>
+                    </Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -23,6 +26,9 @@ const TableResa = (props) => {
                     <Table.Row>
                         <Table.Cell>
                             {line.horaire}
+                        </Table.Cell>
+                        <Table.Cell>
+                            {line.duree}
                         </Table.Cell>
                         <Table.Cell>
                             {line.nomSalle}
