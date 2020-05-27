@@ -173,7 +173,7 @@ export default class Reservation extends React.Component {
             <p className="listTitre"> Salle : </p>
             <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
             <div className="ReservationBtn">
-              <Button primary>Réserver</Button>
+              <Button primary>Vérifier les disponibilités</Button>
             </div>
           </form>
         </div>

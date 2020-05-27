@@ -18,8 +18,21 @@
     width: 50%;
 }
 
-.seg{
+.ui.segment.seg{
     width: 100%;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.NomPrenom{
+    width: 35%;
+    border-width: 1px;
+    border-radius: 0% 90% 2% 0%;
+    background-color: #009de0;
+    padding: 1em 1em;
+    border: 2px solid rgba(34,36,38,.15);
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
 
