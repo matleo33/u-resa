@@ -12,18 +12,25 @@ import Historesas from "./HistoEtResas"
 
 
 export default class Routes extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      profile: props.profile
+    };
+  }
+
   render() {
     return <Switch>
       <Route exact path="/Home" component={Home}></Route>
       <Route exact path="/" component={Recherche}></Route>
       <Route exact path="/u-resa/" component={Recherche}></Route>
-      <Route exact path="/u-resa/Profile" component={Profile}></Route>
+      <Route exact path="/u-resa/Profile" render={(props) => <Profile {...props} profile={this.state.profile} />} />
       <Route exact path="/u-resa/Connexion" component={Connexion}></Route>
       <Route exact path="/u-resa/CGU" component={CGU}></Route>
-      <Route exact path="/u-resa/RechercheEtReservation" component={Reservation}></Route>
+      <Route exact path="/u-resa/RechercheEtReservation" render={(props) => <Reservation {...props} profile={this.state.profile} />} />
       <Route exact path="/u-resa/Plan" component={Plan}></Route>
-      <Route exact path="/u-resa/RechercheSalle" component={Recherche}></Route>
-      <Route exact path="/u-resa/HistoEtResas" component={Historesas}></Route>
+      <Route exact path="/u-resa/RechercheSalle" render={(props) => <Recherche {...props} profile={this.state.profile} />} />
+      <Route exact path="/u-resa/HistoEtResas" render={(props) => <Historesas {...props} profile={this.state.profile} />} />
       <Route component={ErrorPage}></Route>
     </Switch>
   }

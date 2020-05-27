@@ -3,9 +3,22 @@ import { Link } from 'react-router-dom'
 import "../CSS/Menu.css"
 import { Grid } from 'semantic-ui-react'
 
-
+function BoutonConnexion(props) {
+  if (props.connected) {
+    return <Link onClick={() => props.connexion} to="/u-resa/Connexion">Déconnexion</Link>
+  } else {
+    return <Link onClick={() => props.connexion} to="/u-resa/Connexion">Connexion</Link>
+  }
+}
 
 export default class MenuPerso extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      connected: props.connected,
+      connexion: props.connexion
+    };
+  }
 
   render() {
     return <div>
@@ -22,7 +35,7 @@ export default class MenuPerso extends React.Component {
                   <Link to="/u-resa/HistoEtResas"> Mes réservations </Link>
                   <Link to="/u-resa/Plan">Plan</Link>
                   <Link to="/u-resa/Profile"> Mon profil </Link>
-                  <a href="http://localhost:8080/Connexion">Connexion</a>
+                  <BoutonConnexion connexion={this.state.connexion} connected={this.state.connected} />
                 </nav>
               </Grid.Column>
             </Grid.Row>

@@ -6,7 +6,6 @@ import { Message, Segment } from 'semantic-ui-react'
 
 
 export default class Profile extends React.Component {
-  state = { activeIndex: 0 }
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +15,8 @@ export default class Profile extends React.Component {
       hiddenMessageOK: true,
       hiddenMessageKO: true,
       infoProfil: [],
+      profile: props.profile,
+      activeIndex: 0
     }
   }
 
@@ -168,15 +169,15 @@ export default class Profile extends React.Component {
         </Accordion.Title>
             <Accordion.Content active={activeIndex === 1}>
               <p>
-                {this.state.infoProfil.nom}
+                {this.state.profile.nom}
               </p>
               <p>
-                {this.state.infoProfil.prenom}
+                {this.state.profile.prenom}
               </p>
             </Accordion.Content>
-<div>
-        <Segment className="seg">Pellentesque habitant morbi tristique senectus.</Segment>
-        </div>
+            <div>
+              <Segment className="seg">Pellentesque habitant morbi tristique senectus.</Segment>
+            </div>
 
           </Accordion>
         </div>

@@ -20,7 +20,8 @@ export default class Reservation extends React.Component {
             Salle: "",
             response: [],
             activeIndex: -1,
-            CGU: -1
+            CGU: -1,
+            profile: props.profile
         }
     };
 

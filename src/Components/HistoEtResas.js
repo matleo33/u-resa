@@ -56,7 +56,8 @@ export default class Reservation extends React.Component {
         this.state = {
             visibilityHistoric: "hidden",
             reservations: [],
-            historic: []
+            historic: [],
+            profile: props.profile
         };
     }
 
