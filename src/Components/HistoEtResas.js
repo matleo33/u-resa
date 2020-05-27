@@ -1,6 +1,6 @@
 import React from 'react';
 import "../CSS/Reservation.css"
-import { Button, Divider, Table } from 'semantic-ui-react'
+import { Button, Divider, Table, Message } from 'semantic-ui-react'
 
 function handleDate(array) {
     array.forEach(element => {
@@ -57,7 +57,13 @@ export default class Reservation extends React.Component {
             visibilityHistoric: "hidden",
             reservations: [],
             historic: [],
-            profile: props.profile
+            profile: props.profile,
+            Date: '',
+            Horaire: '',
+            Duree: '',
+            Fac: '',
+            Batiment: '',
+            Salle: ''
         };
     }
 
@@ -76,10 +82,29 @@ export default class Reservation extends React.Component {
         fetch("http://localhost:8080/User/1/Resas/Encours")
             .then(response => response.json())
             .then(response => this.setState({ reservations: response }));
+        const { data } = this.props.location
+        if (data !== undefined) {
+            this.setState({
+                Date: data[0]["Date"],
+                Horaire: data[0]["Horaire"],
+                Duree: data[0]["Duree"],
+                Fac: data[0]["Fac"],
+                Batiment: data[0]["Batiment"],
+                idSalle: data[0]["idSalle"],
+                nomSalle: data[0]["nomSalle"]
+            });
+        }
     }
 
     render() {
         return <div className="fillall">
+            {this.state.Date !== '' &&
+                <Message
+                    success
+                    header='Réservation validée !'
+                    content={'Votre réservation salle ' + this.state.nomSalle + ' ,le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + this.state.Duree * 30 + ' minutes a été prise en compte. A bientôt sur nos campus !'}
+                />
+            }
             <section class="container-fluid reserv">
                 <div class="ReservationFirst">
                     <h2> Mes réservations </h2>

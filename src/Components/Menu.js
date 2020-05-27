@@ -23,23 +23,23 @@ export default class MenuPerso extends React.Component {
   render() {
     return <div>
       <header className="container-fluid MenuHeader">
-  <div className="logo">
-<Link  to="/u-resa/"> U-RESA </Link>
+        <div className="logo">
+          <Link to="/u-resa/"> U-RESA </Link>
 
-</div>
-<hr className="separatorMenu"></hr>
-<div className="MenuLink">
-<Link className="Link" to="/u-resa/RechercheSalle"> Réserver </Link>
-<Link className="Link" to="/u-resa/HistoEtResas"> Mes réservations </Link>
-<Link className="Link" to="/u-resa/Plan">Plan</Link>
-<Link className="Link" to="/u-resa/Profile"> Mon profil </Link>
-<a className="Link" href="http://localhost:8080/Connexion">Connexion</a>
+        </div>
+        <hr className="separatorMenu"></hr>
+        <div className="MenuLink">
+          <Link className="Link" to="/u-resa/RechercheSalle"> Réserver </Link>
+          <Link className="Link" to="/u-resa/HistoEtResas"> Mes réservations </Link>
+          <Link className="Link" to="/u-resa/Plan">Plan</Link>
+          <Link className="Link" to="/u-resa/Profile"> Mon profil </Link>
+          <a className="Link" href="http://localhost:8080/Connexion">Connexion</a>
 
-</div>
+        </div>
       </header>
     </div>
 
-          {/*
+    {/*
             
             <Segment.Group inverted  horizontal>
 <Segment ><Link className="Link" to="/u-resa/RechercheSalle"> Réserver </Link></Segment>

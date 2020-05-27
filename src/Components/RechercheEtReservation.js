@@ -66,10 +66,12 @@ export default class Reservation extends React.Component {
                             Horaire: this.state.Horaire,
                             Fac: this.state.Fac,
                             Batiment: this.state.Batiment,
-                            Salle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
+                            idSalle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
+                            nomSalle: this.state.response[this.state.activeIndex.toString()]["nomSalle"],
                             Duree: this.state.Duree,
                         }
                     ]
+                    console.log(data)
                     this.props.history.push({
                         pathname: '/u-resa/CGU',
                         data: data

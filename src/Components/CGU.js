@@ -14,7 +14,8 @@ export default class About extends React.Component {
       Duree: '',
       Fac: '',
       Batiment: '',
-      Salle: ''
+      idSalle: '',
+      nomSalle: ''
     };
   }
 
@@ -27,7 +28,8 @@ export default class About extends React.Component {
         Duree: data[0]["Duree"],
         Fac: data[0]["Fac"],
         Batiment: data[0]["Batiment"],
-        Salle: data[0]["Salle"]
+        idSalle: data[0]["idSalle"],
+        nomSalle: data[0]["nomSalle"]
       });
     }
   }
@@ -42,13 +44,25 @@ export default class About extends React.Component {
         },
         body: JSON.stringify({
           horaire: this.state.Date + ' ' + this.state.Horaire,
-          idsalle: this.state.Salle,
+          idsalle: this.state.idSalle,
           duree: Number(this.state.Duree) * 30,
           idreservant: "1",
         })
       })
+      let data = [
+        {
+          Date: this.state.Date,
+          Horaire: this.state.Horaire,
+          Fac: this.state.Fac,
+          Batiment: this.state.Batiment,
+          idSalle: this.state.idSalle,
+          nomSalle: this.state.nomSalle,
+          Duree: this.state.Duree,
+        }
+      ]
       this.props.history.push({
         pathname: '/u-resa/HistoEtResas',
+        data: data
       })
     }
   }
