@@ -136,6 +136,7 @@ export default class Reservation extends React.Component {
                     <h2> Propositions de réservation </h2>
                     <hr class="separator"></hr>
                     {this.state.response.map((line, index) =>
+                    <div className="centrageSegment">
                         <Segment>
                             <div className="Left">
                                 Salle {line.nomSalle}
@@ -145,6 +146,7 @@ export default class Reservation extends React.Component {
                             </div>
                             <Checkbox checked={this.state.activeIndex === index} index={index} id={index} onClick={this.handleClick} label="Sélectionner" />
                         </Segment>
+                        </div>
                     )}
                     <div class="ReservationBtn">
                         <Button primary onClick={this.handleResa}>Réserver</Button>

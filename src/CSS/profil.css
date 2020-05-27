@@ -12,12 +12,17 @@
 }
 
 .ProfilInfo{
-    padding-top: 1%;
+    margin-top: 1%;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
 }
 
+.seg{
+    margin-left: 0em;
+    margin-right: 0em;
+    width: 100%;
+}
 
 
 

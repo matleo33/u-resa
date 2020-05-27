@@ -2,7 +2,7 @@ import React from 'react';
 import '../CSS/profil.css';
 import { Icon, Image, Accordion } from 'semantic-ui-react'
 import { Form, Input, TextArea, Button } from 'semantic-ui-react'
-import { Message } from 'semantic-ui-react'
+import { Message, Segment } from 'semantic-ui-react'
 
 
 export default class Profile extends React.Component {
@@ -174,12 +174,9 @@ export default class Profile extends React.Component {
                 {this.state.infoProfil.prenom}
               </p>
             </Accordion.Content>
-
-            <Accordion.Title active={1}>
-
-              Info 3
-
-        </Accordion.Title>
+<div>
+        <Segment className="seg">Pellentesque habitant morbi tristique senectus.</Segment>
+        </div>
 
           </Accordion>
         </div>
