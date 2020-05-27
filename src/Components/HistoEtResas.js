@@ -72,7 +72,7 @@ export default class Reservation extends React.Component {
                     <div style={{ "textAlign": "center", marginBottom: "20px" }}>
                         <Button onClick={() => this.toggleVisibilityHistoric()}>Voir/Cacher mon historique</Button>
                     </div>
-                    <TableResa content={this.state.reservations} visibility={this.state.visibilityHistoric} />
+                    <TableResa content={this.state.historic} visibility={this.state.visibilityHistoric} />
                 </div>
             </section>
         </div>
