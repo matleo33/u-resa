@@ -35,6 +35,9 @@ router.get('/Historique', function (req, res) {
     });
 });
 
+router.use(express.json());
+
+
 router.get('/Encours', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
@@ -47,6 +50,7 @@ router.get('/Encours', function (req, res) {
             if (error) throw error;
 
             // Getting the 'response' from the database and sending it to our route. This is were the data is.
+
             res.send(results)
         });
     });

@@ -11,7 +11,6 @@ export default class Reservation extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleResa = this.handleResa.bind(this);
         this.state = {
-            numbers: ["A", "B"],
             Date: "",
             Horaire: "",
             Duree: "",
@@ -61,8 +60,19 @@ export default class Reservation extends React.Component {
                     })
                 }
                 else if (this.state.CGU === 0) {
+                    let data = [
+                        {
+                            Date: this.state.Date,
+                            Horaire: this.state.Horaire,
+                            Fac: this.state.Fac,
+                            Batiment: this.state.Batiment,
+                            Salle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
+                            Duree: this.state.Duree,
+                        }
+                    ]
                     this.props.history.push({
                         pathname: '/u-resa/CGU',
+                        data: data
                     })
                 }
                 else {
@@ -73,60 +83,62 @@ export default class Reservation extends React.Component {
 
     componentDidMount() {
         const { data } = this.props.location
-        this.setState({
-            Date: data[0]["Date"],
-            Horaire: data[0]["Horaire"],
-            Duree: data[0]["Duree"],
-            Fac: data[0]["Fac"],
-            Batiment: data[0]["Batiment"],
-            Salle: data[0]["Salle"]
-        });
-        var str = data[0]["Horaire"].split("H")
-        var heuresansretenue = (Number(str[0]) + Number(Math.trunc((data[0]["Duree"] * 30) / 60))) + 'H' + (Number(str[1]) + Number((data[0]["Duree"] * 30) % 60))
-        var str2 = heuresansretenue.split("H")
-        var heure = data[0]["Date"] + ' ' + (Number(str2[0]) + Number((Math.trunc(Number(str2[1]) / 60)))) + 'H' + (Number(str2[1]) % 60)
-        if (data[0]["Horaire"] === "Aucune préférence") {
-            fetch("http://localhost:8080/Salles/Disponibilitesalle", {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    date: data[0]["Date"],
-                    idsalle: data[0]["Salle"]
-                })
-            }).then(response => response.json())
-                .then(response => this.setState({ response: response }))
-        }
-        else if (data[0]["Salle"] === "Aucune préférence") {
-            fetch("http://localhost:8080/Salles/Disponibilitehoraire", {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    horaire: data[0]["Date"] + ' ' + data[0]["Horaire"],
-                    horairefin: heure,
-                })
-            }).then(response => response.json())
-                .then(response => this.setState({ response: response }))
-        }
-        else {
-            fetch("http://localhost:8080/Salles/Disponibilite", {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    horaire: data[0]["Date"] + ' ' + data[0]["Horaire"],
-                    horairefin: heure,
-                    idsalle: data[0]["Salle"],
-                })
-            }).then(response => response.json())
-                .then(response => this.setState({ response: response }))
+        if (data !== undefined) {
+            this.setState({
+                Date: data[0]["Date"],
+                Horaire: data[0]["Horaire"],
+                Duree: data[0]["Duree"],
+                Fac: data[0]["Fac"],
+                Batiment: data[0]["Batiment"],
+                Salle: data[0]["Salle"]
+            });
+            var str = data[0]["Horaire"].split("H")
+            var heuresansretenue = (Number(str[0]) + Number(Math.trunc((data[0]["Duree"] * 30) / 60))) + 'H' + (Number(str[1]) + Number((data[0]["Duree"] * 30) % 60))
+            var str2 = heuresansretenue.split("H")
+            var heure = data[0]["Date"] + ' ' + (Number(str2[0]) + Number((Math.trunc(Number(str2[1]) / 60)))) + 'H' + (Number(str2[1]) % 60)
+            if (data[0]["Horaire"] === "Aucune préférence") {
+                fetch("http://localhost:8080/Salles/Disponibilitesalle", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        date: data[0]["Date"],
+                        idsalle: data[0]["Salle"]
+                    })
+                }).then(response => response.json())
+                    .then(response => this.setState({ response: response }))
+            }
+            else if (data[0]["Salle"] === "Aucune préférence") {
+                fetch("http://localhost:8080/Salles/Disponibilitehoraire", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        horaire: data[0]["Date"] + ' ' + data[0]["Horaire"],
+                        horairefin: heure,
+                    })
+                }).then(response => response.json())
+                    .then(response => this.setState({ response: response }))
+            }
+            else {
+                fetch("http://localhost:8080/Salles/Disponibilite", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        horaire: data[0]["Date"] + ' ' + data[0]["Horaire"],
+                        horairefin: heure,
+                        idsalle: data[0]["Salle"],
+                    })
+                }).then(response => response.json())
+                    .then(response => this.setState({ response: response }))
+            }
         }
     }
 

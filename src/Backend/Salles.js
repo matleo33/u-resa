@@ -138,6 +138,7 @@ router.post('/Reserver', function (req, res) {
     else {
         // Connecting to the database.
         connection.getConnection(function (err, connection) {
+            console.log(req.body.horaire)
             const query = 'INSERT INTO reservation(horaire,horaire_salle,fk_id_reservant,fk_id_salle, duree) VALUES (str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i"),' + "'" + req.body.horaire + "_" + req.body.idsalle + "'," + "'" + req.body.idreservant + "','" + req.body.idsalle + "','" + req.body.duree + "')";
             if (err) throw err;
             // Executing the MySQL query (select all data from the 'users' table).
