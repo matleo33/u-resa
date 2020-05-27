@@ -33,9 +33,6 @@ export default class Reservation extends React.Component {
     }
 
     handleResa = () => {
-        console.log(this.state.Date + ' ' + this.state.Horaire)
-        console.log(this.state.response[this.state.activeIndex.toString()]["id_salle"])
-        console.log(Number(this.state.Duree) * 30)
         fetch("http://localhost:8080/User/1/CGU", {
             method: 'GET',
             headers: {
