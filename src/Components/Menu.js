@@ -37,34 +37,5 @@ export default class MenuPerso extends React.Component {
         </div>
       </header>
     </div>
-
-    {/*
-            
-            <Segment.Group inverted  horizontal>
-<Segment ><Link className="Link" to="/u-resa/RechercheSalle"> Réserver </Link></Segment>
-<Segment ><Link className="Link" to="/u-resa/HistoEtResas"> Mes réservations </Link></Segment>
-<Segment><Link className="Link" to="/u-resa/Plan">Plan</Link></Segment>
-<Segment><Link className="Link" to="/u-resa/Profile"> Mon profil </Link></Segment>
-<Segment><a className="Link" href="http://localhost:8080/Connexion">Connexion</a></Segment>
-</Segment.Group>
-            
-            
-            
-            <Grid columns={2}>
-            <Grid.Row>
-              <Grid.Column>
-                <Link className="logo" to="/u-resa/"> U-RESA </Link>
-              </Grid.Column>
-              <Grid.Column>
-                <nav className="menu">
-                  <Link to="/u-resa/RechercheSalle"> Réserver </Link>
-                  <Link to="/u-resa/HistoEtResas"> Mes réservations </Link>
-                  <Link to="/u-resa/Plan">Plan</Link>
-                  <Link to="/u-resa/Profile"> Mon profil </Link>
-                  <a href="http://localhost:8080/Connexion">Connexion</a>
-                </nav>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>*/}
   }
 }

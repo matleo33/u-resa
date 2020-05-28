@@ -144,7 +144,7 @@ export default class Reservation extends React.Component {
                     </div>
                     {this.state.visibilityHistoric === "visible" && <TableResa annulable={false} content={this.state.historic} />}
                 </div>
-            </section>
+            </section> 
         </div>
     }
 }
