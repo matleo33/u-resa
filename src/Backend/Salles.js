@@ -103,7 +103,7 @@ router.post('/Disponibilite', function (req, res) { //A DEV REQUETE
     }
     else {
         connection.getConnection(function (err, connection) {
-            const query = 'select * from salle s where id_salle = ' + req.body.idsalle + ' and nomSalle not in ( select nomSalle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%d-%m-%Y %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%d-%m-%Y %HH%i:%s") > horaire and s.id_salle =' + req.body.idsalle + ')';
+            const query = 'select * from salle s where id_salle = ' + req.body.idsalle + ' and nomSalle not in ( select nomSalle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire and s.id_salle =' + req.body.idsalle + ')';
             if (err) throw err;
             // Executing the MySQL query (select all data from the 'users' table).
             connection.query(query, function (error, results, fields) {
@@ -158,10 +158,14 @@ router.post('/Reserver', function (req, res) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Personne réservante non renseigné" });
     }
+    else if (!req.body.horairefin) {
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(400).json({ "status": "Horaire de fin non renseignée" });
+    }
     else {
         // Connecting to the database.
         connection.getConnection(function (err, connection) {
-            const query = 'INSERT INTO reservation(horaire,horaire_salle,fk_id_reservant,fk_id_salle, duree) VALUES (str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i"),' + "'" + req.body.horaire + "_" + req.body.idsalle + "'," + "'" + req.body.idreservant + "','" + req.body.idsalle + "','" + req.body.duree + "')";
+            const query = 'INSERT INTO reservation(horaire,horaire_salle,fk_id_reservant,fk_id_salle, duree,finReservation) VALUES (str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i"),' + "'" + req.body.horaire + "_" + req.body.idsalle + "'," + "'" + req.body.idreservant + "','" + req.body.idsalle + "','" + req.body.duree + "','" + req.body.horairefin + "')";
             if (err) throw err;
             // Executing the MySQL query (select all data from the 'users' table).
             connection.query(query, function (error, results, fields) {

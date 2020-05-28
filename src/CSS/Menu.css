@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
 /*font-family: 'Lora', serif;*/
-
-body,html{
-    padding: 0;
-    margin: 0;
+html{
+    font-size: 100%;
 }
 
 body{
     font-family: 'Lora', serif;
+    padding: 0;
+    margin: 0;
 }
 
 .container-fluid{
@@ -48,10 +48,33 @@ body{
     color: black;
 }
 
-.Link{
+.Link1{
+    position: absolute;
     font-size: 1.7rem;
-    margin-left: 6%;
-    margin-right: 6%;
+    left: 10%;
+    font-family: Brix;
+}
+.Link2{
+    position: absolute;
+    font-size: 1.7rem;
+    left: 27%;
+    font-family: Brix;
+}
+.Link3{
+    margin-left: 48.5%;
+    font-size: 1.7rem;
+    font-family: Brix;
+}
+.Link4{
+    position: absolute;
+    right: 30%;
+    font-size: 1.7rem;
+    font-family: Brix;
+}
+.Link5{
+    position: absolute;
+    font-size: 1.7rem;
+    right: 10%;
     font-family: Brix;
 }
 

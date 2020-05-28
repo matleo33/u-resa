@@ -1,6 +1,7 @@
 import React from 'react';
 import "../CSS/Recherche.css"
 import { Button, Segment, Checkbox } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 
 
@@ -16,7 +17,8 @@ export default class Reservation extends React.Component {
             Duree: "",
             Fac: "",
             Batiment: "",
-            Salle: "",
+            nomSalle: "",
+            idSalle: "",
             response: [],
             activeIndex: -1,
             CGU: -1,
@@ -42,6 +44,10 @@ export default class Reservation extends React.Component {
         }).then(response => response.json())
             .then(response => this.setState({ CGU: response[0]["CGU"] }, function () {
                 if (this.state.CGU === 1) {
+                    var str = this.state.Horaire.split("H")
+                    var heuresansretenue = (Number(str[0]) + Number(Math.trunc((this.state.Duree * 30) / 60))) + 'H' + (Number(str[1]) + Number((this.state.Duree * 30) % 60))
+                    var str2 = heuresansretenue.split("H")
+                    var horairefin = this.state.Date + ' ' + (Number(str2[0]) + Number((Math.trunc(Number(str2[1]) / 60)))) + 'H' + (Number(str2[1]) % 60)
                     fetch("http://localhost:8080/Salles/Reserver", {
                         method: 'POST',
                         headers: {
@@ -53,6 +59,7 @@ export default class Reservation extends React.Component {
                             idsalle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
                             duree: Number(this.state.Duree) * 30,
                             idreservant: "1",
+                            horairefin: horairefin
                         })
                     })
                     let data = [
@@ -103,7 +110,8 @@ export default class Reservation extends React.Component {
                 Duree: data[0]["Duree"],
                 Fac: data[0]["Fac"],
                 Batiment: data[0]["Batiment"],
-                Salle: data[0]["Salle"]
+                nomSalle: data[0]["nomSalle"],
+                idSalle: data[0]["idSalle"]
             });
             var str = data[0]["Horaire"].split("H")
             var heuresansretenue = (Number(str[0]) + Number(Math.trunc((data[0]["Duree"] * 30) / 60))) + 'H' + (Number(str[1]) + Number((data[0]["Duree"] * 30) % 60))
@@ -118,12 +126,12 @@ export default class Reservation extends React.Component {
                     },
                     body: JSON.stringify({
                         date: data[0]["Date"],
-                        idsalle: data[0]["Salle"]
+                        idsalle: data[0]["nomSalle"]
                     })
                 }).then(response => response.json())
                     .then(response => this.setState({ response: response }))
             }
-            else if (data[0]["Salle"] === "Aucune préférence") {
+            else if (data[0]["nomSalle"] === "Aucune préférence") {
                 fetch("http://localhost:8080/Salles/Disponibilitehoraire", {
                     method: 'POST',
                     headers: {
@@ -147,7 +155,7 @@ export default class Reservation extends React.Component {
                     body: JSON.stringify({
                         horaire: data[0]["Date"] + ' ' + data[0]["Horaire"],
                         horairefin: heure,
-                        idsalle: data[0]["Salle"],
+                        idsalle: data[0]["idSalle"],
                     })
                 }).then(response => response.json())
                     .then(response => this.setState({ response: response }))
@@ -168,14 +176,16 @@ export default class Reservation extends React.Component {
                                     Salle {line.nomSalle}
                                 </div>
                                 <div className="Right">
-                                    Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {this.state.Duree * 30} minutes
-                            </div>
+                                    Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {Math.trunc(Number(this.state.Duree) * 30 / 60)}H{Number(this.state.Duree) * 30 % 60}
+                                </div>
                                 <Checkbox checked={this.state.activeIndex === index} index={index} id={index} onClick={this.handleClick} label="Sélectionner" />
                             </Segment>
                         </div>
                     )}
                     <div class="ReservationBtnReserver">
-                        <Button primary onClick={this.handleResa}>Réserver</Button>
+                        {this.state.response.length !== 0 && <Button primary onClick={this.handleResa}>Réserver</Button>}
+                        {this.state.response.length === 0 && <h2>Aucune résevration disponible pour ces critères</h2>}
+                        {this.state.response.length === 0 && <Link to="/u-resa/RechercheSalle"><Button primary>Nouvelle recherche</Button></Link>}
                     </div>
                 </div>
             </section>

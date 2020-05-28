@@ -31,7 +31,7 @@ const TableResa = (props) => {
                             {line.horaire}
                         </Table.Cell>
                         <Table.Cell>
-                            {line.duree}
+                            {Math.trunc(Number(line.duree) / 60)}H{Number(line.duree) % 60 === 0 ? '00' : Number(line.duree) % 60}
                         </Table.Cell>
                         <Table.Cell>
                             {line.nomSalle}
@@ -59,13 +59,13 @@ export default class Reservation extends React.Component {
             Duree: '',
             Fac: '',
             Batiment: '',
-            Salle: ''
+            idSalle: '',
+            nomSalle: ''
         };
     }
 
     toggleDelete(e, titleProps, line) {
         const { index } = titleProps//Corrier ça : j'ai pas réussi à récupérer les données des props, par manque de temps
-        console.log(this.state.reservations[index]["horaire"] + '_' + this.state.reservations[index]["id_salle"])
         fetch("http://localhost:8080/Salles/Supprimer", {
             method: 'POST',
             headers: {
@@ -105,7 +105,6 @@ export default class Reservation extends React.Component {
             .then(response => response.json())
             .then(response => this.correctDate(response))
             .then(response => this.setState({ historic: response }))
-            .then(response => console.log(response));
         fetch("http://localhost:8080/User/1/Resas/Encours")
             .then(response => response.json())
             .then(response => this.correctDate(response))
@@ -132,7 +131,7 @@ export default class Reservation extends React.Component {
                         <Message
                             success
                             header='Réservation validée !'
-                            content={'Votre réservation salle ' + this.state.nomSalle + ' ,le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + this.state.Duree * 30 + ' minutes a été prise en compte. A bientôt sur nos campus !'}
+                            content={'Votre réservation salle ' + this.state.nomSalle + ', le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + Math.trunc(Number(this.state.Duree) * 30 / 60) + 'H' + (Number(this.state.Duree) * 30 % 60 === 0 ? '00' : Number(this.state.Duree) * 30 % 60) + ' a été prise en compte. A bientôt sur nos campus !'}
                         />
                     }
                     <h2 className="h2histo"> Mes réservations </h2>
@@ -144,7 +143,7 @@ export default class Reservation extends React.Component {
                     </div>
                     {this.state.visibilityHistoric === "visible" && <TableResa annulable={false} content={this.state.historic} />}
                 </div>
-            </section> 
+            </section>
         </div>
     }
 }

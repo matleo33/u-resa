@@ -28,11 +28,11 @@ export default class MenuPerso extends React.Component {
         </div>
         <hr className="separatorMenu"></hr>
         <div className="MenuLink">
-          <Link className="Link" to="/u-resa/RechercheSalle"> Réserver </Link>
-          <Link className="Link" to="/u-resa/HistoEtResas"> Mes réservations </Link>
-          <Link className="Link" to="/u-resa/Plan">Plan</Link>
-          <Link className="Link" to="/u-resa/Profile"> Mon profil </Link>
-          <a className="Link" href="http://localhost:8080/Connexion">Connexion</a>
+          <Link className="Link1" to="/u-resa/RechercheSalle"> Réserver </Link>
+          <Link className="Link2" to="/u-resa/HistoEtResas"> Mes réservations </Link>
+          <Link className="Link3" to="/u-resa/Plan">Plan</Link>
+          <Link className="Link4" to="/u-resa/Profile"> Mon profil </Link>
+          <a className="Link5" href="http://localhost:8080/Connexion">Connexion</a>
 
         </div>
       </header>
