@@ -10,6 +10,7 @@ const connection = mysql.createPool({
     database: 'résa'
 });
 
+
 router.get('/Liste', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {

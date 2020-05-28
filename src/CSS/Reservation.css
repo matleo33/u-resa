@@ -48,7 +48,6 @@ padding-top: 2%;
     background-color: whitesmoke;
     margin-bottom: 2%;
     padding-bottom: 3%;
-
 }
 
 .listD{
@@ -100,4 +99,21 @@ padding-top: 2%;
 .fillall{
     height: 38rem;
     background-color: whitesmoke;
+}
+
+.h2font{
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.ui.collapsing.table{
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.Aucuneresas{
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.ui.message{
+    text-align: center;
+    margin-bottom: 0;
 }

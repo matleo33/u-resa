@@ -55,8 +55,20 @@ export default class Reservation extends React.Component {
                             idreservant: "1",
                         })
                     })
+                    let data = [
+                        {
+                            Date: this.state.Date,
+                            Horaire: this.state.Horaire,
+                            Fac: this.state.Fac,
+                            Batiment: this.state.Batiment,
+                            idSalle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
+                            nomSalle: this.state.response[this.state.activeIndex.toString()]["nomSalle"],
+                            Duree: this.state.Duree,
+                        }
+                    ]
                     this.props.history.push({
                         pathname: '/u-resa/HistoEtResas',
+                        data: data
                     })
                 }
                 else if (this.state.CGU === 0) {
@@ -147,7 +159,7 @@ export default class Reservation extends React.Component {
         return <div className="fillall">
             <section class="container-fluid reserv">
                 <div class="TakeReservation">
-                    <h2> Propositions de réservation </h2>
+                    <h2 className="h2font"> Propositions de réservation </h2>
                     <hr class="separator"></hr>
                     {this.state.response.map((line, index) =>
                         <div className="centrageSegment">

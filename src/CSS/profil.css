@@ -27,15 +27,15 @@
 .NomPrenom{
     width: 35%;
     border-width: 1px;
-    border-radius: 0% 90% 2% 0%;
-    background-color: #009de0;
     padding: 1em 1em;
-    border: 2px solid rgba(34,36,38,.15);
     font-weight: bold;
     font-size: 1.2rem;
     font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
     color:rgba(0,0,0,.8);
 }
 
+.ui.styled.accordion{
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
 
 

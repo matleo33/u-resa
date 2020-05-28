@@ -151,7 +151,7 @@ export default class Reservation extends React.Component {
     return <div>
       <section className="container-fluid reserv">
         <div className="TakeReservation">
-          <h2> Rechercher et réserver une salle </h2>
+          <h2 className="h2font"> Rechercher et réserver une salle </h2>
           <hr className="separator"></hr>
           <form className="reservForm" onSubmit={this.testErreur}>
             <p id="erreur_Date" className={this.state.Error}>*Champ non renseigné</p>

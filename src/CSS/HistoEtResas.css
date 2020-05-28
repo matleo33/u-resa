@@ -1,17 +1,15 @@
 h2{
     font-family: 'Lora', serif;
+    padding-top: 2%;
+    text-align: center;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    margin-top: 0;
 }
 
 .ReservationFirst{
     max-height: 20%;
     height: 20%;
     background-color: whitesmoke;
-}
-
-.reserv h2{   
-text-align: center;
-padding-top: 2%;
-
 }
 
 .separator{
@@ -39,46 +37,15 @@ padding-top: 2%;
 }
 
 
-.ReservationBtnReserver{
-    margin-top: 3%;
-    text-align: center;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
+.ReservationBtn{
+    margin-top: 4%;
+    margin-left: 4%;
 }
 
 .TakeReservation{
     background-color: whitesmoke;
     margin-bottom: 2%;
     padding-bottom: 3%;
-    
-}
-
-.centrageSegment{
-    width:35%;
-    margin-top: 1%;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.Left{
-    width:50%;
-    display: inline-block;
-    margin-left: 0;
-}
-
-.Right{
-    width:50%;
-    margin-right: 0;
-    display: inline-block;
-    right: 0;
-    text-align: right;
-}
-
-.Resa-list{
-    margin-bottom: auto;
-    padding-bottom: auto;
-    width:50%
 }
 
 .listD{
@@ -98,8 +65,8 @@ padding-top: 2%;
     margin-bottom: 0%;
     font-weight: bold;
     margin-left: 4%;
-    padding-top: 3%;
-    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;    
+    padding-top: 0;
+
 }
 
 .reservForm{
@@ -112,11 +79,36 @@ padding-top: 2%;
     min-width: 12em;
 }
 
-.fillall{
-    height: 38rem;
-    background-color: whitesmoke;
+.erreur{
+    padding-top: 3%;    
+    margin-left: 2%;
+    margin-bottom: 0;
+    color: red;
+    visibility:hidden;
 }
 
-.h2font{
+.erreurVisible{
+    padding-top: 3%;    
+    margin-left: 2%;
+    margin-bottom: 0;
+    color: red;
+}
+
+.fillresas{
+    min-height: 38rem;
+    background-color: whitesmoke;
+    padding-bottom: 2%;
+}
+
+.ui.collapsing.table{
     font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.Aucuneresas{
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.ui.message{
+    text-align: center;
+    margin-bottom: 0;
 }

@@ -1,14 +1,13 @@
 import React from 'react';
-import "../CSS/Reservation.css"
+import "../CSS/HistoEtResas.css"
 import { Button, Divider, Table, Message } from 'semantic-ui-react'
 
 
 const TableResa = (props) => {
-    const visibilityMethod = props.visibility || "visible";
     if (props.content.length === 0) {
-        return <div style={{ "text-align": "center", visibility: visibilityMethod }}>Vous n'avez encore fait aucune réservation</div>
+        return <div className="Aucuneresas" style={{ "text-align": "center" }}>Vous n'avez encore fait aucune réservation</div>
     } else {
-        return <Table celled striped collapsing style={{ "margin-left": "auto", "margin-right": "auto", visibility: visibilityMethod }}>
+        return <Table celled striped collapsing style={{ "margin-left": "auto", "margin-right": "auto" }}>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>
@@ -20,9 +19,9 @@ const TableResa = (props) => {
                     <Table.HeaderCell>
                         Salle
                     </Table.HeaderCell>
-                    <Table.HeaderCell>
+                    {props.annulable && <Table.HeaderCell>
                         Annuler
-                    </Table.HeaderCell>
+                    </Table.HeaderCell>}
                 </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -37,9 +36,9 @@ const TableResa = (props) => {
                         <Table.Cell>
                             {line.nomSalle}
                         </Table.Cell>
-                        <Table.Cell>
+                        {props.annulable && <Table.Cell>
                             <Button negative index={index} id={index} onClick={(e, titleProps, line) => props.toggleDelete(e, titleProps, line)}>Annuler</Button>
-                        </Table.Cell>
+                        </Table.Cell>}
                     </Table.Row>
                 )}
             </Table.Body>
@@ -66,17 +65,19 @@ export default class Reservation extends React.Component {
 
     toggleDelete(e, titleProps, line) {
         const { index } = titleProps//Corrier ça : j'ai pas réussi à récupérer les données des props, par manque de temps
-        console.log(line.Date, line.Horaire)
-        fetch("http://localhost:8080/User/1/Resas/Supprimer", {
+        console.log(this.state.reservations[index]["horaire"] + '_' + this.state.reservations[index]["id_salle"])
+        fetch("http://localhost:8080/Salles/Supprimer", {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                horaire_salle: line.Date + ' ' + line.Horaire + '_' + line.reservations[index]["id_salle"],
+                horaire_salle: this.state.reservations[index]["horaire"] + '_' + this.state.reservations[index]["id_salle"],
             })
         })
+        this.state.reservations.splice(index, 1)
+        this.forceUpdate()
     }
 
     toggleVisibilityHistoric() {
@@ -94,7 +95,7 @@ export default class Reservation extends React.Component {
             var heure = element.horaire.substring(11, 13);
             heure = parseInt(heure) + 2;
             const date = element.horaire.substring(0, 10);
-            element.horaire = date + " " + heure + ":" + minutes;
+            element.horaire = date + " " + heure + "H" + minutes;
         });
         return toReturn;
     }
@@ -109,6 +110,7 @@ export default class Reservation extends React.Component {
             .then(response => this.correctDate(response))
             .then(response => this.setState({ reservations: response }));
         const { data } = this.props.location
+        console.log(data)
         if (data !== undefined) {
             this.setState({
                 Date: data[0]["Date"],
@@ -119,28 +121,29 @@ export default class Reservation extends React.Component {
                 idSalle: data[0]["idSalle"],
                 nomSalle: data[0]["nomSalle"]
             });
+            console.log(data[0]["Date"], this.state.Date);
         }
     }
 
     render() {
-        return <div className="fillall">
-            {this.state.Date !== '' &&
-                <Message
-                    success
-                    header='Réservation validée !'
-                    content={'Votre réservation salle ' + this.state.nomSalle + ' ,le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + this.state.Duree * 30 + ' minutes a été prise en compte. A bientôt sur nos campus !'}
-                />
-            }
-            <section class="container-fluid reserv">
+        return <div className="fillresas">
+            <section class="container-fluid histo">
                 <div class="ReservationFirst">
-                    <h2> Mes réservations </h2>
+                    {this.state.Date !== '' &&
+                        <Message
+                            success
+                            header='Réservation validée !'
+                            content={'Votre réservation salle ' + this.state.nomSalle + ' ,le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + this.state.Duree * 30 + ' minutes a été prise en compte. A bientôt sur nos campus !'}
+                        />
+                    }
+                    <h2 className="h2histo"> Mes réservations </h2>
                     <Divider />
-                    <TableResa content={this.state.reservations} toggleDelete={(e, titleProps) => this.toggleDelete(e, titleProps)} />
+                    <TableResa annulable={true} content={this.state.reservations} toggleDelete={(e, titleProps) => this.toggleDelete(e, titleProps)} />
                     <Divider />
                     <div style={{ "textAlign": "center", marginBottom: "20px" }}>
                         <Button onClick={() => this.toggleVisibilityHistoric()}>Voir/Cacher mon historique</Button>
                     </div>
-                    <TableResa content={this.state.historic} visibility={this.state.visibilityHistoric} />
+                    {this.state.visibilityHistoric === "visible" && <TableResa annulable={false} content={this.state.historic} />}
                 </div>
             </section>
         </div>
