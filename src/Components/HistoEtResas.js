@@ -2,21 +2,12 @@ import React from 'react';
 import "../CSS/Reservation.css"
 import { Button, Divider, Table, Message } from 'semantic-ui-react'
 
-function handleDate(array) {
-    array.forEach(element => {
-        const date = element.horaire.substring(0, 10);
-        const heure = element.horaire.substring(11, 16);
-        const format = date + ' ' + heure;
-        element.horaire = format;
-    });
-}
 
 const TableResa = (props) => {
     const visibilityMethod = props.visibility || "visible";
     if (props.content.length === 0) {
         return <div style={{ "text-align": "center", visibility: visibilityMethod }}>Vous n'avez encore fait aucune réservation</div>
     } else {
-        handleDate(props.content);
         return <Table celled striped collapsing style={{ "margin-left": "auto", "margin-right": "auto", visibility: visibilityMethod }}>
             <Table.Header>
                 <Table.Row>
@@ -96,12 +87,26 @@ export default class Reservation extends React.Component {
         }
     }
 
+    correctDate(response) {
+        var toReturn = response;
+        toReturn.forEach(element => {
+            const minutes = element.horaire.substring(14, 16);
+            var heure = element.horaire.substring(11, 13);
+            heure = parseInt(heure) + 2;
+            const date = element.horaire.substring(0, 10);
+            element.horaire = date + " " + heure + ":" + minutes;
+        });
+        return toReturn;
+    }
+
     componentDidMount() {
         fetch("http://localhost:8080/User/1/Resas/Historique")
             .then(response => response.json())
-            .then(response => this.setState({ historic: response }))
+            .then(response => this.correctDate(response))
+            .then(response => this.setState({ historic: response }));
         fetch("http://localhost:8080/User/1/Resas/Encours")
             .then(response => response.json())
+            .then(response => this.correctDate(response))
             .then(response => this.setState({ reservations: response }));
         const { data } = this.props.location
         if (data !== undefined) {
