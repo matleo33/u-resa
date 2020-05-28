@@ -175,10 +175,24 @@ export default class Profile extends React.Component {
               <p>
                 {this.state.profile.nom}
               </p>
+              <p>
+                Niveau d'études :
+              </p>
+              <p>
+                Section :
+              </p>
             </Accordion.Content>
-            <div>
-              <Segment className="seg">A propos</Segment>
-            </div>
+            <Accordion.Title
+              active={activeIndex === 2}
+              index={2}
+              onClick={this.handleClick}
+            >
+              <Icon name='dropdown' />
+          A propos
+        </Accordion.Title>
+            <Accordion.Content active={activeIndex === 2}>
+              Lorem Ipsum dolor sit amet
+            </Accordion.Content>
 
           </Accordion>
         </div>
