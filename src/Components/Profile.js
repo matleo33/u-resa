@@ -115,7 +115,7 @@ export default class Profile extends React.Component {
           <Image src='https://scontent-cdg2-1.xx.fbcdn.net/v/t1.0-1/p240x240/69733501_10216927294193774_169972699379007488_o.jpg?_nc_cat=102&_nc_sid=dbb9e7&_nc_ohc=wPZc_aqRDk8AX_i0PG5&_nc_ht=scontent-cdg2-1.xx&_nc_tp=6&oh=933ff4e4be69f5f743a5ba94da8254cb&oe=5EDF8E57' size='medium' circular />
         </div>
         <div class="ProfilInfo">
-        <div className="NomPrenom">{this.state.profile.nom} {this.state.profile.prenom}</div>
+          <div className="NomPrenom">{this.state.profile.nom} {this.state.profile.prenom}</div>
           <Accordion styled fluid>
             <Accordion.Title
               active={activeIndex === 0}
@@ -170,10 +170,10 @@ export default class Profile extends React.Component {
         </Accordion.Title>
             <Accordion.Content active={activeIndex === 1}>
               <p>
-                {this.state.profile.nom}
+                {this.state.profile.prenom}
               </p>
               <p>
-                {this.state.profile.prenom}
+                {this.state.profile.nom}
               </p>
             </Accordion.Content>
             <div>
