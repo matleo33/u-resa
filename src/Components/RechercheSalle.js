@@ -90,6 +90,7 @@ export default class Reservation extends React.Component {
       erreurTextBatiment: "",
       erreurTextSalle: "",
       erreurTextDuree: "",
+      idSalle: "",
     };
   }
 
@@ -100,8 +101,9 @@ export default class Reservation extends React.Component {
         Horaire: this.state.Horaire,
         Fac: this.state.Fac,
         Batiment: this.state.Batiment,
-        Salle: this.state.Salle,
+        nomSalle: this.state.Salle,
         Duree: this.state.Duree,
+        idSalle: this.state.idSalle,
       }
     ]
 
@@ -201,6 +203,7 @@ export default class Reservation extends React.Component {
   }
 
   SalleChange(event) {
+
     this.setState({ 
       Error: "erreur",
       erreurTextSalle: "",
@@ -232,7 +235,7 @@ export default class Reservation extends React.Component {
             <Select id="email" name="email" htmlFor="email" className="listD" placeholder='Sélectionnez le batiment' options={Batiment} onChange={this.BatimentChange} />
             <p id="erreur_Salle" className={this.state.Error}>{this.state.erreurTextSalle}</p>
             <p className="listTitre"> Salle : </p>
-            <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={this.SalleChange} />
+            <Select className="listD" placeholder='Sélectionnez la salle' options={Salle} onChange={(e, { value }) => this.setState({idSalle: value,Error: "erreur",erreurTextSalle: "",Salle: e.target.textContent })} />
             <div className="ReservationBtn">
               <Button primary>Vérifier les disponibilités</Button>
             </div>
