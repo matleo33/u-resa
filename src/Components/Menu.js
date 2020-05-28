@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import "../CSS/Menu.css"
-import { Segment } from 'semantic-ui-react'
 
 function BoutonConnexion(props) {
   if (props.connected) {

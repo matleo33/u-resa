@@ -2,7 +2,7 @@ import React from 'react';
 import '../CSS/profil.css';
 import { Icon, Image, Accordion } from 'semantic-ui-react'
 import { Form, Input, TextArea, Button } from 'semantic-ui-react'
-import { Message, Segment } from 'semantic-ui-react'
+import { Message } from 'semantic-ui-react'
 
 
 export default class Profile extends React.Component {
@@ -52,7 +52,6 @@ export default class Profile extends React.Component {
         this.setState({
           infoProfil: json[0],
         });
-        console.log("good")
       }).catch((err) => {
         console.log(err);
       });
@@ -74,7 +73,6 @@ export default class Profile extends React.Component {
       })
     }).then((response) => {
       if (response.status === 200) {
-        console.log("ok");
         this.setState({ hiddenMessageOK: false })
         window.scrollTo(0, 0);
 

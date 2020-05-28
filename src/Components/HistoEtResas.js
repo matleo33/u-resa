@@ -104,13 +104,13 @@ export default class Reservation extends React.Component {
         fetch("http://localhost:8080/User/1/Resas/Historique")
             .then(response => response.json())
             .then(response => this.correctDate(response))
-            .then(response => this.setState({ historic: response }));
+            .then(response => this.setState({ historic: response }))
+            .then(response => console.log(response));
         fetch("http://localhost:8080/User/1/Resas/Encours")
             .then(response => response.json())
             .then(response => this.correctDate(response))
             .then(response => this.setState({ reservations: response }));
         const { data } = this.props.location
-        console.log(data)
         if (data !== undefined) {
             this.setState({
                 Date: data[0]["Date"],
@@ -121,7 +121,6 @@ export default class Reservation extends React.Component {
                 idSalle: data[0]["idSalle"],
                 nomSalle: data[0]["nomSalle"]
             });
-            console.log(data[0]["Date"], this.state.Date);
         }
     }
 
