@@ -60,7 +60,7 @@ export default class Profile extends React.Component {
 
 
   mailClick = () => {
-    fetch('http://localhost:8080/Contactus', {
+    fetch('http://localhost:8080/Profil/Contactus', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

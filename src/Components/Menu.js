@@ -32,7 +32,7 @@ export default class MenuPerso extends React.Component {
           <Link className="Link2" to="/u-resa/HistoEtResas"> Mes réservations </Link>
           <Link className="Link3" to="/u-resa/Plan">Plan</Link>
           <Link className="Link4" to="/u-resa/Profile"> Mon profil </Link>
-          <a className="Link5" href="http://localhost:8080/Connexion">Connexion</a>
+          <a className="Link5" href="http://localhost:8080/Profil/Connexion">Connexion</a>
 
         </div>
       </header>
