@@ -10,8 +10,8 @@ export default class App extends React.Component {
       connected: false,
       profile: {
         id: 1,
-        nom: "Berrouet",
-        prenom: "Damien",
+        nom: "LEOTARD",
+        prenom: "Mathieu",
         photo: null
       }
     };
