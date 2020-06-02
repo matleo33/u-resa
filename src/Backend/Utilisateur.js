@@ -84,39 +84,6 @@ router.post('/CGU', function (req, res) {
   });
 });
 
-router.use(express.json());
-
-router.post('/Peutreserver', function (req, res) {
-  // Connecting to the database.
-  if (!req.body.horaire) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(400).json({ "status": "Date non renseignée" });
-  }
-  else if (!req.body.horairefin) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(400).json({ "status": "Date de fin non renseignée" });
-  }
-  else if (!req.body.user) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(400).json({ "status": "Utilisateur non renseignée" });
-  }
-  else {
-    connection.getConnection(function (err, connection) {
-      const query = 'SELECT fk_id_salle, horaire, finReservation FROM reservation WHERE fk_id_reservant = ' + req.body.user + ' and str_to_date("' + req.body.horaire + '", "%d/%m/%Y %H:%i") < finReservation AND str_to_date("' + req.body.horairefin + '", "%d/%m/%Y %H:%i") > horaire';
-      if (err) throw err;
-      // Executing the MySQL query (select all data from the 'users' table).
-      connection.query(query, function (error, results, fields) {
-        // If some error occurs, we throw an error.
-        if (error) throw error;
-
-        // Getting the 'response' from the database and sending it to our route. This is were the data is.
-        res.send(results)
-      });
-    });
-  }
-});
-
-
 
 
 

@@ -37,7 +37,6 @@ function getCasClient() {
             status: 418
         }
     });
-    console.log("mail")
     return casClient;
 }
 

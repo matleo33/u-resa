@@ -87,7 +87,8 @@ router.post('/Disponibilitesalle', function (req, res) { //A DEV REQUETE
 });
 
 
-router.post('/Disponibilite', function (req, res) { //A DEV REQUETE
+
+router.post('/Disponibilite', function (req, res) {
     // Connecting to the database.
     if (!req.body.horaire) {
         res.setHeader('Content-Type', 'text/plain');
@@ -109,7 +110,6 @@ router.post('/Disponibilite', function (req, res) { //A DEV REQUETE
             connection.query(query, function (error, results, fields) {
                 // If some error occurs, we throw an error.
                 if (error) throw error;
-
                 // Getting the 'response' from the database and sending it to our route. This is were the data is.
                 res.send(results)
             });
@@ -165,15 +165,26 @@ router.post('/Reserver', function (req, res) {
     else {
         // Connecting to the database.
         connection.getConnection(function (err, connection) {
-            const query = 'INSERT INTO reservation(horaire,horaire_salle,fk_id_reservant,fk_id_salle, duree,finReservation) VALUES (str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i"),' + "'" + req.body.horaire + "_" + req.body.idsalle + "'," + "'" + req.body.idreservant + "','" + req.body.idsalle + "','" + req.body.duree + "','" + req.body.horairefin + "')";
+            const query = 'SELECT fk_id_salle, horaire, finReservation FROM `reservation` WHERE fk_id_reservant = ' + req.body.idreservant + ' and str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i") > horaire';
             if (err) throw err;
-            // Executing the MySQL query (select all data from the 'users' table).
             connection.query(query, function (error, results, fields) {
-                // If some error occurs, we throw an error.
                 if (error) throw error;
+                if (results.length !== 0) {
+                    res.send("Vous avez déjà une réservation de prévu à cette période, merci de réserver une seule salle à la fois.")
+                }
+                else {
+                    if (true) { //ajouter condition en appelant service /disponibilite et en gérant la réponse
+                        res.send("Le créneau n'est plus disponible pour cette salle à cette période.")
+                    }
+                    else {
+                        const query = 'INSERT INTO reservation(horaire,horaire_salle,fk_id_reservant,fk_id_salle, duree,finReservation) VALUES (str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i"),' + "'" + req.body.horaire + "_" + req.body.idsalle + "'," + "'" + req.body.idreservant + "','" + req.body.idsalle + "','" + req.body.duree + "','" + req.body.horairefin + "')";
+                        connection.query(query, function (error, results, fields) {
+                            if (error) throw error;
+                            res.send("Salle réservée")
+                        });
+                    }
 
-                // Getting the 'response' from the database and sending it to our route. This is were the data is.
-                res.send(results)
+                }
             });
         });
     }
