@@ -69,19 +69,27 @@ router.get('/:User/CGU', function (req, res) {
   });
 });
 
+router.use(express.json());
+
 router.post('/CGU', function (req, res) {
   // Connecting to the database.
-  connection.getConnection(function (err, connection) {
-    if (err) throw err;
-    // Executing the MySQL query (select all data from the 'users' table).
-    connection.query('UPDATE reservant SET CGU=1 where id_reservant =' + req.params.user, function (error, results, fields) {
-      // If some error occurs, we throw an error.
-      if (error) throw error;
+  if (!req.body.idutilisateur) {
+    res.setHeader('Content-Type', 'text/plain');
+    res.status(400).json({ "status": "Utilisateur manquant" });
+  }
+  else {
+    connection.getConnection(function (err, connection) {
+      if (err) throw err;
+      // Executing the MySQL query (select all data from the 'users' table).
+      connection.query('UPDATE reservant SET CGU=1 where id_reservant =' + req.body.idutilisateur, function (error, results, fields) {
+        // If some error occurs, we throw an error.
+        if (error) throw error;
 
-      // Getting the 'response' from the database and sending it to our route. This is were the data is.
-      res.send(results)
+        // Getting the 'response' from the database and sending it to our route. This is were the data is.
+        res.send(results)
+      });
     });
-  });
+  }
 });
 
 

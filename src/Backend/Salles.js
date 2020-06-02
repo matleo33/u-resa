@@ -87,7 +87,6 @@ router.post('/Disponibilitesalle', function (req, res) { //A DEV REQUETE
 });
 
 
-
 router.post('/Disponibilite', function (req, res) {
     // Connecting to the database.
     if (!req.body.horaire) {
@@ -103,6 +102,7 @@ router.post('/Disponibilite', function (req, res) {
         res.status(400).json({ "status": "Salle non renseignée" });
     }
     else {
+        //Factoriser ce code pour être utilisé aussi dans /réserver
         connection.getConnection(function (err, connection) {
             const query = 'select * from salle s where id_salle = ' + req.body.idsalle + ' and nomSalle not in ( select nomSalle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire and s.id_salle =' + req.body.idsalle + ')';
             if (err) throw err;
@@ -173,7 +173,7 @@ router.post('/Reserver', function (req, res) {
                     res.send("Vous avez déjà une réservation de prévu à cette période, merci de réserver une seule salle à la fois.")
                 }
                 else {
-                    if (true) { //ajouter condition en appelant service /disponibilite et en gérant la réponse
+                    if (true) {//utiliser aussi l'appel au service /disponibilite et tester si c'est dispo ou non
                         res.send("Le créneau n'est plus disponible pour cette salle à cette période.")
                     }
                     else {

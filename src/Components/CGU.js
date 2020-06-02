@@ -49,6 +49,16 @@ export default class About extends React.Component {
           idreservant: "1",
         })
       })
+      fetch("http://localhost:8080/User/CGU", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          idutilisateur: "1",
+        })
+      })
       let data = [
         {
           Date: this.state.Date,
