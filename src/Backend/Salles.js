@@ -173,7 +173,7 @@ router.post('/Reserver', function (req, res) {
                     res.send("Vous avez déjà une réservation de prévu à cette période, merci de réserver une seule salle à la fois.")
                 }
                 else {
-                    if (true) {//utiliser aussi l'appel au service /disponibilite et tester si c'est dispo ou non
+                    if (false) {//utiliser aussi l'appel au service /disponibilite et tester si c'est dispo ou non
                         res.send("Le créneau n'est plus disponible pour cette salle à cette période.")
                     }
                     else {

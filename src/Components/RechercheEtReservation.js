@@ -176,7 +176,7 @@ export default class Reservation extends React.Component {
                                     Salle {line.nomSalle}
                                 </div>
                                 <div className="Right">
-                                    Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {Math.trunc(Number(this.state.Duree) * 30 / 60)}H{Number(this.state.Duree) * 30 % 60}
+                                    Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {Math.trunc(Number(this.state.Duree) * 30 / 60)}H{Number(this.state.Duree) * 30 % 60 === 0 ? '00' : Number(this.state.Duree) * 30 % 60}
                                 </div>
                                 <Checkbox checked={this.state.activeIndex === index} index={index} id={index} onClick={this.handleClick} label="Sélectionner" />
                             </Segment>
