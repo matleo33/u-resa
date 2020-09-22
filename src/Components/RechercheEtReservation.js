@@ -327,7 +327,7 @@ export default class Reservation extends React.Component {
 
     render() {
         return <div className="TakeReservation">
-            <div className="recherche">
+            <div className={this.state.response.length === 0 ? "recherche" : "recherche rechercheMove"}>
                 <h2 className="h2font"> Rechercher et réserver une salle </h2>
                 <hr className="separator"></hr>
                 <form className="reservForm" onSubmit={this.testErreur}>

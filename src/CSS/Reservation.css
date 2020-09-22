@@ -14,6 +14,34 @@ padding-top: 2%;
 
 }
 
+@keyframes fadeInOpacity {
+	0% {
+        opacity: 0;
+        transform : translateX(-10%);
+	}
+	100% {
+        opacity: 1;
+        transform: translateX(0);
+	}
+}
+
+@keyframes moveTransi {
+	0% {
+        transform : translateX(50%);
+	}
+	100% {
+        transform: translateX(0);
+	}
+}
+
+.reserv{
+    opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-out;
+	animation-duration: 1.5s;
+}
+
 .separator{
     height: 3px;
     width: 5%;
@@ -227,6 +255,19 @@ padding-top: 2%;
 
 .recherche{
     min-width: 35%;
+    opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-out;
+	animation-duration: 1.5s;
+}
+
+.rechercheMove{
+    opacity: 1;
+	animation-name: moveTransi;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-out;
+	animation-duration: 1.5s;
 }
 
 .fillall{
