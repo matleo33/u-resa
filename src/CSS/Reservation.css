@@ -35,11 +35,14 @@ padding-top: 2%;
 }
 
 .reserv{
+    width : 55%;
     opacity: 1;
 	animation-name: fadeInOpacity;
 	animation-iteration-count: 1;
 	animation-timing-function: ease-out;
-	animation-duration: 1.5s;
+    animation-duration: 1.5s;
+    display: flex;
+    justify-content: center;
 }
 
 .separator{
@@ -200,20 +203,56 @@ padding-top: 2%;
     margin-top: 1%;
     margin-right: auto;
     margin-left: auto;
+    width : 60%;
+    margin-top: 2%;
+}
+
+.taillebouton{
+    width: 100%!important;
+    height: 100%!important;
+}
+
+.propositions{
+    display: flex;
+    flex-direction: column;
+    width : 100%;
+}
+
+.propos{
+    top:20%!important;
+    height: 6em;
+    width: 100%!important;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    color: white!important;
+    background-color: transparent!important;
+    background-position: center!important;
+    background-repeat: no-repeat!important;
+    background-size: 100%!important;
+    background-image: url("batiment.jpg")!important;
+}
+
+.ui.animated.button .hidden.content {
+    top: 10%!important;
+    left: auto;
+    right: -100%;
 }
 
 .Left{
-    width:50%;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    font-size: 250%;
+    width:100%!important;
+    height: 100%!important;
     display: inline-block;
-    margin-left: 0;
+    margin-top: 4%;
 }
 
 .Right{
-    width:50%;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    width:100%;
     margin-right: 0;
     display: inline-block;
     right: 0;
-    text-align: right;
+    margin-top: 4%;
 }
 
 .Resa-list{
@@ -263,6 +302,7 @@ padding-top: 2%;
 }
 
 .rechercheMove{
+    width: 20%;;
     opacity: 1;
 	animation-name: moveTransi;
 	animation-iteration-count: 1;

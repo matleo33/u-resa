@@ -1,6 +1,6 @@
 import React from 'react';
 import "../CSS/Reservation.css"
-import { Button, Segment, Checkbox, Select } from 'semantic-ui-react'
+import { Button, Checkbox, Select } from 'semantic-ui-react'
 
 
 const Université = [
@@ -360,15 +360,19 @@ export default class Reservation extends React.Component {
                     <hr class="separator"></hr>
                     {this.state.response.map((line, index) =>
                         <div className="centrageSegment">
-                            <Segment>
-                                <div className="Left">
-                                    Salle {line.nomSalle}
-                                </div>
-                                <div className="Right">
-                                    Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {Math.trunc(Number(this.state.Duree) * 30 / 60)}H{Number(this.state.Duree) * 30 % 60 === 0 ? '00' : Number(this.state.Duree) * 30 % 60}
-                                </div>
-                                <Checkbox checked={this.state.activeIndex === index} index={index} id={index} onClick={this.handleClick} label="Sélectionner" />
-                            </Segment>
+                            <Button animated className="propos">
+                                <Button.Content visible className="taillebouton">
+                                    <div className="Left">
+                                        {line.nomBatiment} {line.nomSalle}
+                                    </div>
+                                </Button.Content>
+                                <Button.Content hidden>
+                                    <div className="Right">
+                                        Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {Math.trunc(Number(this.state.Duree) * 30 / 60)}H{Number(this.state.Duree) * 30 % 60 === 0 ? '00' : Number(this.state.Duree) * 30 % 60}
+                                    </div>
+                                    <Checkbox checked={this.state.activeIndex === index} index={index} id={index} onClick={this.handleClick} label="Sélectionner" />
+                                </Button.Content>
+                            </Button>
                         </div>
                     )}
                     <div class="ReservationBtnReserver">

@@ -44,7 +44,7 @@ router.post('/Disponibilitehoraire', function (req, res) {
         connection.getConnection(function (err, connection) {
             //on vérifie si le checkin avant le checkout
             //on vérifie si le checkout est après le checkin
-            const query = 'select nomSalle,  id_salle from salle s where nomSalle not in (select nomSalle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire)';
+            const query = 'select nomSalle, id_salle, nomBatiment from salle s where nomSalle not in (select nomSalle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire)';
             if (err) throw err;
             // Executing the MySQL query (select all data from the 'users' table).
             connection.query(query, function (error, results, fields) {
