@@ -68,7 +68,6 @@ export default class Reservation extends React.Component {
         this.BatimentChange = this.BatimentChange.bind(this);
         this.SalleChange = this.SalleChange.bind(this);
         this.testErreur = this.testErreur.bind(this)
-        this.handleClick = this.handleClick.bind(this);
         this.handleResa = this.handleResa.bind(this);
         this.state = {
             Error: "erreur",
@@ -81,7 +80,6 @@ export default class Reservation extends React.Component {
             nomSalle: "",
             idSalle: "",
             response: [],
-            activeIndex: -1,
             CGU: -1,
             profile: props.profile,
             erreurTextDate: "",
@@ -198,14 +196,8 @@ export default class Reservation extends React.Component {
         });
     }
 
-    handleClick = (e, titleProps) => {
+    handleResa = (e, titleProps) => {
         const { index } = titleProps
-        const { activeIndex } = this.state
-        const newIndex = activeIndex === index ? -1 : index
-        this.setState({ activeIndex: newIndex })
-    }
-
-    handleResa = () => {
         fetch("http://localhost:8080/User/1/CGU", {
             method: 'GET',
             headers: {
@@ -227,7 +219,7 @@ export default class Reservation extends React.Component {
                         },
                         body: JSON.stringify({
                             horaire: this.state.Date + ' ' + this.state.Horaire,
-                            idsalle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
+                            idsalle: this.state.response[index.toString()]["id_salle"],
                             duree: Number(this.state.Duree) * 30,
                             idreservant: "1",
                             horairefin: horairefin
@@ -239,8 +231,8 @@ export default class Reservation extends React.Component {
                             Horaire: this.state.Horaire,
                             Fac: this.state.Fac,
                             Batiment: this.state.Batiment,
-                            idSalle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
-                            nomSalle: this.state.response[this.state.activeIndex.toString()]["nomSalle"],
+                            idSalle: this.state.response[index.toString()]["id_salle"],
+                            nomSalle: this.state.response[index.toString()]["nomSalle"],
                             Duree: this.state.Duree,
                         }
                     ]
@@ -256,8 +248,8 @@ export default class Reservation extends React.Component {
                             Horaire: this.state.Horaire,
                             Fac: this.state.Fac,
                             Batiment: this.state.Batiment,
-                            idSalle: this.state.response[this.state.activeIndex.toString()]["id_salle"],
-                            nomSalle: this.state.response[this.state.activeIndex.toString()]["nomSalle"],
+                            idSalle: this.state.response[index.toString()]["id_salle"],
+                            nomSalle: this.state.response[index.toString()]["nomSalle"],
                             Duree: this.state.Duree,
                         }
                     ]
@@ -360,7 +352,7 @@ export default class Reservation extends React.Component {
                     <hr class="separator"></hr>
                     {this.state.response.map((line, index) =>
                         <div className="centrageSegment">
-                            <Button animated className="propos">
+                            <Button animated className="propos" index={index} id={index} onClick={this.handleResa}>
                                 <Button.Content visible className="taillebouton">
                                     <div className="Left">
                                         {line.nomBatiment} {line.nomSalle}
@@ -370,14 +362,12 @@ export default class Reservation extends React.Component {
                                     <div className="Right">
                                         Salle {line.nomSalle} disponible à partir de {this.state.Horaire} pour {Math.trunc(Number(this.state.Duree) * 30 / 60)}H{Number(this.state.Duree) * 30 % 60 === 0 ? '00' : Number(this.state.Duree) * 30 % 60}
                                     </div>
-                                    <Checkbox checked={this.state.activeIndex === index} index={index} id={index} onClick={this.handleClick} label="Sélectionner" />
                                 </Button.Content>
                             </Button>
                         </div>
                     )}
                     <div class="ReservationBtnReserver">
                         {this.state.response.length === 0 && <h2>Aucune résevration disponible pour ces critères</h2>}
-                        <Button primary onClick={this.handleResa}>Réserver</Button>
                     </div>
                 </div>
             </section>}
