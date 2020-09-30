@@ -7,7 +7,7 @@ const connection = mysql.createPool({
     port: 3308,
     user: 'root',
     password: '',
-    database: 'résa'
+    database: 'résa_v7'
 });
 
 
@@ -40,11 +40,15 @@ router.post('/Disponibilitehoraire', function (req, res) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Durée du créneau non renseigné" });
     }
+    else if (!req.body.idBatiment) {
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(400).json({ "status": "Batiment non renseigné" });
+    }
     else {
         connection.getConnection(function (err, connection) {
             //on vérifie si le checkin avant le checkout
             //on vérifie si le checkout est après le checkin
-            const query = 'select nomSalle, id_salle, nomBatiment from salle s where nomSalle not in (select nomSalle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire)';
+            const query = 'select s.Code_salle as nomSalle, s.id_salle, b.Batiment as nomBatiment from salle s join batiment b on s.idBatiment = b.Id where s.idBatiment = ' + req.body.idBatiment + ' AND s.Code_salle not in (select s.Code_salle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire) LIMIT 20';
             if (err) throw err;
             // Executing the MySQL query (select all data from the 'users' table).
             connection.query(query, function (error, results, fields) {
@@ -104,7 +108,7 @@ router.post('/Disponibilite', function (req, res) {
     else {
         //Factoriser ce code pour être utilisé aussi dans /réserver
         connection.getConnection(function (err, connection) {
-            const query = 'select * from salle s where id_salle = ' + req.body.idsalle + ' and nomSalle not in ( select nomSalle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire and s.id_salle =' + req.body.idsalle + ')';
+            const query = 'select s.Code_salle as nomSalle, s.id_salle, b.Batiment as nomBatiment from salle s join batiment b on s.idBatiment = b.Id where id_salle = ' + req.body.idsalle + ' and s.Code_salle not in ( select s.Code_salle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire and s.id_salle =' + req.body.idsalle + ')';
             if (err) throw err;
             // Executing the MySQL query (select all data from the 'users' table).
             connection.query(query, function (error, results, fields) {
@@ -138,6 +142,53 @@ router.post('/Supprimer', function (req, res) { //A DEV REQUETE
         });
     }
 });
+
+
+router.get('/Salles', function (req, res) {
+    // Connecting to the database.
+    connection.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query('SELECT Code_site, idBatiment, id_salle, id_salle, Code_salle, Capacite FROM salle WHERE estReservable=1', function (error, results, fields) {
+
+            // If some error occurs, we throw an error.
+            if (error) throw error;
+
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send(results)
+        });
+    });
+});
+
+router.get('/Batiments', function (req, res) {
+    // Connecting to the database.
+    connection.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query('SELECT Id, Secteur, Code_site, Code_batiment, Batiment FROM batiment', function (error, results, fields) {
+
+            // If some error occurs, we throw an error.
+            if (error) throw error;
+
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send(results)
+        });
+    });
+});
+
+router.get('/Sites', function (req, res) {
+    // Connecting to the database.
+    connection.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query('SELECT Code_site, Site FROM site', function (error, results, fields) {
+
+            // If some error occurs, we throw an error.
+            if (error) throw error;
+
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send(results)
+        });
+    });
+});
+
 
 router.use(express.json());
 

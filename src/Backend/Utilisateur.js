@@ -10,7 +10,7 @@ const connection = mysql.createPool({
   port: 3308,
   user: 'root',
   password: '',
-  database: 'résa'
+  database: 'résa_v7'
 });
 
 router.param('User', function (request, response, next, User) {
