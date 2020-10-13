@@ -26,7 +26,7 @@ export default class Home extends React.Component {
             <CustomToggle eventKey="0">Click me!</CustomToggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
-            <Card.Body>Hello! I'm the body</Card.Body>
+            <Card.Body>Hello! I'm the body </Card.Body>
           </Accordion.Collapse>
         </Card>
         <Card>
