@@ -5,7 +5,7 @@ import { Button, Divider, Table, Message } from 'semantic-ui-react'
 
 const TableResa = (props) => {
     if (props.content.length === 0) {
-        return <div className="Aucuneresas" style={{ "text-align": "center" }}>Vous n'avez encore fait aucune réservation</div>
+        return <div className="Aucuneresas" style={{ "textAlign": "center" }}>Vous n'avez encore fait aucune réservation</div>
     } else {
         return <Table celled striped collapsing style={{ "margin-left": "auto", "margin-right": "auto" }}>
             <Table.Header>
@@ -125,13 +125,13 @@ export default class Reservation extends React.Component {
 
     render() {
         return <div className="fillresas">
-            <section class="container-fluid histo">
-                <div class="ReservationFirst">
+            <section className="container-fluid histo">
+                <div className="ReservationFirst">
                     {this.state.Date !== '' &&
                         <Message
                             success
                             header='Réservation validée !'
-                            content={'Votre réservation salle ' + this.state.nomSalle + ', le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + Math.trunc(Number(this.state.Duree) * 30 / 60) + 'H' + (Number(this.state.Duree) * 30 % 60 === 0 ? '00' : Number(this.state.Duree) * 30 % 60) + ' a été prise en compte. A bientôt sur nos campus !'}
+                            content={'Votre réservation salle ' + this.state.nomSalle + ', le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + this.state.Duree + ' a été prise en compte. A bientôt sur nos campus !'}
                         />
                     }
                     <h2 className="h2histo"> Mes réservations </h2>
@@ -149,5 +149,5 @@ export default class Reservation extends React.Component {
 }
 
 
-
+//Math.trunc(Number(this.state.Duree) * 30 / 60) + 'H' + (Number(this.state.Duree) * 30 % 60 === 0 ? '00' : Number(this.state.Duree) * 30 % 60)
 

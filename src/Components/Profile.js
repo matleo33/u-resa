@@ -109,7 +109,7 @@ export default class Profile extends React.Component {
             Le service est momentanément intérompu. Vous pouvez cependant nous envoyer un mail à uresaprojet@gmail.com.
     </p>
         </Message>
-        <div class="ProfilImg">
+        <div className="ProfilImg">
           <Image src='https://pbs.twimg.com/media/EODyC7xWsAAIyzH.jpg' size='medium' circular />
         </div>
         <div class="ProfilInfo">
