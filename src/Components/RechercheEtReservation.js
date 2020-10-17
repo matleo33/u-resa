@@ -1,7 +1,7 @@
 import React from 'react';
 import "../CSS/Reservation.css"
 import Recherche from './RecherchEtReservations_components/recherche';
-import Resa from './RecherchEtReservations_components/reservation';
+import reserver from './RecherchEtReservations_components/reserver';
 //import loadreferentiel from './RecherchEtReservations_components/fonctions'
 
 
@@ -328,10 +328,10 @@ export default class Reservation extends React.Component {
                 BatimentChange={this.BatimentChange}
                 SalleChange={this.SalleChange}
                 Dureechange={this.Dureechange} />
-            {this.state.response.length !== 0 && <Resa response={this.state.response}
-                Horaire={this.state.Horaire}
-                Duree={this.state.Duree}
-                handleResa={this.handleResa} />
+            {this.state.response.length !== 0 && <reserver response={this.state.response}
+                                                           Horaire={this.state.Horaire}
+                                                           Duree={this.state.Duree}
+                                                           handleResa={this.handleResa} />
             }
         </div>
     }

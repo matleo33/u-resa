@@ -4,7 +4,7 @@ import { Button } from 'semantic-ui-react'
 
 
 //Math.trunc(Number(props.Duree) * 30 / 60)}H{Number(props.Duree) * 30 % 60 === 0 ? '00' : Number(props.Duree) * 30 % 60
-function Resa(props) {
+function reserver(props) {
     return (
         <section className="container-fluid reserv">
             <div className="propositions">
@@ -35,11 +35,11 @@ function Resa(props) {
     )
 }
 
-Resa.propTypes = {
+reserver.propTypes = {
     response: PropTypes.array.isRequired,
     Horaire: PropTypes.string.isRequired,
     Duree: PropTypes.string.isRequired,
     handleResa: PropTypes.func.isRequired
 };
 
-export default Resa;
+export default reserver;
