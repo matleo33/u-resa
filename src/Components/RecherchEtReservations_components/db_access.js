@@ -1,4 +1,4 @@
-function loadreferentiel(props) {
+export function loadreferentiel(props) {
     fetch("http://localhost:8080/Salles/Salles", {
         method: 'GET',
         headers: {
@@ -25,11 +25,13 @@ function loadreferentiel(props) {
         .then(response => props.setState({ sites: response }))
 }
 
-function resultat(data, props) {
-    var str = data["Horaire"].split("H")
-    var heuresansretenue = (Number(str[0]) + Number(Math.trunc((data["Duree"] * 30) / 60))) + 'H' + (Number(str[1]) + Number((data["Duree"] * 30) % 60))
-    var str2 = heuresansretenue.split("H")
-    var heure = data["Date"] + ' ' + (Number(str2[0]) + Number((Math.trunc(Number(str2[1]) / 60)))) + 'H' + (Number(str2[1]) % 60)
+export function resultat(data, props) {
+    var splitedHour = data["Horaire"].split("H")
+    var heureSansRetenue = (Number(data["Horaire"].split("H")[0]) + Number(Math.trunc((data["Duree"] * 30) / 60))) +
+        'H' + (Number(splitedHour[1]) + Number((data["Duree"] * 30) % 60))
+    var splitedHeureSansRetenue = heureSansRetenue.split("H")
+    var heure = data["Date"] + ' ' + (Number(splitedHeureSansRetenue[0]) + Number((Math.trunc(Number(splitedHeureSansRetenue[1]) / 60)))) + 'H' +
+        (Number(splitedHeureSansRetenue[1]) % 60)
     if (data["Horaire"] === "Aucune préférence") {
         fetch("http://localhost:8080/Salles/Disponibilitesalle", {
             method: 'POST',
@@ -76,8 +78,8 @@ function resultat(data, props) {
     }
 }
 
-function handleResa(e, titleProps, props) {
-    const { index } = titleProps
+export function handleReservation(titleProps, props) {
+    const { index: propositionIndex } = titleProps
     fetch("http://localhost:8080/User/1/CGU", {
         method: 'GET',
         headers: {
@@ -99,7 +101,7 @@ function handleResa(e, titleProps, props) {
                     },
                     body: JSON.stringify({
                         horaire: props.state.Date + ' ' + props.state.Horaire,
-                        idsalle: props.state.response[index.toString()]["id_salle"],
+                        idsalle: props.state.response[propositionIndex.toString()]["id_salle"],
                         duree: Number(props.state.Duree) * 30,
                         idreservant: "1",
                         horairefin: horairefin
@@ -111,8 +113,8 @@ function handleResa(e, titleProps, props) {
                         Horaire: props.state.Horaire,
                         Fac: props.state.Fac,
                         Batiment: props.state.Batiment,
-                        idSalle: props.state.response[index.toString()]["id_salle"],
-                        nomSalle: props.state.response[index.toString()]["nomSalle"],
+                        idSalle: props.state.response[propositionIndex.toString()]["id_salle"],
+                        nomSalle: props.state.response[propositionIndex.toString()]["nomSalle"],
                         Duree: props.state.Duree,
                     }
                 ]
@@ -128,8 +130,8 @@ function handleResa(e, titleProps, props) {
                         Horaire: props.state.Horaire,
                         Fac: props.state.Fac,
                         Batiment: props.state.Batiment,
-                        idSalle: props.state.response[index.toString()]["id_salle"],
-                        nomSalle: props.state.response[index.toString()]["nomSalle"],
+                        idSalle: props.state.response[propositionIndex.toString()]["id_salle"],
+                        nomSalle: props.state.response[propositionIndex.toString()]["nomSalle"],
                         Duree: props.state.Duree,
                     }
                 ]

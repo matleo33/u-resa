@@ -46,7 +46,7 @@ const TableResa = (props) => {
     }
 }
 
-export default class Reservation extends React.Component {
+export default class Historique extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -4,10 +4,10 @@ import { Route, Switch } from "react-router-dom"
 import Profile from "./Profile"
 import Connexion from "./Connexion"
 import CGU from './CGU';
-import Reservation from './RechercheEtReservation';
+import Reservation from './Reservation';
 import Plan from "./Plan"
 import ErrorPage from "./404NotFound"
-import Historesas from "./HistoEtResas"
+import Historesas from "./Historique"
 
 
 export default class Routes extends React.Component {
