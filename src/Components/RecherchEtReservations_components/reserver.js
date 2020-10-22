@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react'
 
 
+
 //Math.trunc(Number(props.Duree) * 30 / 60)}H{Number(props.Duree) * 30 % 60 === 0 ? '00' : Number(props.Duree) * 30 % 60
-function reserver(props) {
+function Reserver(props) {
     return (
         <section className="container-fluid reserv">
             <div className="propositions">
@@ -35,11 +36,11 @@ function reserver(props) {
     )
 }
 
-reserver.propTypes = {
+Reserver.propTypes = {
     response: PropTypes.array.isRequired,
     Horaire: PropTypes.string.isRequired,
     Duree: PropTypes.string.isRequired,
-    handleResa: PropTypes.func.isRequired
+    handleResa: PropTypes.func.isRequired,
 };
 
-export default reserver;
+export default Reserver;

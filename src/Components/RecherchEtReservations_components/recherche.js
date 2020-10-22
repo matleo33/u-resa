@@ -41,10 +41,6 @@ const Horaire = [
 
 
 function Recherche(props) {
-
-
-
-
     return (
         <div className={props.response.length === 0 ? "recherche" : "recherche rechercheMove"}>
             <h2 className="h2font"> Rechercher et réserver une salle </h2>
@@ -58,20 +54,22 @@ function Recherche(props) {
                 <Select className="listD" placeholder='Aucune préférence' options={Horaire} onChange={props.HoraireChange} />
                 <p id="erreur_Heure" className={props.Error}>{props.erreurTextDuree}</p>
                 <p className="listTitre"> Durée de ma réservation : </p>
-                <Select className="listD" placeholder='Aucune préférence' options={Duree} onChange={props.Dureechange} />
+                <select className="listD selectRecherche" placeholder='Aucune préférence' options={Duree} onChange={props.Dureechange} >
+                    {Duree.map((duree) => <option key={duree.value} value={duree.value}>{duree.text}</option>)}
+                </select>
                 <p id="erreur_University" className={props.Error}>{props.erreurTextFac}</p>
                 <p className="listTitre"> Mon Université : </p>
-                <select className="listD" placeholder='Sélectionnez mon université' options={props.sites} onChange={props.FacChange}>
-                    {props.sites.map((site) => <option key={site.Code_site} value={site.Code_site}>{site.Site}</option>)}
+                <select className="listD selectRecherche" placeholder='Sélectionnez mon université' options={props.sites} onChange={props.FacChange}>
+                    {props.sites.map((site) => <option className='optionItem' key={site.Code_site} value={site.Code_site}>{site.Site}</option>)}
                 </select>
                 <p id="erreur_Batiment" className={props.Error}>{props.erreurTextBatiment}</p>
                 <p className="listTitre"> Batiment désiré : </p>
-                <select className="listD" placeholder='Sélectionnez le batiment' onChange={props.BatimentChange}>
+                <select className="listD selectRecherche" placeholder='Sélectionnez le batiment' onChange={props.BatimentChange}>
                     {props.batiments.map((batiment) => Number(batiment.Code_site) === Number(props.Fac) && <option key={batiment.Id} value={batiment.Id}>{batiment.Batiment}</option>)}
                 </select>
                 <p id="erreur_Salle" className={props.Error}>{props.erreurTextSalle}</p>
                 <p className="listTitre"> Salle : </p>
-                <select className="listD" placeholder='Sélectionnez la salle' onChange={props.SalleChange}>
+                <select className="listD selectRecherche" placeholder='Sélectionnez la salle' onChange={props.SalleChange}>
                     {props.salles.map((salle) => (Number(salle.idBatiment) === Number(props.Batiment) || Number(salle.id_salle) === 0) && <option key={salle.id_salle} value={salle.id_salle}>{salle.Code_salle}</option>)}
                 </select>
                 <div className="ReservationBtn">

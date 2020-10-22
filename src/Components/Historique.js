@@ -7,7 +7,7 @@ const TableResa = (props) => {
     if (props.content.length === 0) {
         return <div className="Aucuneresas" style={{ "textAlign": "center" }}>Vous n'avez encore fait aucune réservation</div>
     } else {
-        return <Table celled striped collapsing style={{ "margin-left": "auto", "margin-right": "auto" }}>
+        return <Table celled striped collapsing style={{ "marginLeft": "auto", "marginRight": "auto" }}>
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell>
@@ -26,7 +26,7 @@ const TableResa = (props) => {
             </Table.Header>
             <Table.Body>
                 {props.content.map((line, index) =>
-                    <Table.Row>
+                    <Table.Row key={index}>
                         <Table.Cell>
                             {line.horaire}
                         </Table.Cell>

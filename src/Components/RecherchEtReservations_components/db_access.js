@@ -78,8 +78,7 @@ export function resultat(data, props) {
     }
 }
 
-export function handleReservation(titleProps, props) {
-    const { index: propositionIndex } = titleProps
+export function handleReservation(props, index) {
     fetch("http://localhost:8080/User/1/CGU", {
         method: 'GET',
         headers: {
@@ -101,7 +100,7 @@ export function handleReservation(titleProps, props) {
                     },
                     body: JSON.stringify({
                         horaire: props.state.Date + ' ' + props.state.Horaire,
-                        idsalle: props.state.response[propositionIndex.toString()]["id_salle"],
+                        idsalle: props.state.response[index.toString()]["id_salle"],
                         duree: Number(props.state.Duree) * 30,
                         idreservant: "1",
                         horairefin: horairefin
@@ -113,8 +112,8 @@ export function handleReservation(titleProps, props) {
                         Horaire: props.state.Horaire,
                         Fac: props.state.Fac,
                         Batiment: props.state.Batiment,
-                        idSalle: props.state.response[propositionIndex.toString()]["id_salle"],
-                        nomSalle: props.state.response[propositionIndex.toString()]["nomSalle"],
+                        idSalle: props.state.response[index.toString()]["id_salle"],
+                        nomSalle: props.state.response[index.toString()]["nomSalle"],
                         Duree: props.state.Duree,
                     }
                 ]
@@ -130,8 +129,8 @@ export function handleReservation(titleProps, props) {
                         Horaire: props.state.Horaire,
                         Fac: props.state.Fac,
                         Batiment: props.state.Batiment,
-                        idSalle: props.state.response[propositionIndex.toString()]["id_salle"],
-                        nomSalle: props.state.response[propositionIndex.toString()]["nomSalle"],
+                        idSalle: props.state.response[index.toString()]["id_salle"],
+                        nomSalle: props.state.response[index.toString()]["nomSalle"],
                         Duree: props.state.Duree,
                     }
                 ]

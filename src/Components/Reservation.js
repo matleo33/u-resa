@@ -1,7 +1,7 @@
 import React from 'react';
 import "../CSS/Reservation.css"
 import Recherche from './RecherchEtReservations_components/recherche';
-import reserver from './RecherchEtReservations_components/reserver';
+import Reserver from './RecherchEtReservations_components/reserver';
 import * as db_access from './RecherchEtReservations_components/db_access';
 
 
@@ -17,6 +17,7 @@ export default class Reservation extends React.Component {
         this.SalleChange = this.SalleChange.bind(this);
         this.Dureechange = this.Dureechange.bind(this);
         this.testErreur = this.testErreur.bind(this);
+        this.handleResa = this.handleResa.bind(this);
         this.state = {
             Error: "erreur",
             DateJour: Date(),
@@ -41,6 +42,8 @@ export default class Reservation extends React.Component {
             sites: []
         }
     };
+
+
 
     testErreur(event) {
         event.preventDefault()
@@ -98,8 +101,12 @@ export default class Reservation extends React.Component {
         }
         else {
             const data = this.state;
-            db_access.resultat(data);
+            db_access.resultat(data, this);
         }
+    }
+
+    handleResa(event) {
+        db_access.handleReservation(this, event.target.id)
     }
 
     DateChange(event) {
@@ -122,7 +129,7 @@ export default class Reservation extends React.Component {
         this.setState({
             Error: "erreur",
             erreurTextHoraire: "",
-            Duree: event.target.textContent
+            Duree: event.target.value
         })
     }
 
@@ -152,7 +159,7 @@ export default class Reservation extends React.Component {
     }
 
     componentDidMount() {
-        db_access.loadreferentiel();
+        db_access.loadreferentiel(this);
     }
 
     render() {
@@ -177,10 +184,11 @@ export default class Reservation extends React.Component {
                 BatimentChange={this.BatimentChange}
                 SalleChange={this.SalleChange}
                 Dureechange={this.Dureechange} />
-            {this.state.response.length !== 0 && <reserver response={this.state.response}
-                                                           Horaire={this.state.Horaire}
-                                                           Duree={this.state.Duree}
-                                                           handleResa={db_access.handleReservation} />
+            {this.state.response.length !== 0 && <Reserver response={this.state.response}
+                Horaire={this.state.Horaire}
+                Duree={this.state.Duree}
+                handleResa={this.handleResa}
+            />
             }
         </div>
     }

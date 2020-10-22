@@ -112,7 +112,7 @@ export default class Profile extends React.Component {
         <div className="ProfilImg">
           <Image src='https://pbs.twimg.com/media/EODyC7xWsAAIyzH.jpg' size='medium' circular />
         </div>
-        <div class="ProfilInfo">
+        <div className="ProfilInfo">
           <div className="NomPrenom">{this.state.profile.prenom} {this.state.profile.nom}</div>
           <Accordion styled fluid>
             <Accordion.Title
