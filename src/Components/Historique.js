@@ -65,6 +65,7 @@ export default class Historique extends React.Component {
     }
 
     toggleDelete(e, titleProps, line) {
+        console.log("allo")
         const { index } = titleProps//Corrier ça : j'ai pas réussi à récupérer les données des props, par manque de temps
         fetch("http://localhost:8080/Salles/Supprimer", {
             method: 'POST',
@@ -93,7 +94,7 @@ export default class Historique extends React.Component {
         toReturn.forEach(element => {
             const minutes = element.horaire.substring(14, 16);
             var heure = element.horaire.substring(11, 13);
-            heure = parseInt(heure) + 2;
+            heure = parseInt(heure) + 1;
             const date = element.horaire.substring(0, 10);
             element.horaire = date + " " + heure + "H" + minutes;
         });

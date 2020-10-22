@@ -94,7 +94,7 @@ export default class Profile extends React.Component {
   render() {
     const { activeIndex, hiddenMessageOK, hiddenMessageKO } = this.state
     return (
-      <div class="ProfilStyle">
+      <div className="ProfilStyle">
         <Message positive
           hidden={hiddenMessageOK}>
           <Message.Header>Message envoyé</Message.Header>
