@@ -92,6 +92,10 @@ export function handleReservation(props, index) {
                 var heuresansretenue = (Number(str[0]) + Number(Math.trunc((props.state.Duree * 30) / 60))) + 'H' + (Number(str[1]) + Number((props.state.Duree * 30) % 60))
                 var str2 = heuresansretenue.split("H")
                 var horairefin = props.state.Date + ' ' + (Number(str2[0]) + Number((Math.trunc(Number(str2[1]) / 60)))) + 'H' + (Number(str2[1]) % 60)
+                //console.log(props.state.response)
+                console.log(index)
+                //console.log(props.state.response[index.toString()]["id_salle"])
+                // console.log(props.state.response[index]["id_salle"])
                 fetch("http://localhost:8080/Salles/Reserver", {
                     method: 'POST',
                     headers: {

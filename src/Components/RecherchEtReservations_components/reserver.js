@@ -12,16 +12,19 @@ function Reserver(props) {
                 <h2 className="h2font"> Propositions de réservation </h2>
                 <hr className="separator"></hr>
                 {props.response.map((line, index) =>
-                    <div key={index} className="centrageSegment">
+
+                    <div key={index} id={index} className="centrageSegment">
                         <Button animated className="propos" index={index} id={index} onClick={props.handleResa}>
                             <Button.Content visible className="taillebouton">
-                                <div className="Left">
+                                <div className="Recto">
                                     {line.nomBatiment} . {line.nomSalle}
+                                    {console.log("index:" + index)}
                                 </div>
                             </Button.Content>
                             <Button.Content hidden>
-                                <div className="Right">
-                                    Salle {line.nomSalle} disponible à partir de {props.Horaire} pour {props.Duree}
+                                <div className="Left">
+                                    <p id={index}>Disponible à partir de {props.Horaire} pour {Math.floor(props.Duree * 30 / 60)}H{props.Duree * 30 % 60 === 0 ? "" : props.Duree * 30 % 60}</p>
+                                    <p id={index}>{line.Capacite} places</p>
                                 </div>
                             </Button.Content>
                         </Button>

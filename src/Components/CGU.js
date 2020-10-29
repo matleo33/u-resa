@@ -95,31 +95,51 @@ export default class About extends React.Component {
         <div class="stylBord">
           <div class="stylText">
             <h3>
-              Conditions générales d’utilisation :</h3>
+              Conditions générales d’utilisation :
+              </h3>
+
             <p>
-              Veuillez lire attentivement les présentes Conditions générales d’utilisation (CGU) car elles contiennent des informations importantes concernant vos droits et obligations.
-  </p>
+              Veuillez lire attentivement les présentes Conditions générales d’utilisation (CGU) car elles contiennent des informations importantes concernant vos droits et devoirs.
+   </p>
+
             <p>
-              En acceptant ces CGU, l’utilisateur certifie sur l’honneur être bien la personne qui va utiliser la salle qu’il a réservé et qu’aucune personne n’étant pas inscrite à l’Université de Bordeaux ne sera présente avec lui dans la salle.
+              En acceptant ces CGU, l’utilisateur certifie sur l’honneur être bien la personne qui va utiliser la salle qu’il a réservé et que les personnes l’accompagnant sont bien des étudiants inscrits à l’université de Bordeaux.
+   </p>
+
+
+            <p>
+              L’utilisateur s'engage à utiliser la salle réservée dans le respect du développement paisible des missions de l’Université et en veillant à ne pas troubler l’ordre public.
+              L’utilisateur s'interdit toute utilisation des locaux, ou du matériel, à d’autres fins que ceux découlant de sa condition d’étudiant de l’Université.
  </p>
+
             <p>
-              L’utilisation des salles de l’Université de Bordeaux est soumise au règlement intérieur rédigé par les instances directrices de l’université et en accord avec le droit français. Il convient de respecter en plus du règlement intérieur les règles de gestion de cette application telles que :
-              <li className="liCGU">Un personnel gestionnaire de l’université à le pouvoir de créer, supprimer ou déplacer n’importe quelle réservation.</li>
-              <li className="liCGU">Un professeur est prioritaire sur l’utilisation de la salle. Même si aucune réservation n’est faite par l’enseignant, il peut réquisitionner la salle afin d’y faire cours sans passer par l’application.</li>
-              <li className="liCGU">Un étudiant voulant réserver une salle au nom d’une association se verra dans l’obligation de fournir un motif de réservation. L’étudiant en question doit obligatoirement être membre de l’association. Le Bureau de la Vie Étudiante du campus de rattachement de l’association sera alors informé et pourra valider le créneau selon la nature du motif de réservation.</li>
+              L’utilisateur reconnait être notamment informé des règles relatives :
+ <li className="liCGU">à l'interdiction de fumer prévue par l’article L.3512-8 du code de la santé public ;</li>
+              <li className="liCGU">à l’interdiction de vapoter prévue par le décret n° 2017-633 du 25 avril 2017 ;</li>
+              <li className="liCGU">à l’interdiction de consommer des boissons alcoolisées sur le Campus prévue par l’article R.4228-20 du code de la santé public ;</li>
+              <li className="liCGU">à l’interdiction de vente de boissons alcooliques aux mineurs prévue par l’article L.3342-1 du même code.</li>
             </p>
+
             <p>
-              De plus, l’utilisateur s’engage à respecter les lieux et à éviter toutes formes de dégradations ou autres actions qui pourraient nuire aux prochains utilisateurs de la salle (dégradation du matériel, déplacement du mobilier sans le remettre à sa place etc…).
-  </p>
-            <p>
-              Veuillez noter qu’en cas d’endommagement de la salle, la responsabilité civile de l’utilisateur pourra être engagée.
- </p>
-            <p>
-              Je consens avoir pris connaissance des conditions générales d’utilisation :
+              Les consignes de contrôle et sécurité doivent être respectées par l’utilisateur ainsi que ses accompagnants lors de l’utilisation de la salle. L’Université se réserve le droit d’exercer un contrôle du respect de ces règles.
               </p>
+
             <p>
-              J’accepte les conditions générales d’utilisations et certifie sur l’honneur disposer d’une inscription à jour à l'Université de Bordeaux ainsi que d’une assurance de responsabilité civile validée et à jour sur cette période (fournie lors de l’inscription) :
-          </p>
+              L’Université se réserve le droit d’interdire l’accès aux personnes ayant réservé les salles et ses accompagnants en cas de non-respect de ces dispositions.
+              </p>
+
+            <p>
+              Plus généralement, l’utilisateur s’engage à respecter les lieux et à éviter toutes formes de dégradations ou autres actions qui pourraient nuire aux utilisateurs suivants de la salle (dégradation du matériel, déplacement du mobilier sans le remettre à sa place etc…).
+              Veuillez noter qu’en cas de dommage causé à la salle ou au mobilier, la responsabilité civile de l’utilisateur pourra être engagée.
+              L’utilisateur reste garant face à l’université de Bordeaux de tout manquement aux présentes conditions générales d’utilisation, même si ce manquement a été commis par ses accompagnants.
+ </p>
+
+            <p>
+              Il est précisé ici, pour information et à tout fin utile, les règles de gestion de réservation suivantes :
+              <li className="liCGU">Un personnel en charge des réservations des salles a le pouvoir de créer, supprimer ou déplacer n’importe quelle réservation ;</li>
+              <li className="liCGU">Un professeur est prioritaire sur l’utilisation de la salle : même si aucune réservation n’est faite par l’enseignant, il peut réquisitionner la salle afin d’y faire cours sans passer par l’application ;</li>
+              <li className="liCGU">Un étudiant voulant réserver une salle au nom d’une association se verra dans l’obligation de fournir un motif de réservation. L’étudiant en question doit obligatoirement être membre de l’association. Le Bureau de la Vie Étudiante du campus de rattachement de l’association sera alors informé et pourra valider le créneau selon la nature du motif de réservation</li>
+            </p>
           </div>
           {this.state.Date !== '' &&
             <div>
@@ -141,4 +161,7 @@ export default class About extends React.Component {
     </div >
   }
 }
+
+
+
 

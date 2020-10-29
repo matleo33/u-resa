@@ -48,7 +48,7 @@ router.post('/Disponibilitehoraire', function (req, res) {
         connection.getConnection(function (err, connection) {
             //on vérifie si le checkin avant le checkout
             //on vérifie si le checkout est après le checkin
-            const query = 'select s.Code_salle as nomSalle, s.id_salle, b.Batiment as nomBatiment from salle s join batiment b on s.idBatiment = b.Id where s.idBatiment = ' + req.body.idBatiment + ' AND s.Code_salle not in (select s.Code_salle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire) LIMIT 20';
+            const query = 'select s.Code_salle as nomSalle, s.id_salle as id_salle, b.Batiment as nomBatiment, s.Capacite as Capacite from salle s join batiment b on s.idBatiment = b.Id where s.idBatiment = ' + req.body.idBatiment + ' AND s.Code_salle not in (select s.Code_salle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire) LIMIT 20';
             if (err) throw err;
             // Executing the MySQL query (select all data from the 'users' table).
             connection.query(query, function (error, results, fields) {
@@ -108,7 +108,7 @@ router.post('/Disponibilite', function (req, res) {
     else {
         //Factoriser ce code pour être utilisé aussi dans /réserver
         connection.getConnection(function (err, connection) {
-            const query = 'select s.Code_salle as nomSalle, s.id_salle, b.Batiment as nomBatiment from salle s join batiment b on s.idBatiment = b.Id where id_salle = ' + req.body.idsalle + ' and s.Code_salle not in ( select s.Code_salle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire and s.id_salle =' + req.body.idsalle + ')';
+            const query = 'select s.Code_salle as nomSalle, s.id_salle as id_salle, b.Batiment as nomBatiment, s.Capacite as Capacite from salle s join batiment b on s.idBatiment = b.Id where id_salle = ' + req.body.idsalle + ' and s.Code_salle not in ( select s.Code_salle from salle s join reservation r on s.id_salle = r.fk_id_salle where str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i:%s") < finReservation AND str_to_date("' + req.body.horairefin + '", "%Y-%m-%d %HH%i:%s") > horaire and s.id_salle =' + req.body.idsalle + ')';
             if (err) throw err;
             // Executing the MySQL query (select all data from the 'users' table).
             connection.query(query, function (error, results, fields) {

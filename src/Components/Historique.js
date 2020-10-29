@@ -132,7 +132,7 @@ export default class Historique extends React.Component {
                         <Message
                             success
                             header='Réservation validée !'
-                            content={'Votre réservation salle ' + this.state.nomSalle + ', le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + this.state.Duree + ' a été prise en compte. A bientôt sur nos campus !'}
+                            content={'Votre réservation salle ' + this.state.nomSalle + ', le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + Math.floor(this.state.Duree * 30 / 60) + 'H' + (this.state.Duree * 30 % 60 === 0 ? "" : this.state.Duree * 30 % 60) + ' a été prise en compte. A bientôt sur nos campus !'}
                         />
                     }
                     <h2 className="h2histo"> Mes réservations </h2>

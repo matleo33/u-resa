@@ -106,6 +106,9 @@ export default class Reservation extends React.Component {
     }
 
     handleResa(event) {
+        console.log(event.target.id)
+        console.log(event.target.index)
+        console.log(event.target)
         db_access.handleReservation(this, event.target.id)
     }
 
