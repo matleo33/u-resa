@@ -148,3 +148,14 @@ export function handleReservation(props, index) {
             }
         }));
 }
+
+export function countSalle(salles, Batiment) {
+    var count = 0;
+    for (var i = 0; i < salles.length; i++) {
+        if (salles[i].idBatiment === Number(Batiment)) {
+            count = count + 1;
+        }
+    }
+    console.log(count, count > 1)
+    return count > 1
+}

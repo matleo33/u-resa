@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Select } from 'semantic-ui-react';
+import * as db_access from './db_access';
+
 
 const Duree = [
     { key: 'af', value: '1', text: '30 min' },
@@ -41,6 +43,7 @@ const Horaire = [
 
 
 function Recherche(props) {
+
     return (
         <div className={props.response.length === 0 ? "recherche" : "recherche rechercheMove"}>
             <h2 className="h2font"> Rechercher et réserver une salle </h2>
@@ -70,7 +73,7 @@ function Recherche(props) {
                 <p id="erreur_Salle" className={props.Error}>{props.erreurTextSalle}</p>
                 <p className="listTitre"> Salle : </p>
                 <select className="listD selectRecherche" placeholder='Sélectionnez la salle' onChange={props.SalleChange}>
-                    {props.salles.map((salle) => (Number(salle.idBatiment) === Number(props.Batiment) || Number(salle.id_salle) === 0) && <option key={salle.id_salle} value={salle.id_salle}>{salle.Code_salle}</option>)}
+                    {db_access.countSalle(props.salles, props.Batiment) && props.salles.map((salle) => ((Number(salle.idBatiment) === Number(props.Batiment) || Number(salle.id_salle) === 0)) && <option key={salle.id_salle} value={salle.id_salle}>{salle.Code_salle}</option>)}
                 </select>
                 <div className="ReservationBtn">
                     <Button primary>Vérifier les disponibilités</Button>

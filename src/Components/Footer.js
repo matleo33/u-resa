@@ -1,6 +1,8 @@
 import React from 'react';
 import "../CSS/Footer.css"
 import { Icon, Grid } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+
 
 export default class Footer extends React.Component {
     render() {
@@ -34,6 +36,7 @@ export default class Footer extends React.Component {
                 <Grid.Column>
                     <div className="text">
                         <div>A propos de l'université</div>
+                        <div><Link className="LinkFooter" to="/u-resa/CGU">Lire les CGU</Link></div>
                         <div>Cette univesité basée à Bordeaux a formé les plus grands de ce monde</div>
                         <Icon circular name='facebook' size='large'></Icon>
                         <span><Icon circular name='twitter' size='large'></Icon></span>

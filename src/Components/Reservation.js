@@ -148,8 +148,16 @@ export default class Reservation extends React.Component {
         this.setState({
             Error: "erreur",
             erreurTextBatiment: "",
-            Batiment: event.target.value
+            Batiment: event.target.value,
         });
+        if (db_access.countSalle(this.state.salles, event.target.value)) {
+            console.log("OUI")
+            this.setState({
+                erreurTextSalle: "",
+                nomSalle: "Aucune préférence",
+                idSalle: "0"
+            });
+        }
     }
 
     SalleChange(event) {

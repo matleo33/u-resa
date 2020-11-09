@@ -148,7 +148,7 @@ router.get('/Salles', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
         if (err) throw err;
-        connection.query('SELECT Code_site, idBatiment, id_salle, id_salle, Code_salle, Capacite FROM salle WHERE estReservable=1', function (error, results, fields) {
+        connection.query('SELECT Code_site, idBatiment, id_salle, id_salle, Code_salle, Capacite FROM salle WHERE estReservable=1 ORDER BY id_salle', function (error, results, fields) {
 
             // If some error occurs, we throw an error.
             if (error) throw error;
@@ -163,7 +163,7 @@ router.get('/Batiments', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
         if (err) throw err;
-        connection.query('SELECT Id, Secteur, Code_site, Code_batiment, Batiment FROM batiment', function (error, results, fields) {
+        connection.query('SELECT Id, Secteur, Code_site, Code_batiment, Batiment FROM batiment ORDER BY Id', function (error, results, fields) {
 
             // If some error occurs, we throw an error.
             if (error) throw error;

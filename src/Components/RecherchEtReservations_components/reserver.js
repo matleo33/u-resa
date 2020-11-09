@@ -18,7 +18,6 @@ function Reserver(props) {
                             <Button.Content visible className="taillebouton">
                                 <div className="Recto">
                                     {line.nomBatiment} . {line.nomSalle}
-                                    {console.log("index:" + index)}
                                 </div>
                             </Button.Content>
                             <Button.Content hidden>

@@ -3,6 +3,8 @@ import '../CSS/profil.css';
 import { Icon, Image, Accordion } from 'semantic-ui-react'
 import { Form, Input, TextArea, Button } from 'semantic-ui-react'
 import { Message } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+
 
 
 export default class Profile extends React.Component {
@@ -189,7 +191,7 @@ export default class Profile extends React.Component {
           A propos
         </Accordion.Title>
             <Accordion.Content active={activeIndex === 2}>
-              Lorem Ipsum dolor sit amet
+              <div>L'utilisation de cette application doit se faire dans le respect des conditions générales d'utilisation disponibles <Link className="LinkFooter" to="/u-resa/CGU">ici</Link>.</div>
             </Accordion.Content>
 
           </Accordion>
