@@ -126,6 +126,7 @@ router.post('/Supprimer', function (req, res) { //A DEV REQUETE
     if (!req.body.horaire_salle) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "horaire_salle non renseignée" });
+        return;
     }
     else {
         connection.getConnection(function (err, connection) {
@@ -196,22 +197,27 @@ router.post('/Reserver', function (req, res) {
     if (!req.body.horaire) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Horaire non renseigné" });
+        return;
     }
     else if (!req.body.duree) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Durée du créneau non renseigné" });
+        return;
     }
     else if (!req.body.idsalle) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Salle non renseigné" });
+        return;
     }
     else if (!req.body.idreservant) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Personne réservante non renseigné" });
+        return;
     }
     else if (!req.body.horairefin) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Horaire de fin non renseignée" });
+        return;
     }
     else {
         // Connecting to the database.
@@ -221,7 +227,7 @@ router.post('/Reserver', function (req, res) {
             connection.query(query, function (error, results, fields) {
                 if (error) throw error;
                 if (results.length !== 0) {
-                    res.send("Vous avez déjà une réservation de prévu à cette période, merci de réserver une seule salle à la fois.")
+                    res.status(401).json({ "status": "Vous avez déjà une réservation de prévu à cette période, merci de réserver une seule salle à la fois." });
                 }
                 else {
                     if (false) {//utiliser aussi l'appel au service /disponibilite et tester si c'est dispo ou non
@@ -231,7 +237,7 @@ router.post('/Reserver', function (req, res) {
                         const query = 'INSERT INTO reservation(horaire,horaire_salle,fk_id_reservant,fk_id_salle, duree,finReservation) VALUES (str_to_date("' + req.body.horaire + '", "%Y-%m-%d %HH%i"),' + "'" + req.body.horaire + "_" + req.body.idsalle + "'," + "'" + req.body.idreservant + "','" + req.body.idsalle + "','" + req.body.duree + "','" + req.body.horairefin + "')";
                         connection.query(query, function (error, results, fields) {
                             if (error) throw error;
-                            res.send("Salle réservée")
+                            res.status(200).json({ "status": "Salle réservée" });
                         });
                     }
 
@@ -241,5 +247,49 @@ router.post('/Reserver', function (req, res) {
     }
 });
 
+var fileupload = require("express-fileupload");
+router.use(fileupload({
+    useTempFiles: true,
+    tempFileDir: './'
+}));
+var fs = require("fs");
+var path = require('path');
+
+
+router.post("/import", function (req, res) {
+    var file;
+
+    if (!req.files) {
+        res.setHeader('Content-Type', 'text/plain');
+        res.status(404).json({ "status": "Aucun fichier envoyé" });
+        return;
+    } else {
+        var edt = null;
+        fs.readFile(req.files.file.tempFilePath, 'utf8', (err, data) => {
+            if (err) {
+                console.error(err)
+                return
+            }
+            edt = JSON.parse(data);
+
+        })
+        connection.getConnection(function (err, connection) {
+            if (err) throw err;
+            // Executing the MySQL query (select all data from the 'users' table).
+            for (let i = 0; i < edt.length; i++) {
+                connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion) VALUES ("' + edt[i].codeBatiment + '","' + edt[i].codeSalle + '","' + edt[i].codeSite + '","' + edt[i].dateDebut + '","' + edt[i].dateFin + '",' + edt[i].duree + ',"' + edt[i].libelleBatiment + '","' + edt[i].libelleSalle + '","' + edt[i].libelleSite + '","' + edt[i].promotion + '");', function (error, results, fields) {
+                    if (error) throw error;
+                });
+            }
+
+            // If some error occurs, we throw an error.
+
+
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send({ "status": "import OK" })
+
+        });
+    }
+});
 
 module.exports = router;

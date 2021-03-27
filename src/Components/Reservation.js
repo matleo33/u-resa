@@ -106,9 +106,6 @@ export default class Reservation extends React.Component {
     }
 
     handleResa(event) {
-        console.log(event.target.id)
-        console.log(event.target.index)
-        console.log(event.target)
         db_access.handleReservation(this, event.target.id)
     }
 
@@ -151,7 +148,6 @@ export default class Reservation extends React.Component {
             Batiment: event.target.value,
         });
         if (db_access.countSalle(this.state.salles, event.target.value)) {
-            console.log("OUI")
             this.setState({
                 erreurTextSalle: "",
                 nomSalle: "Aucune préférence",

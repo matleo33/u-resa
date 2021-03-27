@@ -92,10 +92,6 @@ export function handleReservation(props, index) {
                 var heuresansretenue = (Number(str[0]) + Number(Math.trunc((props.state.Duree * 30) / 60))) + 'H' + (Number(str[1]) + Number((props.state.Duree * 30) % 60))
                 var str2 = heuresansretenue.split("H")
                 var horairefin = props.state.Date + ' ' + (Number(str2[0]) + Number((Math.trunc(Number(str2[1]) / 60)))) + 'H' + (Number(str2[1]) % 60)
-                //console.log(props.state.response)
-                console.log(index)
-                //console.log(props.state.response[index.toString()]["id_salle"])
-                // console.log(props.state.response[index]["id_salle"])
                 fetch("http://localhost:8080/Salles/Reserver", {
                     method: 'POST',
                     headers: {
@@ -109,7 +105,7 @@ export function handleReservation(props, index) {
                         idreservant: "1",
                         horairefin: horairefin
                     })
-                })
+                }).then(response => props.setState({ Status: response.status }))
                 let data = [
                     {
                         Date: props.state.Date,
@@ -119,6 +115,7 @@ export function handleReservation(props, index) {
                         idSalle: props.state.response[index.toString()]["id_salle"],
                         nomSalle: props.state.response[index.toString()]["nomSalle"],
                         Duree: props.state.Duree,
+                        Status: props.state.Status
                     }
                 ]
                 props.props.history.push({
@@ -136,6 +133,7 @@ export function handleReservation(props, index) {
                         idSalle: props.state.response[index.toString()]["id_salle"],
                         nomSalle: props.state.response[index.toString()]["nomSalle"],
                         Duree: props.state.Duree,
+                        Status: props.state.Status
                     }
                 ]
                 props.props.history.push({
@@ -156,6 +154,6 @@ export function countSalle(salles, Batiment) {
             count = count + 1;
         }
     }
-    console.log(count, count > 1)
+    //console.log(count, count > 1)
     return count > 1
 }

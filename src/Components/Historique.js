@@ -128,11 +128,18 @@ export default class Historique extends React.Component {
         return <div className="fillresas">
             <section className="container-fluid histo">
                 <div className="ReservationFirst">
-                    {this.state.Date !== '' &&
+                    {this.state.Status === 200 &&
                         <Message
                             success
                             header='Réservation validée !'
                             content={'Votre réservation salle ' + this.state.nomSalle + ', le ' + this.state.Date + ' à ' + this.state.Horaire + ' pour ' + Math.floor(this.state.Duree * 30 / 60) + 'H' + (this.state.Duree * 30 % 60 === 0 ? "" : this.state.Duree * 30 % 60) + ' a été prise en compte. A bientôt sur nos campus !'}
+                        />
+                    }
+                    {this.state.Status === 401 &&
+                        <Message
+                            negative
+                            header='Réservation annulée'
+                            content={'Votre réservation n\'est pas prise en compte car vous possédez déjà une réservation sur cette plage horaire'}
                         />
                     }
                     <h2 className="h2histo"> Mes réservations </h2>
