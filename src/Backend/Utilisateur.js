@@ -76,6 +76,7 @@ router.post('/CGU', function (req, res) {
   if (!req.body.idutilisateur) {
     res.setHeader('Content-Type', 'text/plain');
     res.status(400).json({ "status": "Utilisateur manquant" });
+    return;
   }
   else {
     connection.getConnection(function (err, connection) {

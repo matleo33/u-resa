@@ -83,14 +83,17 @@ router.post('/Contactus', function (req, res, next) {
     if (!req.body.from) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Adresse mail manquante" });
+        return;
     }
     else if (!req.body.subject) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Sujet du message manquant" });
+        return;
     }
     else if (!req.body.message) {
         res.setHeader('Content-Type', 'text/plain');
         res.status(400).json({ "status": "Message manquant" });
+        return;
     }
     else {
         var mail = new Mail(req.body.from, req.body.subject, req.body.message);

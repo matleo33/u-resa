@@ -33,15 +33,15 @@ router.use(express.json());
 router.post('/Disponibilitehoraire', function (req, res) {
     // Connecting to the database.
     if (!req.body.horaire) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Horaire non renseigné" });
     }
     else if (!req.body.horairefin) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Durée du créneau non renseigné" });
     }
     else if (!req.body.idBatiment) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Batiment non renseigné" });
     }
     else {
@@ -65,11 +65,11 @@ router.post('/Disponibilitehoraire', function (req, res) {
 router.post('/Disponibilitesalle', function (req, res) { //A DEV REQUETE
     // Connecting to the database.
     if (!req.body.date) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Date non renseignée" });
     }
     else if (!req.body.idsalle) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Salle non renseignée" });
     }
     else {
@@ -94,15 +94,15 @@ router.post('/Disponibilitesalle', function (req, res) { //A DEV REQUETE
 router.post('/Disponibilite', function (req, res) {
     // Connecting to the database.
     if (!req.body.horaire) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Date non renseignée" });
     }
     else if (!req.body.horairefin) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Date de fin non renseignée" });
     }
     else if (!req.body.idsalle) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Salle non renseignée" });
     }
     else {
@@ -124,7 +124,7 @@ router.post('/Disponibilite', function (req, res) {
 router.post('/Supprimer', function (req, res) { //A DEV REQUETE
     // Connecting to the database.
     if (!req.body.horaire_salle) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "horaire_salle non renseignée" });
         return;
     }
@@ -195,27 +195,27 @@ router.use(express.json());
 
 router.post('/Reserver', function (req, res) {
     if (!req.body.horaire) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Horaire non renseigné" });
         return;
     }
     else if (!req.body.duree) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Durée du créneau non renseigné" });
         return;
     }
     else if (!req.body.idsalle) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Salle non renseigné" });
         return;
     }
     else if (!req.body.idreservant) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Personne réservante non renseigné" });
         return;
     }
     else if (!req.body.horairefin) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(400).json({ "status": "Horaire de fin non renseignée" });
         return;
     }
@@ -250,44 +250,67 @@ router.post('/Reserver', function (req, res) {
 var fileupload = require("express-fileupload");
 router.use(fileupload({
     useTempFiles: true,
-    tempFileDir: './'
+    tempFileDir: './HistoImport'
 }));
 var fs = require("fs");
 var path = require('path');
 
 
 router.post("/import", function (req, res) {
-    var file;
-
     if (!req.files) {
-        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Type', 'application/json');
         res.status(404).json({ "status": "Aucun fichier envoyé" });
         return;
     } else {
-        var edt = null;
         fs.readFile(req.files.file.tempFilePath, 'utf8', (err, data) => {
             if (err) {
-                console.error(err)
-                return
+                console.log(err)
+                res.setHeader('Content-Type', 'application/json');
+                res.status(500).json({ "status": "Error reading file", "message": err });
+                throw err;
             }
-            edt = JSON.parse(data);
-
-        })
-        connection.getConnection(function (err, connection) {
-            if (err) throw err;
-            // Executing the MySQL query (select all data from the 'users' table).
-            for (let i = 0; i < edt.length; i++) {
-                connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion) VALUES ("' + edt[i].codeBatiment + '","' + edt[i].codeSalle + '","' + edt[i].codeSite + '","' + edt[i].dateDebut + '","' + edt[i].dateFin + '",' + edt[i].duree + ',"' + edt[i].libelleBatiment + '","' + edt[i].libelleSalle + '","' + edt[i].libelleSite + '","' + edt[i].promotion + '");', function (error, results, fields) {
-                    if (error) throw error;
-                });
+            try {
+                data = JSON.parse(data);
+            } catch (error) {
+                res.setHeader('Content-Type', 'application/json');
+                res.status(500).json({ "status": "Incorrect json object", "message": error });
+                console.log(error);
+                return;
             }
-
-            // If some error occurs, we throw an error.
-
-
-            // Getting the 'response' from the database and sending it to our route. This is were the data is.
-            res.send({ "status": "import OK" })
-
+            connection.getConnection(function (err, connection) {
+                if (err) {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.status(500).json({ "status": "Error accessing database" });
+                    throw err;
+                };                // Executing the MySQL query (select all data from the 'users' table).
+                for (let i = 0; i < data.length; i++) {
+                    connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion) VALUES ("' + data[i].codeBatiment + '","' + data[i].codeSalle + '","' + data[i].codeSite + '","' + data[i].dateDebut + '","' + data[i].dateFin + '",' + data[i].duree + ',"' + data[i].libelleBatiment + '","' + data[i].libelleSalle + '","' + data[i].libelleSite + '","' + data[i].promotion + '");', function (error, results, fields) {
+                        if (err) {
+                            res.setHeader('Content-Type', 'application/json');
+                            res.status(500).json({ "status": "Error insert", "message": err });
+                            throw err;
+                        };
+                    });
+                }
+                res.send({ "status": "Import OK", "message": "Imported " + data.length + " objects" })
+                console.log("Imported " + data.length + " objects")
+            });
+            let date_ob = new Date();
+            let date = ("0" + date_ob.getDate()).slice(-2);
+            let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+            let year = date_ob.getFullYear();
+            let hours = date_ob.getHours();
+            let minutes = date_ob.getMinutes();
+            let seconds = date_ob.getSeconds();
+            let fulldate = year + "-" + month + "-" + date + "-" + hours + "-" + minutes + "-" + seconds;
+            fs.rename(req.files.file.tempFilePath, "./HistoImport/Import_edt_" + fulldate + ".json", function (err) {
+                if (err) {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.status(500);
+                    throw err;
+                };
+                console.log('File Renamed in' + "Import_edt_" + fulldate + ".json");
+            });
         });
     }
 });
