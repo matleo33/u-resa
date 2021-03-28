@@ -284,7 +284,7 @@ router.post("/import", function (req, res) {
                     throw err;
                 };                // Executing the MySQL query (select all data from the 'users' table).
                 for (let i = 0; i < data.length; i++) {
-                    connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion) VALUES ("' + data[i].codeBatiment + '","' + data[i].codeSalle + '","' + data[i].codeSite + '","' + data[i].dateDebut + '","' + data[i].dateFin + '",' + data[i].duree + ',"' + data[i].libelleBatiment + '","' + data[i].libelleSalle + '","' + data[i].libelleSite + '","' + data[i].promotion + '");', function (error, results, fields) {
+                    connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion,reservant) VALUES ("' + data[i].codeBatiment + '","' + data[i].codeSalle + '","' + data[i].codeSite + '","' + data[i].dateDebut + '","' + data[i].dateFin + '",' + data[i].duree + ',"' + data[i].libelleBatiment + '","' + data[i].libelleSalle + '","' + data[i].libelleSite + '","' + data[i].promotion + '","' + data[i].reservant + '");', function (error, results, fields) {
                         if (err) {
                             res.setHeader('Content-Type', 'application/json');
                             res.status(500).json({ "status": "Error insert", "message": err });
@@ -305,8 +305,6 @@ router.post("/import", function (req, res) {
             let fulldate = year + "-" + month + "-" + date + "-" + hours + "-" + minutes + "-" + seconds;
             fs.rename(req.files.file.tempFilePath, "./HistoImport/Import_edt_" + fulldate + ".json", function (err) {
                 if (err) {
-                    res.setHeader('Content-Type', 'application/json');
-                    res.status(500);
                     throw err;
                 };
                 console.log('File Renamed in' + "Import_edt_" + fulldate + ".json");
