@@ -282,18 +282,36 @@ router.post("/import", function (req, res) {
                     res.setHeader('Content-Type', 'application/json');
                     res.status(500).json({ "status": "Error accessing database" });
                     throw err;
-                };                // Executing the MySQL query (select all data from the 'users' table).
+                };
+                var nbError = 0;
                 for (let i = 0; i < data.length; i++) {
-                    connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion,reservant) VALUES ("' + data[i].codeBatiment + '","' + data[i].codeSalle + '","' + data[i].codeSite + '","' + data[i].dateDebut + '","' + data[i].dateFin + '",' + data[i].duree + ',"' + data[i].libelleBatiment + '","' + data[i].libelleSalle + '","' + data[i].libelleSite + '","' + data[i].promotion + '","' + data[i].reservant + '");', function (error, results, fields) {
-                        if (err) {
-                            res.setHeader('Content-Type', 'application/json');
-                            res.status(500).json({ "status": "Error insert", "message": err });
-                            throw err;
-                        };
-                    });
+                    if (!data[i].supprimer && !data[i].modifier) {
+                        connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion,reservant,idEdT) VALUES ("' + data[i].codeBatiment + '","' + data[i].codeSalle + '","' + data[i].codeSite + '","' + data[i].dateDebut + '","' + data[i].dateFin + '",' + data[i].duree + ',"' + data[i].libelleBatiment + '","' + data[i].libelleSalle + '","' + data[i].libelleSite + '","' + data[i].promotion + '","' + data[i].reservant + '","' + data[i].idEdT + '");', function (error, results, fields) {
+                            if (error) {
+                                console.log("Error in insert at object " + data[i].idEdT);
+                                nbError++;
+                            };
+                        });
+                    }
+                    else if (data[i].supprimer === 1 && !data[i].modifier) {
+                        connection.query('DELETE FROM import WHERE idEdT =' + data[i].idEdT + ';', function (error, results, fields) {
+                            if (error) {
+                                console.log("Error in delete at object " + data[i].idEdT);
+                                nbError++;
+                            };
+                        });
+                    }
+                    else if (!data[i].supprimer && data[i].modifier === 1) {
+                        connection.query('UPDATE import SET codeBatiment="' + data[i].codeBatiment + '",codeSalle="' + data[i].codeSalle + '",codeSite="' + data[i].codeSite + '",dateDebut="' + data[i].dateDebut + '",dateFin="' + data[i].dateFin + '",duree=' + data[i].duree + ',libelleBatiment="' + data[i].libelleBatiment + '",libelleSalle="' + data[i].libelleSalle + '",libelleSite="' + data[i].libelleSite + '",promotion="' + data[i].promotion + '",reservant="' + data[i].reservant + '" WHERE idEdT=' + data[i].idEdT + ';', function (error, results, fields) {
+                            if (error) {
+                                console.log("Error in update at object " + data[i].idEdT);
+                                nbError++;
+                            };
+                        });
+                    }
                 }
-                res.send({ "status": "Import OK", "message": "Imported " + data.length + " objects" })
-                console.log("Imported " + data.length + " objects")
+                res.send({ "status": "Import OK", "message": data.length - nbError + " objects modified, " + nbError + " errors" })
+                console.log(data.length - nbError + " objects modified, " + nbError + " errors");
             });
             let date_ob = new Date();
             let date = ("0" + date_ob.getDate()).slice(-2);
@@ -307,7 +325,7 @@ router.post("/import", function (req, res) {
                 if (err) {
                     throw err;
                 };
-                console.log('File Renamed in' + "Import_edt_" + fulldate + ".json");
+                console.log('File Renamed in ' + "Import_edt_" + fulldate + ".json");
             });
         });
     }
