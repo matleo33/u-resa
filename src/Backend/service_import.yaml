@@ -1,0 +1,68 @@
+openapi: 3.0.0
+info:
+  title: U-Resa API d'import des salles
+  description: Service d'import des salles dans les bases U-Resa.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/
+    description: Local server while waiting for U-Bordeaux server
+paths:
+  /salles/import:
+    post:
+      requestBody:
+        description: Body of a room usage to be imported in U-Resa database
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idEdT:
+                  type: integer
+                codeBatiment:
+                  type: string
+                codeSalle:
+                  type: string
+                codeSite:
+                  type: string
+                dateDebut:
+                  type: string
+                dateFin:
+                  type: string
+                duree:
+                  type: integer
+                libelleBatiment:
+                  type: string
+                libelleSalle:
+                  type: string
+                promotion:
+                  type: string
+                reservant:
+                  type: string
+                supprimer:
+                  type: boolean
+                modifier:
+                  type: boolean
+              required:
+                - idEdT
+                - codeBatiment
+                - codeSalle
+                - codeSite
+                - dateDebut
+                - dateFin
+                - duree
+                - libelleBatiment
+                - libelleSalle
+                - promotion
+                - reservant
+                - supprimer
+                - modifier
+      responses:
+        '201':
+          description: Imported
+        '404':
+          description: Aucun fichier envoyé
+        '400':
+          description: Incorrect json object
+        '500':
+          description: Error accessing database
