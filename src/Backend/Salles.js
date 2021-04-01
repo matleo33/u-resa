@@ -284,34 +284,43 @@ router.post("/import", function (req, res) {
                     throw err;
                 };
                 var nbError = 0;
-                for (let i = 0; i < data.length; i++) {
-                    if (!data[i].supprimer && !data[i].modifier) {
-                        connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion,reservant,idEdT) VALUES ("' + data[i].codeBatiment + '","' + data[i].codeSalle + '","' + data[i].codeSite + '","' + data[i].dateDebut + '","' + data[i].dateFin + '",' + data[i].duree + ',"' + data[i].libelleBatiment + '","' + data[i].libelleSalle + '","' + data[i].libelleSite + '","' + data[i].promotion + '","' + data[i].reservant + '","' + data[i].idEdT + '");', function (error, results, fields) {
+                var dateImport = new Date();
+                let date = ("0" + dateImport.getDate()).slice(-2);
+                let month = ("0" + (dateImport.getMonth() + 1)).slice(-2);
+                let year = dateImport.getFullYear();
+                let hours = dateImport.getHours();
+                let minutes = dateImport.getMinutes();
+                let seconds = dateImport.getSeconds();
+                let fulldateImport = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+                for (let i = 0; i < data.listeEdT.length; i++) {
+                    if (!data.listeEdT[i].supprimer && !data.listeEdT[i].modifier) {
+                        connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion,reservant,idEdT,origine,dateImport) VALUES ("' + data.listeEdT[i].codeBatiment + '","' + data.listeEdT[i].codeSalle + '","' + data.listeEdT[i].codeSite + '","' + data.listeEdT[i].dateDebut + '","' + data.listeEdT[i].dateFin + '",' + data.listeEdT[i].duree + ',"' + data.listeEdT[i].libelleBatiment + '","' + data.listeEdT[i].libelleSalle + '","' + data.listeEdT[i].libelleSite + '","' + data.listeEdT[i].promotion + '","' + data.listeEdT[i].reservant + '","' + data.listeEdT[i].idEdT + '","' + data.origine + '","' + fulldateImport + '");', function (error, results, fields) {
                             if (error) {
-                                console.log("Error in insert at object " + data[i].idEdT);
+                                console.log("Error in insert at object " + data.listeEdT[i].idEdT);
                                 nbError++;
                             };
                         });
                     }
-                    else if (data[i].supprimer === 1 && !data[i].modifier) {
-                        connection.query('DELETE FROM import WHERE idEdT =' + data[i].idEdT + ';', function (error, results, fields) {
+                    else if (data.listeEdT[i].supprimer === 1 && !data.listeEdT[i].modifier) {
+                        connection.query('UPDATE import SET action = "DEL", dateImport="' + fulldateImport + '" WHERE idEdT =' + data.listeEdT[i].idEdT + ' AND origine="' + data.origine + '";', function (error, results, fields) {
                             if (error) {
-                                console.log("Error in delete at object " + data[i].idEdT);
+                                console.log('UPDATE import SET action = "DEL", dateImport="' + fulldateImport + '" WHERE idEdT =' + data.listeEdT[i].idEdT + ' AND origine="' + data.origine + '";');
+                                console.log("Error in delete at object " + data.listeEdT[i].idEdT);
                                 nbError++;
                             };
                         });
                     }
-                    else if (!data[i].supprimer && data[i].modifier === 1) {
-                        connection.query('UPDATE import SET codeBatiment="' + data[i].codeBatiment + '",codeSalle="' + data[i].codeSalle + '",codeSite="' + data[i].codeSite + '",dateDebut="' + data[i].dateDebut + '",dateFin="' + data[i].dateFin + '",duree=' + data[i].duree + ',libelleBatiment="' + data[i].libelleBatiment + '",libelleSalle="' + data[i].libelleSalle + '",libelleSite="' + data[i].libelleSite + '",promotion="' + data[i].promotion + '",reservant="' + data[i].reservant + '" WHERE idEdT=' + data[i].idEdT + ';', function (error, results, fields) {
+                    else if (!data.listeEdT[i].supprimer && data.listeEdT[i].modifier === 1) {
+                        connection.query('UPDATE import SET action ="UPD" ,dateImport= "' + fulldateImport + '",codeBatiment="' + data.listeEdT[i].codeBatiment + '",codeSalle="' + data.listeEdT[i].codeSalle + '",codeSite="' + data.listeEdT[i].codeSite + '",dateDebut="' + data.listeEdT[i].dateDebut + '",dateFin="' + data.listeEdT[i].dateFin + '",duree=' + data.listeEdT[i].duree + ',libelleBatiment="' + data.listeEdT[i].libelleBatiment + '",libelleSalle="' + data.listeEdT[i].libelleSalle + '",libelleSite="' + data.listeEdT[i].libelleSite + '",promotion="' + data.listeEdT[i].promotion + '",reservant="' + data.listeEdT[i].reservant + '",dateImport="' + fulldateImport + '" WHERE idEdT=' + data.listeEdT[i].idEdT + ' AND origine ="' + data.origine + '";', function (error, results, fields) {
                             if (error) {
-                                console.log("Error in update at object " + data[i].idEdT);
+                                console.log("Error in update at object " + data.listeEdT[i].idEdT);
                                 nbError++;
                             };
                         });
                     }
                 }
-                res.send({ "status": "Import OK", "message": data.length - nbError + " objects modified, " + nbError + " errors" })
-                console.log(data.length - nbError + " objects modified, " + nbError + " errors");
+                res.send({ "status": "Import OK", "message": data.listeEdT.length - nbError + " objects modified, " + nbError + " errors" })
+                console.log(data.listeEdT.length - nbError + " objects modified, " + nbError + " errors");
             });
             let date_ob = new Date();
             let date = ("0" + date_ob.getDate()).slice(-2);

@@ -13,6 +13,7 @@
             "libelleSalle": "102",
             "libelleSite": "1e TRANCHE",
             "modifier": 0,
+            "origine": "SI S&T",
             "promotion": "Promo import 1",
             "reservant": "import",
             "supprimer": 0
@@ -28,6 +29,7 @@
             "libelleSalle": "102",
             "libelleSite": "1e TRANCHE",
             "modifier": 0,
+            "origine": "SI S&T",
             "promotion": "Promo import 2",
             "reservant": "import",
             "supprimer": 0
@@ -43,6 +45,7 @@
             "libelleSalle": "102",
             "libelleSite": "1e TRANCHE",
             "modifier": 1,
+            "origine": "SI S&T",
             "promotion": "Promo import 2 modif",
             "reservant": "import",
             "supprimer": 0
@@ -58,6 +61,7 @@
             "libelleSalle": "102",
             "libelleSite": "1e TRANCHE",
             "modifier": 0,
+            "origine": "SI S&T",
             "promotion": "Promo import 3",
             "reservant": "import",
             "supprimer": 0
@@ -73,6 +77,7 @@
             "libelleSalle": "102",
             "libelleSite": "1e TRANCHE",
             "modifier": 0,
+            "origine": "SI S&T",
             "promotion": "Promo import 3",
             "reservant": "import",
             "supprimer": 1
