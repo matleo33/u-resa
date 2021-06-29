@@ -1,0 +1,150 @@
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 2
+Error : insert object 0
+Error : insert object 1
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 1
+Error : insert object 2
+Error : insert object 0
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Object 0 correctly inserted
+Object 1 correctly inserted
+Object 2 correctly inserted
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Error : insert object 0
+Error : insert object 1
+Error : insert object 2
+Object 3 correctly inserted
+Object 4 correctly deleted
+Object 0 correctly inserted
+Object 1 correctly inserted
+Object 2 correctly inserted
+Object 3 correctly inserted
+Object 4 correctly deleted
+Object 0 correctly inserted
+Object 1 correctly inserted
+Object 2 correctly inserted
+Object 3 correctly inserted
+Object 4 correctly deleted
+Object 0 correctly inserted
+Object 1 correctly inserted
+Object 2 correctly inserted
+Object 3 correctly inserted
+Object 4 correctly deleted
+Object 0 correctly inserted
+Object 1 correctly inserted
+Object 2 correctly inserted
+Object 3 correctly inserted
+Object 4 correctly deleted
+Object 0 correctly inserted
+Object 1 correctly inserted
+Object 2 correctly inserted
+Object 3 correctly inserted
+Object 4 correctly deleted
+Object 0 correctly inserted
+Object 1 correctly inserted
+Object 2 correctly inserted
+Object 3 correctly inserted
+Object 4 correctly deleted

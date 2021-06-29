@@ -256,88 +256,112 @@ var fs = require("fs");
 var path = require('path');
 
 
-router.post("/import", function (req, res) {
-    if (!req.files) {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(404).json({ "status": "Aucun fichier envoyé" });
-        return;
-    } else {
-        fs.readFile(req.files.file.tempFilePath, 'utf8', (err, data) => {
-            if (err) {
-                console.log(err)
-                res.setHeader('Content-Type', 'application/json');
-                res.status(500).json({ "status": "Error reading file", "message": err });
-                throw err;
-            }
-            try {
-                data = JSON.parse(data);
-            } catch (error) {
-                res.setHeader('Content-Type', 'application/json');
-                res.status(500).json({ "status": "Incorrect json object", "message": error });
-                console.log(error);
-                return;
-            }
+router.get("/import", function (req, res) {
+    getImport()
+    var options = {
+        root: path.join(__dirname, './')
+    }
+    res.status(200).json({ "status": "Data get" });
+});
+
+var http = require('http');
+const { SSL_OP_EPHEMERAL_RSA } = require('constants');
+const { time } = require('console');
+const { wait } = require('@testing-library/dom');
+function dateDiff(date1, date2) {
+    var diff = {}                           // Initialisation du retour
+    var tmp = date2 - date1;
+
+    tmp = Math.floor(tmp / 1000);             // Nombre de secondes entre les 2 dates
+    diff.sec = tmp % 60;                    // Extraction du nombre de secondes
+
+    tmp = Math.floor((tmp - diff.sec) / 60);    // Nombre de minutes (partie entière)
+    diff.min = tmp % 60;                    // Extraction du nombre de minutes
+
+    tmp = Math.floor((tmp - diff.min) / 60);    // Nombre d'heures (entières)
+    diff.hour = tmp % 24;                   // Extraction du nombre d'heures
+
+    tmp = Math.floor((tmp - diff.hour) / 24);   // Nombre de jours restants
+    diff.day = tmp;
+
+    return diff;
+}
+
+function getImport() {
+    var options = {
+        host: 'localhost',
+        port: 8080,
+        path: '/Salles/importfile',
+        method: 'GET',
+        headers: {
+            accept: 'application/json'
+        }
+    };
+    var x = http.request(options, function (res) {
+        res.on('data', function (data) {
+            data = JSON.parse(data);
             connection.getConnection(function (err, connection) {
-                if (err) {
-                    res.setHeader('Content-Type', 'application/json');
-                    res.status(500).json({ "status": "Error accessing database" });
-                    throw err;
-                };
-                var nbError = 0;
-                var dateImport = new Date();
-                let date = ("0" + dateImport.getDate()).slice(-2);
-                let month = ("0" + (dateImport.getMonth() + 1)).slice(-2);
-                let year = dateImport.getFullYear();
-                let hours = dateImport.getHours();
-                let minutes = dateImport.getMinutes();
-                let seconds = dateImport.getSeconds();
-                let fulldateImport = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
-                for (let i = 0; i < data.listeEdT.length; i++) {
-                    if (!data.listeEdT[i].supprimer && !data.listeEdT[i].modifier) {
-                        connection.query('INSERT INTO import (codeBatiment, codeSalle, codeSite, dateDebut, dateFin, duree, libelleBatiment, libelleSalle, libelleSite, promotion,reservant,idEdT,origine,dateImport) VALUES ("' + data.listeEdT[i].codeBatiment + '","' + data.listeEdT[i].codeSalle + '","' + data.listeEdT[i].codeSite + '","' + data.listeEdT[i].dateDebut + '","' + data.listeEdT[i].dateFin + '",' + data.listeEdT[i].duree + ',"' + data.listeEdT[i].libelleBatiment + '","' + data.listeEdT[i].libelleSalle + '","' + data.listeEdT[i].libelleSite + '","' + data.listeEdT[i].promotion + '","' + data.listeEdT[i].reservant + '","' + data.listeEdT[i].idEdT + '","' + data.origine + '","' + fulldateImport + '");', function (error, results, fields) {
-                            if (error) {
-                                console.log("Error in insert at object " + data.listeEdT[i].idEdT);
-                                nbError++;
-                            };
-                        });
-                    }
-                    else if (data.listeEdT[i].supprimer === 1 && !data.listeEdT[i].modifier) {
-                        connection.query('UPDATE import SET action = "DEL", dateImport="' + fulldateImport + '" WHERE idEdT =' + data.listeEdT[i].idEdT + ' AND origine="' + data.origine + '";', function (error, results, fields) {
-                            if (error) {
-                                console.log('UPDATE import SET action = "DEL", dateImport="' + fulldateImport + '" WHERE idEdT =' + data.listeEdT[i].idEdT + ' AND origine="' + data.origine + '";');
-                                console.log("Error in delete at object " + data.listeEdT[i].idEdT);
-                                nbError++;
-                            };
-                        });
-                    }
-                    else if (!data.listeEdT[i].supprimer && data.listeEdT[i].modifier === 1) {
-                        connection.query('UPDATE import SET action ="UPD" ,dateImport= "' + fulldateImport + '",codeBatiment="' + data.listeEdT[i].codeBatiment + '",codeSalle="' + data.listeEdT[i].codeSalle + '",codeSite="' + data.listeEdT[i].codeSite + '",dateDebut="' + data.listeEdT[i].dateDebut + '",dateFin="' + data.listeEdT[i].dateFin + '",duree=' + data.listeEdT[i].duree + ',libelleBatiment="' + data.listeEdT[i].libelleBatiment + '",libelleSalle="' + data.listeEdT[i].libelleSalle + '",libelleSite="' + data.listeEdT[i].libelleSite + '",promotion="' + data.listeEdT[i].promotion + '",reservant="' + data.listeEdT[i].reservant + '",dateImport="' + fulldateImport + '" WHERE idEdT=' + data.listeEdT[i].idEdT + ' AND origine ="' + data.origine + '";', function (error, results, fields) {
-                            if (error) {
-                                console.log("Error in update at object " + data.listeEdT[i].idEdT);
-                                nbError++;
-                            };
-                        });
-                    }
-                }
-                res.send({ "status": "Import OK", "message": data.listeEdT.length - nbError + " objects modified, " + nbError + " errors" })
-                console.log(data.listeEdT.length - nbError + " objects modified, " + nbError + " errors");
-            });
-            let date_ob = new Date();
-            let date = ("0" + date_ob.getDate()).slice(-2);
-            let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-            let year = date_ob.getFullYear();
-            let hours = date_ob.getHours();
-            let minutes = date_ob.getMinutes();
-            let seconds = date_ob.getSeconds();
-            let fulldate = year + "-" + month + "-" + date + "-" + hours + "-" + minutes + "-" + seconds;
-            fs.rename(req.files.file.tempFilePath, "./HistoImport/Import_edt_" + fulldate + ".json", function (err) {
-                if (err) {
-                    throw err;
-                };
-                console.log('File Renamed in ' + "Import_edt_" + fulldate + ".json");
+                traitement(data, connection)
             });
         });
+    });
+    x.end();
+}
+
+function notification(connection) {
+    connection.query('DELETE FROM reservation r WHERE r.fk_id_reservant <> 0 AND "' + data[i].dateDebut + '" < r.finReservation AND  "' + data[i].dateFin + '" > r.horaire', function (error, results, fields) {
+    });
+}
+
+function traitement(data, connection) {
+    for (let i = 0; i < data.length; i++) {
+        date1 = new Date(data[i].dateDebut);
+        date2 = new Date(data[i].dateFin);
+        diff = dateDiff(date1, date2);
+        connection.query('DELETE FROM reservation r WHERE r.fk_id_reservant <> 0 AND "' + data[i].dateDebut + '" < r.finReservation AND  "' + data[i].dateFin + '" > r.horaire', function (error, results, fields) {
+            if (error) {
+                console.log("Error deleting reservation" + i);
+            } else {
+                connection.query('INSERT INTO notifier (fk_id_reservant, fk_id_salle, horaire,duree,finReservation) VALUES ("0",(SELECT id_salle FROM salle WHERE code_salle = "' + data[i].codeSalle + '" AND code_batiment = "' + data[i].codeBatiment + '" AND code_site="' + data[i].codeSite + '"),"' + data[i].dateDebut + '","' + ((diff.hour * 60) + (diff.min)) + '","' + data[i].dateFin + '");', function (error, results, fields) {
+                    if (error) {
+                        console.log("Error : insert in notifier" + i);
+                    } else {
+                        console.log("insert in notifier")
+                    }
+                    if (data[i].action === 'INSERT') {
+                        connection.query('INSERT INTO reservation (fk_id_reservant, fk_id_salle, horaire,duree,finReservation) VALUES ("0",(SELECT id_salle FROM salle WHERE code_salle = "' + data[i].codeSalle + '" AND code_batiment = "' + data[i].codeBatiment + '" AND code_site="' + data[i].codeSite + '"),"' + data[i].dateDebut + '","' + ((diff.hour * 60) + (diff.min)) + '","' + data[i].dateFin + '");', function (error, results, fields) {
+                            if (error) {
+                                console.log("Error : insert an object " + i);
+                            } else {
+                                console.log("insert OK")
+                            }
+                        });
+                    }
+                    else if (data[i].action === 'DELETE') {
+                        connection.query('DELETE FROM reservation WHERE horaire = "' + data[i].dateDebut + '" AND finReservation = "' + data[i].dateFin + '" AND fk_id_salle = (SELECT id_salle FROM salle WHERE code_salle = "' + data[i].codeSalle + '" AND code_batiment = "' + data[i].codeBatiment + '" AND code_site="' + data[i].codeSite + '");', function (error, results, fields) {
+                            if (error) {
+                                console.log("Error : delete an object  " + i);
+                            } else {
+                                console.log("delete OK")
+                            }
+                        });
+                    }
+                    else {
+                        console.log('Unknown action of objet ' + i + '\n')
+                    }
+                });
+                console.log("deleted a reservation")
+            }
+        });
     }
+}
+//getImport();
+
+router.get("/importfile", function (req, res) {
+    var options = {
+        root: path.join(__dirname, '../..')
+    }
+    res.sendFile('/public/import.js', options)
 });
 
 module.exports = router;
