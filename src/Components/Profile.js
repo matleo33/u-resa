@@ -75,14 +75,22 @@ export default class Profile extends React.Component {
       })
     }).then((response) => {
       if (response.status === 200) {
-        this.setState({ hiddenMessageOK: false })
+        this.setState({
+          hiddenMessageOK: false, Message: '',
+          Object: '',
+          AdresseMail: ''
+        })
         window.scrollTo(0, 0);
 
       }
     })
       .catch((error) => {
         console.error(error);
-        this.setState({ hiddenMessageKO: false })
+        this.setState({
+          hiddenMessageKO: false, Message: '',
+          Object: '',
+          AdresseMail: '',
+        })
       });
   }
 
@@ -102,14 +110,14 @@ export default class Profile extends React.Component {
           <Message.Header>Message envoyé</Message.Header>
           <p>
             Votre retour nous sera très utile pour améliorer cette application lors de sa prochaine mise à jour.
-    </p>
+          </p>
         </Message>
         <Message negative
           hidden={hiddenMessageKO}>
           <Message.Header>Message bloqué</Message.Header>
           <p>
             Le service est momentanément intérompu. Vous pouvez cependant nous envoyer un mail à uresaprojet@gmail.com.
-    </p>
+          </p>
         </Message>
         <div className="ProfilImg">
           <Image src='https://pbs.twimg.com/media/EODyC7xWsAAIyzH.jpg' size='medium' circular />
@@ -123,8 +131,8 @@ export default class Profile extends React.Component {
               onClick={this.handleClick}
             >
               <Icon name='dropdown' />
-          Contactez-nous
-        </Accordion.Title>
+              Contactez-nous
+            </Accordion.Title>
             <Accordion.Content active={activeIndex === 0}>
               <Form>
                 <Form.Field
@@ -166,8 +174,8 @@ export default class Profile extends React.Component {
               onClick={this.handleClick}
             >
               <Icon name='dropdown' />
-          Autres infos
-        </Accordion.Title>
+              Autres infos
+            </Accordion.Title>
             <Accordion.Content active={activeIndex === 1}>
               <p>
                 {this.state.profile.prenom}
@@ -188,8 +196,8 @@ export default class Profile extends React.Component {
               onClick={this.handleClick}
             >
               <Icon name='dropdown' />
-          A propos
-        </Accordion.Title>
+              A propos
+            </Accordion.Title>
             <Accordion.Content active={activeIndex === 2}>
               <div>L'utilisation de cette application doit se faire dans le respect des conditions générales d'utilisation disponibles <Link className="LinkFooter" to="/u-resa/CGU">ici</Link>.</div>
             </Accordion.Content>

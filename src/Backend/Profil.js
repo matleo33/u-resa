@@ -43,18 +43,19 @@ function getCasClient() {
 class Mail {
     constructor(from, subject, message) {
         this.smtpTransport = mailer.createTransport("SMTP", {
-            host: "smtp.gmail.com",
-            port: 25,
+            /*host: "smtp.gmail.com",
+            port: 25,*/
+            service: 'gmail',
             auth: {
                 user: "uresa33@gmail.com",
                 pass: "u1r2$s&a"
             }
         });
         this.mail = {
-            to: "uresa33@gmail.com", //536a6554a5-ff6ff8@inbox.mailtrap.io
+            from: "uresa33@gmail.com",
+            to: "uresa33@gmail.com",
             subject: subject,
             text: "Message de :" + from + message,
-            html: "<p>" + "Message de : " + from + "</p>" + "<p>" + message + "</p>"
         };
     }
     send() {

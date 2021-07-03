@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 var express = require('express');
 var router = express.Router();
+const mailer = require("nodemailer");
 
 const connection = mysql.createPool({
     host: 'localhost',
@@ -10,6 +11,38 @@ const connection = mysql.createPool({
     database: 'résa_v7'
 });
 
+
+class Mail {
+    constructor(to, subject, message) {
+        this.smtpTransport = mailer.createTransport("SMTP", {
+            /*host: "smtp.gmail.com",
+            port: 25,*/
+            service: 'gmail',
+            auth: {
+                user: "uresa33@gmail.com",
+                pass: "u1r2$s&a"
+            }
+        });
+        this.mail = {
+            from: "uresa33@gmail.com",
+            to: to,
+            subject: subject,
+            text: message,
+        };
+    }
+    send() {
+        this.smtpTransport.sendMail(this.mail, function (error, response) {
+            if (error) {
+                console.log(error);
+                return false;
+            } else {
+                console.log("Message sent: " + response.message);
+            }
+        });
+        this.smtpTransport.close();
+        return true;
+    }
+}
 
 router.get('/Liste', function (req, res) {
     // Connecting to the database.
@@ -301,39 +334,63 @@ function getImport() {
         res.on('data', function (data) {
             data = JSON.parse(data);
             connection.getConnection(function (err, connection) {
-                traitement(data, connection)
+                traitement(data)
+                notification();
             });
         });
     });
     x.end();
 }
 
-function notification(connection) {
-    connection.query('DELETE FROM reservation r WHERE r.fk_id_reservant <> 0 AND "' + data[i].dateDebut + '" < r.finReservation AND  "' + data[i].dateFin + '" > r.horaire', function (error, results, fields) {
+function notification() {
+    connection.query('SELECT * FROM notifier where 1', function (error, results, fields) {
+        if (error) {
+            console.log("Error : Failed to select notifier table")
+        }
+        for (let i = 0; i < results.length; i++) {
+            connection.query('SELECT Mailtest FROM reservant where id_reservant=' + results[i].fk_id_reservant, function (error, resultat, fields) {
+                if (error) {
+                    console.log("Error : reading Mailtest")
+                }
+                var mail = new Mail(resultat[0].Mailtest, 'Annulation de réservation', 'Un cours s\'sest positionné sur votre réservation du ' + results[i].horaire + ' salle ' + results[i].fk_id_salle + ' batiment XXX. Veuillez effectuer une nouvelle réservation');
+                if (!mail.send()) {
+                    console.log("Error : Mail failed to notify")
+                }
+            });
+        }
+        //connection.query('DELETE FROM notifier WHERE 1');
     });
 }
 
-function traitement(data, connection) {
+/*function traitementfile(){
+
+}*/
+
+function traitement(data, callback) {
     for (let i = 0; i < data.length; i++) {
         date1 = new Date(data[i].dateDebut);
         date2 = new Date(data[i].dateFin);
         diff = dateDiff(date1, date2);
-        connection.query('DELETE FROM reservation r WHERE r.fk_id_reservant <> 0 AND "' + data[i].dateDebut + '" < r.finReservation AND  "' + data[i].dateFin + '" > r.horaire', function (error, results, fields) {
+        connection.query('INSERT INTO notifier (fk_id_reservant, fk_id_salle, horaire,duree,finReservation) SELECT fk_id_reservant, fk_id_salle, horaire, duree, finReservation FROM reservation r WHERE r.fk_id_reservant <> 0 AND fk_id_salle = (SELECT id_salle FROM salle WHERE code_salle = "' + data[i].codeSalle + '" AND code_batiment = "' + data[i].codeBatiment + '" AND code_site="' + data[i].codeSite + '") AND "' + data[i].dateDebut + '" < r.finReservation AND  "' + data[i].dateFin + '" > r.horaire;', function (error, results, fields) {
             if (error) {
-                console.log("Error deleting reservation" + i);
+                console.log("Error : insert in notifier " + i);
             } else {
-                connection.query('INSERT INTO notifier (fk_id_reservant, fk_id_salle, horaire,duree,finReservation) VALUES ("0",(SELECT id_salle FROM salle WHERE code_salle = "' + data[i].codeSalle + '" AND code_batiment = "' + data[i].codeBatiment + '" AND code_site="' + data[i].codeSite + '"),"' + data[i].dateDebut + '","' + ((diff.hour * 60) + (diff.min)) + '","' + data[i].dateFin + '");', function (error, results, fields) {
+                if (JSON.parse(JSON.stringify(results)).affectedRows) {
+                    console.log("Insert in notifier")
+                }
+                connection.query('DELETE FROM reservation r WHERE r.fk_id_reservant <> 0 AND fk_id_salle = (SELECT id_salle FROM salle WHERE code_salle = "' + data[i].codeSalle + '" AND code_batiment = "' + data[i].codeBatiment + '" AND code_site="' + data[i].codeSite + '") AND "' + data[i].dateDebut + '" < r.finReservation AND  "' + data[i].dateFin + '" > r.horaire', function (error, results, fields) {
                     if (error) {
-                        console.log("Error : insert in notifier" + i);
-                    } else {
-                        console.log("insert in notifier")
+                        console.log("Error : Error deleting reservation " + i);
+                    }
+                    if (JSON.parse(JSON.stringify(results)).affectedRows) {
+                        console.log("Deleted reservation")
                     }
                     if (data[i].action === 'INSERT') {
                         connection.query('INSERT INTO reservation (fk_id_reservant, fk_id_salle, horaire,duree,finReservation) VALUES ("0",(SELECT id_salle FROM salle WHERE code_salle = "' + data[i].codeSalle + '" AND code_batiment = "' + data[i].codeBatiment + '" AND code_site="' + data[i].codeSite + '"),"' + data[i].dateDebut + '","' + ((diff.hour * 60) + (diff.min)) + '","' + data[i].dateFin + '");', function (error, results, fields) {
                             if (error) {
-                                console.log("Error : insert an object " + i);
-                            } else {
-                                console.log("insert OK")
+                                console.log("Error : insert object " + i);
+                            } else if (JSON.parse(JSON.stringify(results)).affectedRows) {
+                                console.log("Insert EdT " + i)
                             }
                         });
                     }
@@ -341,8 +398,8 @@ function traitement(data, connection) {
                         connection.query('DELETE FROM reservation WHERE horaire = "' + data[i].dateDebut + '" AND finReservation = "' + data[i].dateFin + '" AND fk_id_salle = (SELECT id_salle FROM salle WHERE code_salle = "' + data[i].codeSalle + '" AND code_batiment = "' + data[i].codeBatiment + '" AND code_site="' + data[i].codeSite + '");', function (error, results, fields) {
                             if (error) {
                                 console.log("Error : delete an object  " + i);
-                            } else {
-                                console.log("delete OK")
+                            } else if (JSON.parse(JSON.stringify(results)).affectedRows) {
+                                console.log("Delete EdT " + i)
                             }
                         });
                     }
@@ -350,12 +407,10 @@ function traitement(data, connection) {
                         console.log('Unknown action of objet ' + i + '\n')
                     }
                 });
-                console.log("deleted a reservation")
             }
         });
     }
 }
-//getImport();
 
 router.get("/importfile", function (req, res) {
     var options = {
