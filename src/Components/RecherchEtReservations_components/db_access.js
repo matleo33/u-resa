@@ -23,6 +23,14 @@ export function loadreferentiel(props) {
         }
     }).then(response => response.json())
         .then(response => props.setState({ sites: response }))
+    fetch("http://localhost:8080/Referentiels/HoraireReservable", {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    }).then(response => response.json())
+        .then(response => props.setState({ horaireReservable: response }))
 }
 
 export function resultat(data, props) {

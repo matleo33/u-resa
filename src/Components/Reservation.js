@@ -39,7 +39,8 @@ export default class Reservation extends React.Component {
             erreurTextDuree: "",
             salles: [],
             batiments: [],
-            sites: []
+            sites: [],
+            horaireReservable: []
         }
     };
 
@@ -183,6 +184,7 @@ export default class Reservation extends React.Component {
                 Batiment={this.state.Batiment}
                 Fac={this.state.Fac}
                 sites={this.state.sites}
+                horaireReservable={this.state.horaireReservable}
                 response={this.state.response}
                 handleError={this.testErreur}
                 DateChange={this.DateChange}

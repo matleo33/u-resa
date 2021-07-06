@@ -51,18 +51,20 @@ function Recherche(props) {
             <form className="reservForm" onSubmit={props.handleError}>
                 <p id="erreur_Date" className={props.Error}>{props.erreurTextDate}</p>
                 <p className="listTitre"> Date de ma réservation : </p>
-                <input type="date" className="listD" id="start" name="trip-start" onChange={props.DateChange} />
+                <input type="date" className="listD selectRecherche" id="start" name="trip-start" onChange={props.DateChange} />
                 <p id="erreur_Heure" className={props.Error}>{props.erreurTextHoraire}</p>
                 <p className="listTitre"> Heure de ma réservation : </p>
-                <Select className="listD" placeholder='Aucune préférence' options={Horaire} onChange={props.HoraireChange} />
+                <select className="listD selectRecherche" placeholder='Aucune préférence' onChange={props.HoraireChange}>
+                    {props.horaireReservable.map((horaireReservable) => <option className='optionItem' key={horaireReservable.heure} value={horaireReservable.heure}>{horaireReservable.heure}</option>)}
+                </select>
                 <p id="erreur_Heure" className={props.Error}>{props.erreurTextDuree}</p>
                 <p className="listTitre"> Durée de ma réservation : </p>
-                <select className="listD selectRecherche" placeholder='Aucune préférence' options={Duree} onChange={props.Dureechange} >
+                <select className="listD selectRecherche" placeholder='Aucune préférence' onChange={props.Dureechange} >
                     {Duree.map((duree) => <option key={duree.value} value={duree.value}>{duree.text}</option>)}
                 </select>
                 <p id="erreur_University" className={props.Error}>{props.erreurTextFac}</p>
                 <p className="listTitre"> Mon Université : </p>
-                <select className="listD selectRecherche" placeholder='Sélectionnez mon université' options={props.sites} onChange={props.FacChange}>
+                <select className="listD selectRecherche" placeholder='Sélectionnez mon université' onChange={props.FacChange}>
                     {props.sites.map((site) => <option className='optionItem' key={site.Code_site} value={site.Code_site}>{site.Site}</option>)}
                 </select>
                 <p id="erreur_Batiment" className={props.Error}>{props.erreurTextBatiment}</p>
@@ -98,6 +100,7 @@ Recherche.propTypes = {
     Batiment: PropTypes.string.isRequired,
     Fac: PropTypes.string.isRequired,
     sites: PropTypes.array.isRequired,
+    horaireReservable: PropTypes.array.isRequired,
     response: PropTypes.array.isRequired,
     handleError: PropTypes.func.isRequired,
     DateChange: PropTypes.func.isRequired,

@@ -7,6 +7,7 @@ var MemoryStore = require('session-memory-store')(session);
 var Profil = require('./Profil');
 var Utilisateur = require('./Utilisateur');
 var Salles = require('./Salles');
+var Referentiels = require('./Referentiels');
 
 
 
@@ -30,6 +31,8 @@ router.use(session({
 router.use('/User', Utilisateur);
 router.use('/Salles', Salles);
 router.use('/Profil', Profil);
+router.use('/Referentiels', Referentiels);
+
 
 
 module.exports = router;

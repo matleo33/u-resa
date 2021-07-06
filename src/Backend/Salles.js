@@ -53,14 +53,13 @@ router.get('/Liste', function (req, res) {
 
             // If some error occurs, we throw an error.
             if (error) throw error;
-
             // Getting the 'response' from the database and sending it to our route. This is were the data is.
             res.send(results)
         });
     });
 });
 
-router.use(express.json());
+//router.use(express.json());
 
 
 router.post('/Disponibilitehoraire', function (req, res) {
@@ -186,7 +185,6 @@ router.get('/Salles', function (req, res) {
 
             // If some error occurs, we throw an error.
             if (error) throw error;
-
             // Getting the 'response' from the database and sending it to our route. This is were the data is.
             res.send(results)
         });
@@ -334,7 +332,7 @@ function getImport() {
         res.on('data', function (data) {
             data = JSON.parse(data);
             connection.getConnection(function (err, connection) {
-                traitement(data)
+                traitement(data);
                 notification();
             });
         });
@@ -352,10 +350,11 @@ function notification() {
                 if (error) {
                     console.log("Error : reading Mailtest")
                 }
-                var mail = new Mail(resultat[0].Mailtest, 'Annulation de réservation', 'Un cours s\'sest positionné sur votre réservation du ' + results[i].horaire + ' salle ' + results[i].fk_id_salle + ' batiment XXX. Veuillez effectuer une nouvelle réservation');
+                /*var mail = new Mail(resultat[0].Mailtest, 'Annulation de réservation', 'Un cours s\'sest positionné sur votre réservation du ' + results[i].horaire + ' salle ' + results[i].fk_id_salle + ' batiment XXX. Veuillez effectuer une nouvelle réservation');
                 if (!mail.send()) {
                     console.log("Error : Mail failed to notify")
-                }
+                }*/
+                console.log("mail");
             });
         }
         //connection.query('DELETE FROM notifier WHERE 1');
