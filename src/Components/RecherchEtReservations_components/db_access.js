@@ -31,15 +31,27 @@ export function loadreferentiel(props) {
         }
     }).then(response => response.json())
         .then(response => props.setState({ horaireReservable: response }))
+    fetch("http://localhost:8080/Referentiels/DureeReservable", {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+    }).then(response => response.json())
+        .then(response => props.setState({ dureeReservable: response }))
 }
 
 export function resultat(data, props) {
     var splitedHour = data["Horaire"].split("H")
+    console.log(splitedHour)
     var heureSansRetenue = (Number(data["Horaire"].split("H")[0]) + Number(Math.trunc((data["Duree"] * 30) / 60))) +
         'H' + (Number(splitedHour[1]) + Number((data["Duree"] * 30) % 60))
+    console.log(heureSansRetenue)
     var splitedHeureSansRetenue = heureSansRetenue.split("H")
+    console.log(splitedHeureSansRetenue)
     var heure = data["Date"] + ' ' + (Number(splitedHeureSansRetenue[0]) + Number((Math.trunc(Number(splitedHeureSansRetenue[1]) / 60)))) + 'H' +
         (Number(splitedHeureSansRetenue[1]) % 60)
+    console.log(heure)
     if (data["Horaire"] === "Aucune préférence") {
         fetch("http://localhost:8080/Salles/Disponibilitesalle", {
             method: 'POST',

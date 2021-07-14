@@ -12,7 +12,9 @@ export default class App extends React.Component {
         id: 1,
         nom: "LEOTARD",
         prenom: "Mathieu",
-        photo: null
+        photo: null,
+        campus: "1e TRANCHE",
+        sites_autorises: [1, 2]
       }
     };
   }

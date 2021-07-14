@@ -44,8 +44,6 @@ export default class Profile extends React.Component {
 
   }
 
-
-
   componentDidMount() {
 
     fetch('http://localhost:8080/User/2')
@@ -124,6 +122,7 @@ export default class Profile extends React.Component {
         </div>
         <div className="ProfilInfo">
           <div className="NomPrenom">{this.state.profile.prenom} {this.state.profile.nom}</div>
+          <div className="NomPrenom">Campus : {this.state.profile.campus} </div>
           <Accordion styled fluid>
             <Accordion.Title
               active={activeIndex === 0}

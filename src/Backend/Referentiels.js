@@ -19,8 +19,21 @@ router.get('/HoraireReservable', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
         if (err) throw err;
-        connection.query('SELECT heure FROM horairereservable WHERE 1', function (error, results, fields) {
+        connection.query('SELECT heure, Code_site FROM horairereservable WHERE 1', function (error, results, fields) {
 
+            // If some error occurs, we throw an error.
+            if (error) throw error;
+            // Getting the 'response' from the database and sending it to our route. This is were the data is.
+            res.send(results)
+        });
+    });
+});
+
+router.get('/DureeReservable', function (req, res) {
+    // Connecting to the database.
+    connection.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query('SELECT duree, Code_site FROM duree WHERE 1', function (error, results, fields) {
             // If some error occurs, we throw an error.
             if (error) throw error;
             // Getting the 'response' from the database and sending it to our route. This is were the data is.
