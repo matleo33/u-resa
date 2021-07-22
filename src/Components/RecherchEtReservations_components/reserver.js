@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react'
+import * as functions from '../functions';
 
 
 
-//Math.trunc(Number(props.Duree) * 30 / 60)}H{Number(props.Duree) * 30 % 60 === 0 ? '00' : Number(props.Duree) * 30 % 60
+
 function Reserver(props) {
     return (
         <section className="container-fluid reserv">
@@ -22,7 +23,7 @@ function Reserver(props) {
                             </Button.Content>
                             <Button.Content hidden>
                                 <div className="Left">
-                                    <p id={index}>Disponible à partir de {props.Horaire} pour {Math.floor(props.Duree * 30 / 60)}H{props.Duree * 30 % 60 === 0 ? "" : props.Duree * 30 % 60}</p>
+                                    <p id={index}>Disponible à partir de {props.Horaire} pour {props.Duree}</p>
                                     <p id={index}>{line.Capacite} places</p>
                                 </div>
                             </Button.Content>

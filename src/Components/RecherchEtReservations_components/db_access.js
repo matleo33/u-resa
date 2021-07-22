@@ -1,3 +1,5 @@
+import * as functions from '../functions';
+
 export function loadreferentiel(props) {
     fetch("http://localhost:8080/Salles/Salles", {
         method: 'GET',
@@ -42,16 +44,7 @@ export function loadreferentiel(props) {
 }
 
 export function resultat(data, props) {
-    var splitedHour = data["Horaire"].split("H")
-    console.log(splitedHour)
-    var heureSansRetenue = (Number(data["Horaire"].split("H")[0]) + Number(Math.trunc((data["Duree"] * 30) / 60))) +
-        'H' + (Number(splitedHour[1]) + Number((data["Duree"] * 30) % 60))
-    console.log(heureSansRetenue)
-    var splitedHeureSansRetenue = heureSansRetenue.split("H")
-    console.log(splitedHeureSansRetenue)
-    var heure = data["Date"] + ' ' + (Number(splitedHeureSansRetenue[0]) + Number((Math.trunc(Number(splitedHeureSansRetenue[1]) / 60)))) + 'H' +
-        (Number(splitedHeureSansRetenue[1]) % 60)
-    console.log(heure)
+    var heure = functions.dateEtDuree(data["Horaire"], data["Duree"]);
     if (data["Horaire"] === "Aucune préférence") {
         fetch("http://localhost:8080/Salles/Disponibilitesalle", {
             method: 'POST',
@@ -75,7 +68,7 @@ export function resultat(data, props) {
             },
             body: JSON.stringify({
                 horaire: data["Date"] + ' ' + data["Horaire"],
-                horairefin: heure,
+                horairefin: data["Date"] + ' ' + heure,
                 idBatiment: data["Batiment"]
             })
         }).then(response => response.json())

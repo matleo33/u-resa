@@ -59,7 +59,7 @@ router.get('/Liste', function (req, res) {
     });
 });
 
-//router.use(express.json());
+router.use(express.json());
 
 
 router.post('/Disponibilitehoraire', function (req, res) {
@@ -195,7 +195,7 @@ router.get('/Batiments', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
         if (err) throw err;
-        connection.query('SELECT Id, Secteur, Code_site, Code_batiment, Batiment FROM batiment ORDER BY Id', function (error, results, fields) {
+        connection.query('SELECT distinct Id, Secteur, b.Code_site, b.Code_batiment, Batiment FROM batiment b ,salle s WHERE b.Code_batiment = s.Code_batiment AND s.estReservable = 1 ORDER BY Id', function (error, results, fields) {
 
             // If some error occurs, we throw an error.
             if (error) throw error;
@@ -210,7 +210,7 @@ router.get('/Sites', function (req, res) {
     // Connecting to the database.
     connection.getConnection(function (err, connection) {
         if (err) throw err;
-        connection.query('SELECT Code_site, Site FROM site', function (error, results, fields) {
+        connection.query('SELECT DISTINCT s.Code_site, s.Site FROM site s, salle sa WHERE s.Code_site = sa.Code_site AND sa.estReservable = 1', function (error, results, fields) {
 
             // If some error occurs, we throw an error.
             if (error) throw error;
